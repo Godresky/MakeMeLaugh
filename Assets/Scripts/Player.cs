@@ -9,14 +9,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speedWalking = 5;
     [SerializeField]
-    private float _speedCrouching = 5;
+    private float _speedCrouching = 2.5f;
     [SerializeField]
     private float _gravity = -30f;
+    [SerializeField]
+    private float _crouchingCoefficient = 0.2f;
 
-    private bool _crouching = false;
+    [SerializeField]
+    private bool _isCrouching = false;
 
     [SerializeField]
     private CharacterController _controller;
+    private float _playerHeight;
 
     [Header("Camera Settings")]
     [SerializeField]
@@ -42,6 +46,7 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
 
         _controller = GetComponent<CharacterController>();
+        _playerHeight = _controller.height;
 
         _camera = _cameraTransform.GetComponent<Camera>();
     }
@@ -59,7 +64,7 @@ public class Player : MonoBehaviour
 
     public void SwitchCrouching()
     {
-        _crouching = !_crouching;
+        _isCrouching = !_isCrouching;
     }
 
     private void MouseLook()
@@ -85,14 +90,25 @@ public class Player : MonoBehaviour
 
     private void Movement()
     {
+        // WASD
         if (_controller.isGrounded)
             _verticalVelocity.y = 0;
 
-        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * _speedWalking;
+        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isCrouching ? _speedCrouching : _speedWalking);
         _controller.Move(horizontalVelocity * Time.deltaTime);
 
         _verticalVelocity.y += _gravity * Time.deltaTime;
         _controller.Move(_verticalVelocity * Time.deltaTime);
+
+        // Crouching
+        if (_isCrouching && _controller.height > (_playerHeight / 2))
+        {
+            _controller.height -= _crouchingCoefficient;
+        }
+        else if (!_isCrouching && _controller.height < _playerHeight)
+        {
+            _controller.height += _crouchingCoefficient;
+        }
 
         //CheckAudio(horizontalVelocity.magnitude);
     }
