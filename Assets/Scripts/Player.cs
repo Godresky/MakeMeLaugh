@@ -13,9 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _gravity = -30f;
     [SerializeField]
-    private float _crouchingCoefficient = 0.2f;
+    private float _crouchingCoefficient = 0.02f;
 
-    [SerializeField]
     private bool _isCrouching = false;
 
     [SerializeField]

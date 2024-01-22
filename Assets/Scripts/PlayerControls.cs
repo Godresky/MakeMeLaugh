@@ -161,7 +161,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Action"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""d684c948-f2d6-4852-8f34-bca6d6829113"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -200,7 +200,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2ca464fa-3ea6-42b6-8328-6bf91796492c"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Mouse>/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
