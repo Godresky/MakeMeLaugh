@@ -13,6 +13,7 @@ public class PlayerKeyboard : MonoBehaviour
 
     private Vector2 _movementInput;
     private Vector2 _mouseInput;
+    private float _crouchAction;
 
     private void Awake()
     {
@@ -26,6 +27,8 @@ public class PlayerKeyboard : MonoBehaviour
         _playerControls.FPSControl.MouseY.performed += ctx => _mouseInput.y = ctx.ReadValue<float>();
 
         _playerControls.FPSControl.Crouch.performed += ctx => Player.SwitchCrouching();
+        //_playerControls.FPSControl.Crouch.performed += ctx => Player.SwitchCrouching(ctx.ReadValue<float>());
+        //_playerControls.FPSControl.Crouch.performed -= ctx => Player.SwitchCrouching(ctx.ReadValue<float>());
 
         _playerControls.Actions.Action.performed += ctx => PlayerPickUpSystem.Interact();
         //_playerControls.Actions.Drop.performed += ctx => Player.DropItem();

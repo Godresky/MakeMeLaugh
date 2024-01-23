@@ -13,13 +13,20 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _gravity = -30f;
     [SerializeField]
-    private float _crouchingCoefficient = 0.02f;
-
+    private float _crouchingTransitionSpeed = 10f;
+    [SerializeField]
+    private float _crouchHeight = 1f;
+    [SerializeField]
+    private float _standingHeight;
+    [SerializeField]
+    private float _currentHeight;
+    [SerializeField]
     private bool _isCrouching = false;
+    [SerializeField]
+    private Vector3 _initialCameraPosition;
 
     [SerializeField]
     private CharacterController _controller;
-    private float _playerHeight;
 
     [Header("Camera Settings")]
     [SerializeField]
@@ -45,9 +52,10 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
 
         _controller = GetComponent<CharacterController>();
-        _playerHeight = _controller.height;
+        _standingHeight = _currentHeight = _controller.height;
 
         _camera = _cameraTransform.GetComponent<Camera>();
+        _initialCameraPosition = _cameraTransform.localPosition;
     }
 
     public void RecieveInputMovement(Vector2 input)
@@ -61,11 +69,6 @@ public class Player : MonoBehaviour
         _mouseInput.y = input.y * _sensetivity.y;
     }
 
-    public void SwitchCrouching()
-    {
-        _isCrouching = !_isCrouching;
-    }
-
     private void MouseLook()
     {
         transform.Rotate(Vector3.up, _mouseInput.x * Time.deltaTime);
@@ -76,6 +79,36 @@ public class Player : MonoBehaviour
 
         targetRotation.x = _xRotation;
         _cameraTransform.eulerAngles = targetRotation;
+    }
+
+    public void SwitchCrouching()
+    {
+        _isCrouching = !_isCrouching;
+    }
+
+    public void Crouching()
+    {
+        // Transform Character
+        var heightTarget = _isCrouching ? _crouchHeight : _standingHeight;
+
+        var crouchDelta = Time.deltaTime * _crouchingTransitionSpeed;
+        _currentHeight = Mathf.Lerp(_currentHeight, heightTarget, crouchDelta);
+        //if (_isCrouching && _currentHeight > _crouchHeight)
+        //{
+        //    _currentHeight -= crouchDelta;
+        //}
+        //else if (!_isCrouching && _currentHeight < heightTarget)
+        //{
+        //    _currentHeight += crouchDelta;
+        //}
+
+        _controller.height = _currentHeight;
+
+        // Tranform camera
+        var halfHeightDifference = new Vector3(0, (_standingHeight - _currentHeight) / 2, 0);
+        var newCameraPosition = _initialCameraPosition - halfHeightDifference;
+
+        _cameraTransform.localPosition = newCameraPosition;
     }
 
     //private void CheckAudio(float speed)
@@ -99,16 +132,6 @@ public class Player : MonoBehaviour
         _verticalVelocity.y += _gravity * Time.deltaTime;
         _controller.Move(_verticalVelocity * Time.deltaTime);
 
-        // Crouching
-        if (_isCrouching && _controller.height > (_playerHeight / 2))
-        {
-            _controller.height -= _crouchingCoefficient;
-        }
-        else if (!_isCrouching && _controller.height < _playerHeight)
-        {
-            _controller.height += _crouchingCoefficient;
-        }
-
         //CheckAudio(horizontalVelocity.magnitude);
     }
 
@@ -116,6 +139,7 @@ public class Player : MonoBehaviour
     {
         MouseLook();
         Movement();
+        Crouching();
 
         //CheckRaycast();
     }
