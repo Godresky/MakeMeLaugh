@@ -45,6 +45,7 @@ public class PlayerPickingUp : MonoBehaviour
         {
             _equipped = false;
             _equippedItemRb.useGravity = true;
+            _equippedItemRb.velocity = Vector3.zero;
         }
     }
 
