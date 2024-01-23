@@ -15,11 +15,19 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _gravity = -30f;
     [SerializeField]
-    private float _crouchingCoefficient = 0.02f;
+    // Crouching parameters
+    private float _crouchingTransitionSpeed = 10f;
+    [SerializeField]
+    private float _crouchHeight = 1f;
+    private float _standingHeight;
+    private float _currentHeight;
+    private bool _isTryingToCrouch = false;
+    private Vector3 _initialCameraPosition;
+    bool IsCrouching => _standingHeight - _currentHeight > .1f;
+
 
     [SerializeField]
     private CharacterController _controller;
-    private float _playerHeight;
 
     [Header("Camera Settings")]
     [SerializeField]
@@ -55,9 +63,10 @@ public class Player : MonoBehaviour
 
         _controller = GetComponent<CharacterController>();
         _playerPickingUp = GetComponent<PlayerPickingUp>();
-        _playerHeight = _controller.height;
+        _standingHeight = _currentHeight = _controller.height;
 
         _camera = _cameraTransform.GetComponent<Camera>();
+        _initialCameraPosition = _cameraTransform.localPosition;
     }
 
     public void RecieveInputMovement(Vector2 input)
@@ -83,7 +92,7 @@ public class Player : MonoBehaviour
 
     public void SwitchCrouching()
     {
-        _isCrouching = !_isCrouching;
+        _isTryingToCrouch = !_isTryingToCrouch;
     }
 
     private void MouseLook()
@@ -96,6 +105,37 @@ public class Player : MonoBehaviour
 
         targetRotation.x = _xRotation;
         _cameraTransform.eulerAngles = targetRotation;
+    }
+
+    public void Crouching()
+    {
+        // Transform Character
+        var heightTarget = _isTryingToCrouch ? _crouchHeight : _standingHeight;
+
+        if (IsCrouching && !_isTryingToCrouch)
+        {
+            var castOrigin = transform.position + new Vector3(0, _currentHeight / 2, 0);
+            if (Physics.Raycast(castOrigin, Vector3.up, out RaycastHit hit, 0.2f))
+            {
+                var distanceToCeiling = hit.point.y - castOrigin.y;
+                heightTarget = Mathf.Max
+                (
+                    _currentHeight + distanceToCeiling - 0.1f,
+                    _crouchHeight
+                );
+            }
+        }
+
+        var crouchDelta = Time.deltaTime * _crouchingTransitionSpeed;
+        _currentHeight = Mathf.Lerp(_currentHeight, heightTarget, crouchDelta);
+
+        _controller.height = _currentHeight;
+
+        // Tranform camera
+        var halfHeightDifference = new Vector3(0, (_standingHeight - _currentHeight) / 2, 0);
+        var newCameraPosition = _initialCameraPosition - halfHeightDifference;
+
+        _cameraTransform.localPosition = newCameraPosition;
     }
 
     //private void CheckAudio(float speed)
@@ -141,21 +181,11 @@ public class Player : MonoBehaviour
         if (_controller.isGrounded)
             _verticalVelocity.y = 0;
 
-        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isCrouching ? _speedCrouching : _speedWalking);
+        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isTryingToCrouch ? _speedCrouching : _speedWalking);
         _controller.Move(horizontalVelocity * Time.deltaTime);
 
         _verticalVelocity.y += _gravity * Time.deltaTime;
         _controller.Move(_verticalVelocity * Time.deltaTime);
-
-        // Crouching
-        if (_isCrouching && _controller.height > (_playerHeight / 2))
-        {
-            _controller.height -= _crouchingCoefficient;
-        }
-        else if (!_isCrouching && _controller.height < _playerHeight)
-        {
-            _controller.height += _crouchingCoefficient;
-        }
 
         //CheckAudio(horizontalVelocity.magnitude);
     }
@@ -164,8 +194,8 @@ public class Player : MonoBehaviour
     {
         MouseLook();
         Movement();
+        Crouching();
 
         CheckRaycast();
     }
-
 }
