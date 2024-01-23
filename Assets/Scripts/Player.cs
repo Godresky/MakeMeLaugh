@@ -18,13 +18,9 @@ public class Player : MonoBehaviour
     private float _crouchingTransitionSpeed = 10f;
     [SerializeField]
     private float _crouchHeight = 1f;
-    [SerializeField]
     private float _standingHeight;
-    [SerializeField]
     private float _currentHeight;
-    [SerializeField]
     private bool _isCrouching = false;
-    [SerializeField]
     private Vector3 _initialCameraPosition;
 
     [SerializeField]
