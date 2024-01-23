@@ -61,7 +61,6 @@ public class PlayerPickUpSystem : MonoBehaviour
             _rb = _hit.collider.GetComponent<Rigidbody>();
             _coll = _hit.collider.GetComponent<BoxCollider>();
             _rb.isKinematic = true;
-            _coll.isTrigger = true;
         }
         else if (!_pickingUp && _equipped)
         {
@@ -69,7 +68,6 @@ public class PlayerPickUpSystem : MonoBehaviour
             _hit.transform.SetParent(_itemParent);
             Destroy(_pointConteiner);
             _rb.isKinematic = false;
-            _coll.isTrigger = false;
         }
     }
 
