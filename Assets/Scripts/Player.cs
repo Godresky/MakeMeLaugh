@@ -20,7 +20,8 @@ public class Player : MonoBehaviour
     private float _crouchHeight = 1f;
     private float _standingHeight;
     private float _currentHeight;
-    private bool _isCrouching = false;
+
+    [SerializeField]
     private Vector3 _initialCameraPosition;
 
     [SerializeField]
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMaskRaycast;
 
+    private bool _isCrouching = false;
     private bool _isPickingUp = false;
 
     private float _xRotation = 0f;
@@ -86,6 +88,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SwitchCrouching()
+    {
+        _isCrouching = !_isCrouching;
+    }
+
     private void MouseLook()
     {
         transform.Rotate(Vector3.up, _mouseInput.x * Time.deltaTime);
@@ -98,11 +105,6 @@ public class Player : MonoBehaviour
         _cameraTransform.eulerAngles = targetRotation;
     }
 
-    public void SwitchCrouching()
-    {
-        _isCrouching = !_isCrouching;
-    }
-
     public void Crouching()
     {
         // Transform Character
@@ -110,14 +112,6 @@ public class Player : MonoBehaviour
 
         var crouchDelta = Time.deltaTime * _crouchingTransitionSpeed;
         _currentHeight = Mathf.Lerp(_currentHeight, heightTarget, crouchDelta);
-        //if (_isCrouching && _currentHeight > _crouchHeight)
-        //{
-        //    _currentHeight -= crouchDelta;
-        //}
-        //else if (!_isCrouching && _currentHeight < heightTarget)
-        //{
-        //    _currentHeight += crouchDelta;
-        //}
 
         _controller.height = _currentHeight;
 
@@ -188,5 +182,4 @@ public class Player : MonoBehaviour
 
         CheckRaycast();
     }
-
 }
