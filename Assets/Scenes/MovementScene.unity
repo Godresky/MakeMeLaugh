@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1413,15 +1413,16 @@ MonoBehaviour:
   _speedWalking: 5
   _speedCrouching: 2
   _gravity: -30
-  _crouchingCoefficient: 0.01
+  _crouchingTransitionSpeed: 5
+  _crouchHeight: 1
   _controller: {fileID: 1640619236}
   _sensetivity: {x: 35, y: 0.5}
   _xClamp: 60
   _cameraTransform: {fileID: 963194228}
-  _distanceRaycast: Infinity
+  _distanceRaycast: 5
   _layerMaskRaycast:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
 --- !u!143 &1640619236
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1445,7 +1446,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1640619237
