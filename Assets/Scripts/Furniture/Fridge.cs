@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fridge : MonoBehaviour
+public class Fridge : Furniture
 {
     [SerializeField] private List<Transform> _ingridients;
     [SerializeField] private List<Transform> _defaultPositions;
 
-    private void Start()
-    {
+    private void Start(){
         UpdateFridge();
     }
 

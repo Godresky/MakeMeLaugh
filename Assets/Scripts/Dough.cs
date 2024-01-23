@@ -6,7 +6,7 @@ public class Dough : MonoBehaviour
     [SerializeField]
     private State _type;
 
-    public State CurrentType { get => _type; }
+    public State CurrentState { get => _type; }
 
     [Space(2)]
     [Header("Grow")]
@@ -14,23 +14,19 @@ public class Dough : MonoBehaviour
     [Range(1,7)]
     [SerializeField] private float _endScale;
 
-    private void Start()
-    {
+    private void Start(){
         Grow();
     }
 
     public void Grow() => StartCoroutine(Growing());
 
-    public void Bake()
-    {
+    public void Bake(){
 
     }
 
-    private IEnumerator Growing()
-    {
+    private IEnumerator Growing(){
         yield return new WaitForSeconds(_growTime);
         transform.localScale *= _endScale;
-
     }
 
     public enum State

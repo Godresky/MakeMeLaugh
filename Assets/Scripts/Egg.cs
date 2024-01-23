@@ -9,8 +9,7 @@ public class Egg : DoughIngridient
 
     private Rigidbody _rigidbody;
 
-    private void Awake()
-    {
+    private void Awake(){
         _rigidbody = GetComponent<Rigidbody>();
     }
 
