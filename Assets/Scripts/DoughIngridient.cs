@@ -3,11 +3,11 @@ using UnityEngine;
 public class DoughIngridient : MonoBehaviour
 {
     [SerializeField]
-    private IngridientType _type;
+    private Type _type;
 
-    public IngridientType CurrentType { get => _type; }
+    public Type CurrentType { get => _type; }
 
-    public enum IngridientType
+    public enum Type
     {
         Egg,
         Milk,

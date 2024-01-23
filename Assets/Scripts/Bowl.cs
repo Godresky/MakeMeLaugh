@@ -16,13 +16,13 @@ public class Bowl : MonoBehaviour
     private Fridge _fridge;
 
     [SerializeField]
-    private List<DoughIngridient.IngridientType> _ingridientsInBowl;
+    private List<DoughIngridient.Type> _ingridientsInBowl;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out DoughIngridient ingridient))
         {
-            if (other.TryGetComponent(out Egg egg) && egg.IsBroken == true && egg.CurrentType == DoughIngridient.IngridientType.Egg)
+            if (other.TryGetComponent(out Egg egg) && egg.IsBroken == true && egg.CurrentType == DoughIngridient.Type.Egg)
                 return;
 
             _ingridientsInBowl.Add(ingridient.CurrentType);
@@ -39,12 +39,12 @@ public class Bowl : MonoBehaviour
 
     public void TryMakeDough()
     {
-        if (!_ingridientsInBowl.Contains(DoughIngridient.IngridientType.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.IngridientType.Flour) || !_ingridientsInBowl.Contains(DoughIngridient.IngridientType.Water) || !_ingridientsInBowl.Contains(DoughIngridient.IngridientType.Yeast))
+        if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Water) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
             return;
 
         _ingridientsInBowl.Clear();
         //_makingAnimation.Play();
-        //_fridge.UpdateFridge();
+        _fridge.UpdateFridge();
 
         Instantiate(_dough.gameObject, _doughSpawnpoint.position, _doughSpawnpoint.rotation);
     }

@@ -3,22 +3,43 @@ using UnityEngine;
 
 public class Dough : MonoBehaviour
 {
-    [Header("Needs")]
-    public bool NeedToRoll = false;
-    public bool NeedFilling = false;
-    public bool IsReadyForBaking = false;
+    [SerializeField]
+    private State _type;
+
+    public State CurrentType { get => _type; }
+
     [Space(2)]
     [Header("Grow")]
     [SerializeField] private float _growTime;
     [Range(1,7)]
     [SerializeField] private float _endScale;
 
+    private void Start()
+    {
+        Grow();
+    }
+
     public void Grow() => StartCoroutine(Growing());
-    public void Bake(){
+
+    public void Bake()
+    {
 
     }
-    private IEnumerator Growing(){
+
+    private IEnumerator Growing()
+    {
         yield return new WaitForSeconds(_growTime);
         transform.localScale *= _endScale;
+
+    }
+
+    public enum State
+    {
+        Unrised,
+        Rised,
+        ReadyForBaking,
+        Rolled,
+        Filled,
+        Cooked
     }
 }
