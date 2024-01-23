@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class Dough : MonoBehaviour
+public class Dough : PickableItem
 {
     [SerializeField]
-    private State _type;
+    private State _state;
 
-    public State CurrentState { get => _type; }
+    public State CurrentState { get => _state; }
 
     [Space(2)]
     [Header("Grow")]
@@ -24,13 +24,24 @@ public class Dough : MonoBehaviour
 
     }
 
+    public void Rollig(float endScale){
+        _state = State.Rolled;
+        transform.localScale *= endScale;
+    }
+
+    public void Filling() => _state = State.Filled;
+
+    public void IsReady(){
+        if (_state == State.Filled)
+            _state = State.ReadyForBaking;
+    }
+
     private IEnumerator Growing(){
         yield return new WaitForSeconds(_growTime);
         transform.localScale *= _endScale;
     }
 
-    public enum State
-    {
+    public enum State{
         Unrised,
         Rised,
         ReadyForBaking,

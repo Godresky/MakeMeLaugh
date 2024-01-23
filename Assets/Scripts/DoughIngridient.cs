@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DoughIngridient : MonoBehaviour
+public class DoughIngridient : PickableItem
 {
     [SerializeField]
     private Type _type;
