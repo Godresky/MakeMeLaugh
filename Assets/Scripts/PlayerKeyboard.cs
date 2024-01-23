@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerKeyboard : MonoBehaviour
 {
     public Player Player;
-    public PlayerPickUpSystem PlayerPickUpSystem;
 
     private PlayerControls _playerControls;
 
@@ -27,7 +26,7 @@ public class PlayerKeyboard : MonoBehaviour
 
         _playerControls.FPSControl.Crouch.performed += ctx => Player.SwitchCrouching();
 
-        _playerControls.Actions.Action.performed += ctx => PlayerPickUpSystem.Interact();
+        _playerControls.Actions.Action.performed += ctx => Player.RecievePickUp();
         //_playerControls.Actions.Drop.performed += ctx => Player.DropItem();
 
         //_playerControls.Menu.SwitchPad.performed += ctx => Stats.singleton.SwitchPadMenu();

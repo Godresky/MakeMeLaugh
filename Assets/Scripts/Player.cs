@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(PlayerPickingUp))]
 public class Player : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -15,8 +17,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _crouchingCoefficient = 0.02f;
 
-    private bool _isCrouching = false;
-
     [SerializeField]
     private CharacterController _controller;
     private float _playerHeight;
@@ -26,9 +26,17 @@ public class Player : MonoBehaviour
     private Vector2 _sensetivity = new Vector2(8f, 0.5f);
     [SerializeField]
     private float _xClamp;
-
     [SerializeField]
     private Transform _cameraTransform;
+
+    [Header("Pucking Up Settings")]
+    [SerializeField]
+    private float _distanceRaycast = Mathf.Infinity;
+    [SerializeField]
+    private LayerMask _layerMaskRaycast;
+
+    private bool _isCrouching = false;
+    private bool _isPickingUp = false;
 
     private float _xRotation = 0f;
     private Vector2 _mouseInput;
@@ -38,6 +46,7 @@ public class Player : MonoBehaviour
     private Vector3 _teleportPosition = Vector3.zero;
 
     private Camera _camera;
+    private PlayerPickingUp _playerPickingUp;
 
     private void Start()
     {
@@ -45,6 +54,7 @@ public class Player : MonoBehaviour
         Cursor.visible = false;
 
         _controller = GetComponent<CharacterController>();
+        _playerPickingUp = GetComponent<PlayerPickingUp>();
         _playerHeight = _controller.height;
 
         _camera = _cameraTransform.GetComponent<Camera>();
@@ -59,6 +69,16 @@ public class Player : MonoBehaviour
     {
         _mouseInput.x = input.x * _sensetivity.x;
         _mouseInput.y = input.y * _sensetivity.y;
+    }
+
+    public void RecievePickUp()
+    {
+        _isPickingUp = !_isPickingUp;
+
+        if (!_isPickingUp)
+        {
+            _playerPickingUp.Drop();
+        }
     }
 
     public void SwitchCrouching()
@@ -86,6 +106,34 @@ public class Player : MonoBehaviour
     //        _canPlayAudio = false;
     //    }
     //}
+
+    private void CheckRaycast()
+    {
+        //if (_lastHoveredItem != null)
+        //{
+        //    _lastHoveredItem.OnHoverExit();
+        //    _lastHoveredItem = null;
+        //}
+
+        Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, _distanceRaycast, _layerMaskRaycast, QueryTriggerInteraction.Ignore))
+        {
+            if (hit.collider.TryGetComponent(out PickableItem item))
+            {
+                //if (_lastHoveredItem != null)
+                //    _lastHoveredItem.OnHoverExit();
+
+                //_lastHoveredItem = outlineItem;
+                //outlineItem.OnHoverEnter();
+
+                if (_isPickingUp)
+                {
+                    _playerPickingUp.PickUp(hit.collider.gameObject);
+                }
+            }
+        }
+    }
 
     private void Movement()
     {
@@ -117,7 +165,7 @@ public class Player : MonoBehaviour
         MouseLook();
         Movement();
 
-        //CheckRaycast();
+        CheckRaycast();
     }
 
 }
