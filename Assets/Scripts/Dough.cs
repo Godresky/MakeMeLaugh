@@ -32,7 +32,7 @@ public class Dough : PickableItem
     public void Filling() => _state = State.Filled;
 
     public void IsReady(){
-        if (_state == State.Filled)
+        if (_state == State.Filled || _state == State.Rolled)
             _state = State.ReadyForBaking;
     }
 
