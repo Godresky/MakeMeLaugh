@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
 
     public void SwitchCrouching()
     {
-        _isCrouching = !_isCrouching;
+        _isTryingToCrouch = !_isTryingToCrouch;
     }
 
     private void MouseLook()
