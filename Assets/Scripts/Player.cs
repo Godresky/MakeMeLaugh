@@ -15,13 +15,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _gravity = -30f;
     [SerializeField]
+    // Crouching parameters
     private float _crouchingTransitionSpeed = 10f;
     [SerializeField]
     private float _crouchHeight = 1f;
     private float _standingHeight;
     private float _currentHeight;
-    private bool _isCrouching = false;
+    private bool _isTryingToCrouch = false;
     private Vector3 _initialCameraPosition;
+    bool IsCrouching => _standingHeight - _currentHeight > .1f;
+
 
     [SerializeField]
     private CharacterController _controller;
@@ -100,24 +103,30 @@ public class Player : MonoBehaviour
 
     public void SwitchCrouching()
     {
-        _isCrouching = !_isCrouching;
+        _isTryingToCrouch = !_isTryingToCrouch;
     }
 
     public void Crouching()
     {
         // Transform Character
-        var heightTarget = _isCrouching ? _crouchHeight : _standingHeight;
+        var heightTarget = _isTryingToCrouch ? _crouchHeight : _standingHeight;
+
+        if (IsCrouching && !_isTryingToCrouch)
+        {
+            var castOrigin = transform.position + new Vector3(0, _currentHeight / 2, 0);
+            if (Physics.Raycast(castOrigin, Vector3.up, out RaycastHit hit, 0.2f))
+            {
+                var distanceToCeiling = hit.point.y - castOrigin.y;
+                heightTarget = Mathf.Max
+                (
+                    _currentHeight + distanceToCeiling - 0.1f,
+                    _crouchHeight
+                );
+            }
+        }
 
         var crouchDelta = Time.deltaTime * _crouchingTransitionSpeed;
         _currentHeight = Mathf.Lerp(_currentHeight, heightTarget, crouchDelta);
-        //if (_isCrouching && _currentHeight > _crouchHeight)
-        //{
-        //    _currentHeight -= crouchDelta;
-        //}
-        //else if (!_isCrouching && _currentHeight < heightTarget)
-        //{
-        //    _currentHeight += crouchDelta;
-        //}
 
         _controller.height = _currentHeight;
 
@@ -171,7 +180,7 @@ public class Player : MonoBehaviour
         if (_controller.isGrounded)
             _verticalVelocity.y = 0;
 
-        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isCrouching ? _speedCrouching : _speedWalking);
+        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isTryingToCrouch ? _speedCrouching : _speedWalking);
         _controller.Move(horizontalVelocity * Time.deltaTime);
 
         _verticalVelocity.y += _gravity * Time.deltaTime;
