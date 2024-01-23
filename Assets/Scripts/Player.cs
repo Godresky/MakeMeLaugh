@@ -107,11 +107,6 @@ public class Player : MonoBehaviour
         _cameraTransform.eulerAngles = targetRotation;
     }
 
-    public void SwitchCrouching()
-    {
-        _isTryingToCrouch = !_isTryingToCrouch;
-    }
-
     public void Crouching()
     {
         // Transform Character
