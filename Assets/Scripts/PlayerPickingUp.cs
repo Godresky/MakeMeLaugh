@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerPickingUp : MonoBehaviour
@@ -8,11 +9,14 @@ public class PlayerPickingUp : MonoBehaviour
     private bool _equipped = false;
     [SerializeField]
     private Transform _cameraTransform;
+    [SerializeField]
+    private float _lerpSpeed;
+    [SerializeField]
+    private GameObject _objectGrabPoint;
 
-    private GameObject _pointConteiner;
     private GameObject _equippedItem;
-    private Transform _itemParent;
-    private Rigidbody _itemRb;
+    private Transform _equippedItemParent;
+    private Rigidbody _equippedItemRb;
 
     //private void Highlight()
     //{
@@ -40,11 +44,8 @@ public class PlayerPickingUp : MonoBehaviour
         if (_equipped)
         {
             _equipped = false;
-
-            _equippedItem.transform.SetParent(_itemParent);
-            Destroy(_pointConteiner);
-
-            _itemRb.isKinematic = false;
+            _equippedItemRb.useGravity = true;
+            _equippedItemRb.velocity = Vector3.zero;
         }
     }
 
@@ -53,22 +54,22 @@ public class PlayerPickingUp : MonoBehaviour
         if (!_equipped)
         {
             _equipped = true;
-
             _equippedItem = item;
-            _itemParent = _equippedItem.transform.parent;
 
-            _pointConteiner = new GameObject("PointConteiner");
-            _pointConteiner.transform.SetParent(_cameraTransform);
+            _objectGrabPoint.transform.position = _equippedItem.transform.position;
 
-            _equippedItem.transform.SetParent(_pointConteiner.transform);
-
-            _itemRb = item.GetComponent<Rigidbody>();
-            _itemRb.isKinematic = true;
+            _equippedItemRb = item.GetComponent<Rigidbody>();
+            _equippedItemRb.useGravity = false;
         }
     }
 
     private void Update()
     {
-//Highlight();
+        if (_equipped)
+        {
+            Vector3 newPosition = Vector3.Lerp(_equippedItem.transform.position, _objectGrabPoint.transform.position, Time.deltaTime * _lerpSpeed);
+            _equippedItemRb.MovePosition(newPosition);
+        }
+        //Highlight();
     }
 }
