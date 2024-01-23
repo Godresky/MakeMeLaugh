@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMaskRaycast;
 
+    private bool _isCrouching = false;
     private bool _isPickingUp = false;
 
     private float _xRotation = 0f;
@@ -87,6 +88,11 @@ public class Player : MonoBehaviour
         {
             _playerPickingUp.Drop();
         }
+    }
+
+    public void SwitchCrouching()
+    {
+        _isCrouching = !_isCrouching;
     }
 
     private void MouseLook()
@@ -197,5 +203,4 @@ public class Player : MonoBehaviour
 
         CheckRaycast();
     }
-
 }
