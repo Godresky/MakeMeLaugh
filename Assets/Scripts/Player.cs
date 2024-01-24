@@ -44,9 +44,6 @@ public class Player : MonoBehaviour
     private LayerMask _layerMaskRaycast;
 
     private bool _isPickingUp = false;
-    [SerializeField]
-    private bool _isLightingItem = false;
-    private Collider _pickingHitCollider;
 
     private float _xRotation = 0f;
     private Vector2 _mouseInput;
@@ -57,6 +54,7 @@ public class Player : MonoBehaviour
 
     private Camera _camera;
     private PlayerPickingUp _playerPickingUp;
+    private PickableItem _lastHoveredItem;
 
     private void Start()
     {
@@ -151,11 +149,11 @@ public class Player : MonoBehaviour
 
     private void CheckRaycast()
     {
-        //if (_lastHoveredItem != null)
-        //{
-        //    _lastHoveredItem.OnHoverExit();
-        //    _lastHoveredItem = null;
-        //}
+        if (_lastHoveredItem != null)
+        {
+            _lastHoveredItem.OnHoverExit();
+            _lastHoveredItem = null;
+        }
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
 
@@ -163,18 +161,11 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
             {
-                //if (_lastHoveredItem != null)
-                //    _lastHoveredItem.OnHoverExit();
+                if (_lastHoveredItem != null)
+                    _lastHoveredItem.OnHoverExit();
 
-                //_lastHoveredItem = outlineItem;
-                //outlineItem.OnHoverEnter();
-
-                if (!_isLightingItem)
-                {
-                    _pickingHitCollider = hit.collider;
-                    _isLightingItem = !_isLightingItem;
-                    hit.collider.GetComponent<PickableItem>()?.SwitchOutlighting();
-                }
+                _lastHoveredItem = item;
+                item.OnHoverEnter();
 
                 if (_isPickingUp)
                 {
@@ -182,12 +173,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        if ((hit.collider == null || hit.collider.GetComponent<PickableItem>() == null) && _isLightingItem)
-        {
-            _isLightingItem = !_isLightingItem;
-            _pickingHitCollider.GetComponent<PickableItem>()?.SwitchOutlighting();
-        }
-
     }
 
     private void Movement()

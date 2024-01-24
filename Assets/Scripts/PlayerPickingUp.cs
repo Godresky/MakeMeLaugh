@@ -17,27 +17,6 @@ public class PlayerPickingUp : MonoBehaviour
     private GameObject _equippedItem;
     private Rigidbody _equippedItemRb;
 
-    //private void Highlight()
-    //{
-    //    // Highlighting of obj
-    //    Debug.DrawRay(_playerCameraTransform.position, _playerCameraTransform.forward * _hitRange, Color.red);
-    //    if (_hit.collider != null)
-    //    {
-    //        _hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
-    //    }
-
-    //    if (Physics.Raycast(
-    //        _playerCameraTransform.position,
-    //        _playerCameraTransform.forward,
-    //        out _hit,
-    //        _hitRange,
-    //        _pickableLayerMask))
-    //    {
-    //        _hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-
-    //    }
-    //}
-
     public void Drop()
     {
         if (_equipped)
@@ -69,6 +48,5 @@ public class PlayerPickingUp : MonoBehaviour
             Vector3 newPosition = Vector3.Lerp(_equippedItem.transform.position, _objectGrabPoint.transform.position, Time.deltaTime * _lerpSpeed);
             _equippedItemRb.MovePosition(newPosition);
         }
-        //Highlight();
     }
 }

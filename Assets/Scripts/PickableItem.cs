@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
+[RequireComponent(typeof(Outline))]
 public class PickableItem : MonoBehaviour
 {
     private Outline _outline;
@@ -13,17 +14,21 @@ public class PickableItem : MonoBehaviour
     private float _outlineWidth = 10f;
 
 
-    void Start()
+    private void Start()
     {
-        this.gameObject.AddComponent<Outline>();
         _outline = GetComponent<Outline>();
         _outline.enabled = false;
         _outline.OutlineColor = _outlineColor;
         _outline.OutlineWidth = _outlineWidth;
     }
 
-    public void SwitchOutlighting()
+    public void OnHoverEnter()
     {
-        _outline.enabled = !_outline.enabled;
+        _outline.enabled = true;
+    }
+
+    public void OnHoverExit()
+    {
+        _outline.enabled = false;
     }
 }
