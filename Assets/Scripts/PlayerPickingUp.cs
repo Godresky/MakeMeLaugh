@@ -15,6 +15,7 @@ public class PlayerPickingUp : MonoBehaviour
     private GameObject _objectGrabPoint;
 
     private GameObject _equippedItem;
+    private PickableItem _equippedItemClass;
     private Rigidbody _equippedItemRb;
 
     public void Drop()
@@ -22,6 +23,9 @@ public class PlayerPickingUp : MonoBehaviour
         if (_equipped)
         {
             _equipped = false;
+
+            _equippedItem = null;
+
             _equippedItemRb.useGravity = true;
             _equippedItemRb.velocity = Vector3.zero;
         }
@@ -36,9 +40,16 @@ public class PlayerPickingUp : MonoBehaviour
 
             _objectGrabPoint.transform.position = _equippedItem.transform.position;
 
+            _equippedItemClass = item.GetComponent<PickableItem>();
+
             _equippedItemRb = item.GetComponent<Rigidbody>();
             _equippedItemRb.useGravity = false;
         }
+    }
+
+    public PickableItem GetEquippedItem()
+    {
+        return _equippedItem != null ? _equippedItemClass : null;
     }
 
     private void Update()

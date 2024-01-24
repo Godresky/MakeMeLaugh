@@ -13,13 +13,24 @@ public class PickableItem : MonoBehaviour
     [SerializeField]
     private float _outlineWidth = 10f;
 
+    private bool _loadedOutline = false;
+
 
     private void Start()
     {
         _outline = GetComponent<Outline>();
-        _outline.enabled = false;
+
         _outline.OutlineColor = _outlineColor;
         _outline.OutlineWidth = _outlineWidth;
+    }
+
+    private void LateUpdate()
+    {
+        if (!_loadedOutline)
+        {
+            _loadedOutline = true;
+            _outline.enabled = false;
+        }
     }
 
     public void OnHoverEnter()
