@@ -21,18 +21,22 @@ public class Border : MonoBehaviour
 
         other.transform.rotation = Quaternion.identity;
 
-        if (other.gameObject.tag == "Plate")
+        if (other.gameObject.tag == "Plate" && _plateSpawnPoint != null)
         {
             other.transform.position = _plateSpawnPoint.position;
 
         }
-        else if (other.gameObject.tag == "Player")
+        else if (other.gameObject.tag == "Player" && _playerSpawnPoint != null)
         {
             other.transform.position = _playerSpawnPoint.position;
         }
-        else
+        else if (_missingSpawnPoin != null)
         {
             other.transform.position = _missingSpawnPoin.position;
+        }
+        else
+        {
+            other.transform.position = Vector3.zero;
         }
     }
 }
