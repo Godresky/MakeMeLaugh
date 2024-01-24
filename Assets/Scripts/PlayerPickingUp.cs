@@ -15,7 +15,6 @@ public class PlayerPickingUp : MonoBehaviour
     private GameObject _objectGrabPoint;
 
     private GameObject _equippedItem;
-    private Transform _equippedItemParent;
     private Rigidbody _equippedItemRb;
 
     //private void Highlight()

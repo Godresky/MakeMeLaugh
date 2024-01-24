@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -221,11 +221,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 687386428}
+  - {fileID: 1714652507}
+  - {fileID: 2100560189}
   - {fileID: 139233615}
   - {fileID: 1845857491}
   - {fileID: 146920537}
-  - {fileID: 1714652507}
-  - {fileID: 2100560189}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &139233610
@@ -613,10 +613,9 @@ GameObject:
   - component: {fileID: 687386425}
   - component: {fileID: 687386424}
   - component: {fileID: 687386430}
-  - component: {fileID: 687386429}
   m_Layer: 10
   m_Name: PickableObj
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -734,21 +733,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 84565118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &687386429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687386423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad8735ffc6715a48ba4be25cb9bbecb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 687386426}
-  color: {r: 0.9689877, g: 0.9882353, b: 0, a: 1}
 --- !u!114 &687386430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,6 +745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b65f4929d99065438225612a643e55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _outlineColor: {r: 0, g: 1, b: 1, a: 1}
+  _outlineWidth: 10
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,7 +1493,6 @@ GameObject:
   - component: {fileID: 1714652504}
   - component: {fileID: 1714652503}
   - component: {fileID: 1714652509}
-  - component: {fileID: 1714652508}
   m_Layer: 10
   m_Name: PickableObj (1)
   m_TagString: Untagged
@@ -1628,21 +1613,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 84565118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1714652508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714652502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad8735ffc6715a48ba4be25cb9bbecb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 1714652505}
-  color: {r: 0.9675588, g: 0.98490566, b: 0, a: 1}
 --- !u!114 &1714652509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1655,6 +1625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b65f4929d99065438225612a643e55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _outlineColor: {r: 0, g: 1, b: 1, a: 1}
+  _outlineWidth: 10
 --- !u!1 &1845857490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1774,6 @@ GameObject:
   - component: {fileID: 2100560191}
   - component: {fileID: 2100560190}
   - component: {fileID: 2100560195}
-  - component: {fileID: 2100560194}
   m_Layer: 10
   m_Name: PickableObj (2)
   m_TagString: Untagged
@@ -1923,21 +1894,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100560188}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2100560194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100560188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad8735ffc6715a48ba4be25cb9bbecb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 2100560192}
-  color: {r: 0.96862745, g: 0.9882353, b: 0, a: 1}
 --- !u!114 &2100560195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,6 +1906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b65f4929d99065438225612a643e55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _outlineColor: {r: 0, g: 1, b: 1, a: 1}
+  _outlineWidth: 10
 --- !u!1001 &501127551413295025
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float _currentHeight;
     private bool _isTryingToCrouch = false;
     private Vector3 _initialCameraPosition;
-    bool IsCrouching => _standingHeight - _currentHeight > .1f;
+    private bool _isCrouching => _standingHeight - _currentHeight > .1f;
 
 
     [SerializeField]
@@ -43,8 +43,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMaskRaycast;
 
-    private bool _isCrouching = false;
     private bool _isPickingUp = false;
+    [SerializeField]
+    private bool _isLightingItem = false;
+    private Collider _pickingHitCollider;
 
     private float _xRotation = 0f;
     private Vector2 _mouseInput;
@@ -112,7 +114,7 @@ public class Player : MonoBehaviour
         // Transform Character
         var heightTarget = _isTryingToCrouch ? _crouchHeight : _standingHeight;
 
-        if (IsCrouching && !_isTryingToCrouch)
+        if (_isCrouching && !_isTryingToCrouch)
         {
             var castOrigin = transform.position + new Vector3(0, _currentHeight / 2, 0);
             if (Physics.Raycast(castOrigin, Vector3.up, out RaycastHit hit, 0.2f))
@@ -167,12 +169,25 @@ public class Player : MonoBehaviour
                 //_lastHoveredItem = outlineItem;
                 //outlineItem.OnHoverEnter();
 
+                if (!_isLightingItem)
+                {
+                    _pickingHitCollider = hit.collider;
+                    _isLightingItem = !_isLightingItem;
+                    hit.collider.GetComponent<PickableItem>()?.SwitchOutlighting();
+                }
+
                 if (_isPickingUp)
                 {
                     _playerPickingUp.PickUp(hit.collider.gameObject);
                 }
             }
         }
+        if ((hit.collider == null || hit.collider.GetComponent<PickableItem>() == null) && _isLightingItem)
+        {
+            _isLightingItem = !_isLightingItem;
+            _pickingHitCollider.GetComponent<PickableItem>()?.SwitchOutlighting();
+        }
+
     }
 
     private void Movement()
@@ -181,7 +196,7 @@ public class Player : MonoBehaviour
         if (_controller.isGrounded)
             _verticalVelocity.y = 0;
 
-        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isTryingToCrouch ? _speedCrouching : _speedWalking);
+        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isCrouching ? _speedCrouching : _speedWalking);
         _controller.Move(horizontalVelocity * Time.deltaTime);
 
         _verticalVelocity.y += _gravity * Time.deltaTime;
