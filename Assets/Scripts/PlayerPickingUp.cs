@@ -15,35 +15,17 @@ public class PlayerPickingUp : MonoBehaviour
     private GameObject _objectGrabPoint;
 
     private GameObject _equippedItem;
-    private Transform _equippedItemParent;
+    private PickableItem _equippedItemClass;
     private Rigidbody _equippedItemRb;
-
-    //private void Highlight()
-    //{
-    //    // Highlighting of obj
-    //    Debug.DrawRay(_playerCameraTransform.position, _playerCameraTransform.forward * _hitRange, Color.red);
-    //    if (_hit.collider != null)
-    //    {
-    //        _hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
-    //    }
-
-    //    if (Physics.Raycast(
-    //        _playerCameraTransform.position,
-    //        _playerCameraTransform.forward,
-    //        out _hit,
-    //        _hitRange,
-    //        _pickableLayerMask))
-    //    {
-    //        _hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-
-    //    }
-    //}
 
     public void Drop()
     {
         if (_equipped)
         {
             _equipped = false;
+
+            _equippedItem = null;
+
             _equippedItemRb.useGravity = true;
             _equippedItemRb.velocity = Vector3.zero;
         }
@@ -58,9 +40,16 @@ public class PlayerPickingUp : MonoBehaviour
 
             _objectGrabPoint.transform.position = _equippedItem.transform.position;
 
+            _equippedItemClass = item.GetComponent<PickableItem>();
+
             _equippedItemRb = item.GetComponent<Rigidbody>();
             _equippedItemRb.useGravity = false;
         }
+    }
+
+    public PickableItem GetEquippedItem()
+    {
+        return _equippedItem != null ? _equippedItemClass : null;
     }
 
     private void Update()
@@ -70,6 +59,5 @@ public class PlayerPickingUp : MonoBehaviour
             Vector3 newPosition = Vector3.Lerp(_equippedItem.transform.position, _objectGrabPoint.transform.position, Time.deltaTime * _lerpSpeed);
             _equippedItemRb.MovePosition(newPosition);
         }
-        //Highlight();
     }
 }

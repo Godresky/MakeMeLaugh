@@ -12,7 +12,6 @@ public class PlayerKeyboard : MonoBehaviour
 
     private Vector2 _movementInput;
     private Vector2 _mouseInput;
-    private float _crouchAction;
 
     private void Awake()
     {
