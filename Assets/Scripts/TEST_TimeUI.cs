@@ -6,7 +6,7 @@ using UnityEngine;
 public class TEST_TimeUI : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI _timeText;
+    private TextMeshPro _timeText;
 
     private void OnEnable()
     {

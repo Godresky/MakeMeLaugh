@@ -194,6 +194,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Clock"",
+                    ""type"": ""Button"",
+                    ""id"": ""447a0b51-5b28-42dd-ba84-45208ab0333c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +247,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TurnOnCheat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5de7fbe-d730-4632-ac85-1b1c11ecd904"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Clock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -326,6 +346,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_Drop = m_Actions.FindAction("Drop", throwIfNotFound: true);
         m_Actions_SwitchFlashlight = m_Actions.FindAction("Switch Flashlight", throwIfNotFound: true);
         m_Actions_TurnOnCheat = m_Actions.FindAction("TurnOnCheat", throwIfNotFound: true);
+        m_Actions_Clock = m_Actions.FindAction("Clock", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_SwitchPad = m_Menu.FindAction("Switch Pad", throwIfNotFound: true);
@@ -466,6 +487,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Drop;
     private readonly InputAction m_Actions_SwitchFlashlight;
     private readonly InputAction m_Actions_TurnOnCheat;
+    private readonly InputAction m_Actions_Clock;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -474,6 +496,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Drop => m_Wrapper.m_Actions_Drop;
         public InputAction @SwitchFlashlight => m_Wrapper.m_Actions_SwitchFlashlight;
         public InputAction @TurnOnCheat => m_Wrapper.m_Actions_TurnOnCheat;
+        public InputAction @Clock => m_Wrapper.m_Actions_Clock;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -495,6 +518,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @TurnOnCheat.started += instance.OnTurnOnCheat;
             @TurnOnCheat.performed += instance.OnTurnOnCheat;
             @TurnOnCheat.canceled += instance.OnTurnOnCheat;
+            @Clock.started += instance.OnClock;
+            @Clock.performed += instance.OnClock;
+            @Clock.canceled += instance.OnClock;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -511,6 +537,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @TurnOnCheat.started -= instance.OnTurnOnCheat;
             @TurnOnCheat.performed -= instance.OnTurnOnCheat;
             @TurnOnCheat.canceled -= instance.OnTurnOnCheat;
+            @Clock.started -= instance.OnClock;
+            @Clock.performed -= instance.OnClock;
+            @Clock.canceled -= instance.OnClock;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -603,6 +632,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDrop(InputAction.CallbackContext context);
         void OnSwitchFlashlight(InputAction.CallbackContext context);
         void OnTurnOnCheat(InputAction.CallbackContext context);
+        void OnClock(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

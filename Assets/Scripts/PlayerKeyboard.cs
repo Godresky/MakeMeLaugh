@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerKeyboard : MonoBehaviour
 {
     public Player Player;
-
+    public ClockUI Clock;
+    
     private PlayerControls _playerControls;
 
     private Vector2 _movementInput;
@@ -27,6 +28,8 @@ public class PlayerKeyboard : MonoBehaviour
         _playerControls.FPSControl.Crouch.performed += ctx => Player.SwitchCrouching();
         //_playerControls.FPSControl.Crouch.performed += ctx => Player.SwitchCrouching(ctx.ReadValue<float>());
         //_playerControls.FPSControl.Crouch.performed -= ctx => Player.SwitchCrouching(ctx.ReadValue<float>());
+
+        _playerControls.Actions.Clock.performed += ctx => Clock.SwitchActive();
 
         _playerControls.Actions.Action.performed += ctx => Player.RecievePickUp();
         //_playerControls.Actions.Drop.performed += ctx => Player.DropItem();

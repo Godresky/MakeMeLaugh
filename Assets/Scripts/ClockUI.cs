@@ -8,6 +8,7 @@ public class ClockUI : MonoBehaviour
     private Transform _minuteArrow;
     [SerializeField] 
     private Transform _hourArrow;
+    private bool _isActive = false;
 
     private void OnEnable()
     {
@@ -21,10 +22,20 @@ public class ClockUI : MonoBehaviour
         TimeManager.OnHourChanged -= UpdateTime;
     }
 
+    private void Start()
+    {
+        this.gameObject.SetActive(_isActive);
+    }
 
     private void UpdateTime()
     {
         _minuteArrow.eulerAngles = new Vector3(0, 0, -(float)TimeManager.Minute * 6f);
         _hourArrow.eulerAngles = new Vector3(0, 0, -((float)TimeManager.Hour * 60 + (float)TimeManager.Minute) * 0.25f);
+    }
+
+    public void SwitchActive()
+    {
+        _isActive = !_isActive;
+        this.gameObject.SetActive(_isActive);
     }
 }
