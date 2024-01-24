@@ -1,10 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerPickingUp))]
+[RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -51,19 +52,36 @@ public class Player : MonoBehaviour
 
     private Vector2 _movementInput;
     private Vector2 _verticalVelocity = Vector2.zero;
-    private Vector3 _teleportPosition = Vector3.zero;
 
     private Camera _camera;
     private PlayerPickingUp _playerPickingUp;
     private PickableItem _lastHoveredItem;
+
+    private AudioSource _audio;
+
+    [Header("Sound Settings")]
+    [SerializeField]
+    private List<AudioClip> _footstepsClips;
+    [SerializeField]
+    private float _delayWalk;
+    [SerializeField]
+    private float _delayСrouching;
+    [SerializeField]
+    private AudioSource _getItemSound;
+    [SerializeField]
+    private AudioSource _dropItemSound;
+    [SerializeField]
+    private bool _canPlayAudio = true;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        _audio = GetComponent<AudioSource>();
         _controller = GetComponent<CharacterController>();
         _playerPickingUp = GetComponent<PlayerPickingUp>();
+
         _standingHeight = _currentHeight = _controller.height;
 
         _camera = _cameraTransform.GetComponent<Camera>();
@@ -144,14 +162,29 @@ public class Player : MonoBehaviour
         _cameraTransform.localPosition = newCameraPosition;
     }
 
-    //private void CheckAudio(float speed)
-    //{
-    //    if (_controller.isGrounded && speed > 2f && !_audio.isPlaying && _canPlayAudio)
-    //    {
-    //        StartCoroutine(Footstep());
-    //        _canPlayAudio = false;
-    //    }
-    //}
+    private void CheckAudio(float speed)
+    {
+        if (_controller.isGrounded && speed > 2f && !_audio.isPlaying && _canPlayAudio)
+        {
+            StartCoroutine(Footstep());
+            _canPlayAudio = false;
+        }
+    }
+
+    private IEnumerator Footstep()
+    {
+        int numberRandomClip = Random.Range(0, _footstepsClips.Count);
+
+        _audio.clip = _footstepsClips[numberRandomClip];
+
+        _audio.volume = Random.Range(0.65f, 0.75f);
+        _audio.pitch = Random.Range(0.8f, 1.1f);
+        _audio.Play();
+
+        yield return new WaitForSeconds(_isCrouching ? _delayСrouching : _delayWalk);
+
+        _canPlayAudio = true;
+    }
 
     private void CheckRaycast()
     {
@@ -207,7 +240,7 @@ public class Player : MonoBehaviour
         _verticalVelocity.y += _gravity * Time.deltaTime;
         _controller.Move(_verticalVelocity * Time.deltaTime);
 
-        //CheckAudio(horizontalVelocity.magnitude);
+        CheckAudio(horizontalVelocity.magnitude);
     }
 
     private void Update()
