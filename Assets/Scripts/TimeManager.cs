@@ -20,18 +20,16 @@ public class TimeManager : MonoBehaviour
     private float _minuteToRealTime = 0.5f; // second Real time to minute Game time
     private float timer;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Minute = _startMinute;
         Hour = _startHour;
         timer = _minuteToRealTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        timer -= Time.deltaTime;
+        timer -= Time.fixedDeltaTime;
 
         if (timer <= 0)
         {

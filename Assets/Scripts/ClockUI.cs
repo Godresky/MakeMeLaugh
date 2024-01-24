@@ -24,7 +24,7 @@ public class ClockUI : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.SetActive(_isActive);
+        gameObject.SetActive(_isActive);
     }
 
     private void UpdateTime()
@@ -36,6 +36,6 @@ public class ClockUI : MonoBehaviour
     public void SwitchActive()
     {
         _isActive = !_isActive;
-        this.gameObject.SetActive(_isActive);
+        gameObject.SetActive(_isActive);
     }
 }
