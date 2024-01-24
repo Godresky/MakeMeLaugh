@@ -8,6 +8,8 @@ public class ClockUI : MonoBehaviour
     private Transform _minuteArrow;
     [SerializeField] 
     private Transform _hourArrow;
+    [SerializeField]
+    private Animator _animator;
     private bool _isActive = false;
 
     private void OnEnable()
@@ -24,7 +26,7 @@ public class ClockUI : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(_isActive);
+        _animator.SetBool("isActive", _isActive);
     }
 
     private void UpdateTime()
@@ -36,6 +38,6 @@ public class ClockUI : MonoBehaviour
     public void SwitchActive()
     {
         _isActive = !_isActive;
-        gameObject.SetActive(_isActive);
+        _animator.SetBool("isActive", _isActive);
     }
 }
