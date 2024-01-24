@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float _currentHeight;
     private bool _isTryingToCrouch = false;
     private Vector3 _initialCameraPosition;
-    bool IsCrouching => _standingHeight - _currentHeight > .1f;
+    private bool _isCrouching => _standingHeight - _currentHeight > .1f;
 
 
     [SerializeField]
@@ -43,8 +43,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask _layerMaskRaycast;
 
-    private bool _isCrouching = false;
     private bool _isPickingUp = false;
+    private bool _isInteracting = false;
 
     private float _xRotation = 0f;
     private Vector2 _mouseInput;
@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
 
     private Camera _camera;
     private PlayerPickingUp _playerPickingUp;
+    private PickableItem _lastHoveredItem;
 
     private void Start()
     {
@@ -90,6 +91,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void RecieveInteract()
+    {
+        _isInteracting = true;
+    }
+
     public void SwitchCrouching()
     {
         _isTryingToCrouch = !_isTryingToCrouch;
@@ -112,7 +118,7 @@ public class Player : MonoBehaviour
         // Transform Character
         var heightTarget = _isTryingToCrouch ? _crouchHeight : _standingHeight;
 
-        if (IsCrouching && !_isTryingToCrouch)
+        if (_isCrouching && !_isTryingToCrouch)
         {
             var castOrigin = transform.position + new Vector3(0, _currentHeight / 2, 0);
             if (Physics.Raycast(castOrigin, Vector3.up, out RaycastHit hit, 0.2f))
@@ -149,11 +155,12 @@ public class Player : MonoBehaviour
 
     private void CheckRaycast()
     {
-        //if (_lastHoveredItem != null)
-        //{
-        //    _lastHoveredItem.OnHoverExit();
-        //    _lastHoveredItem = null;
-        //}
+        PickableItem currentEquippedItem = _playerPickingUp.GetEquippedItem();
+        if (_lastHoveredItem != null && currentEquippedItem != _lastHoveredItem)
+        {
+            _lastHoveredItem.OnHoverExit();
+            _lastHoveredItem = null;
+        }
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
 
@@ -161,18 +168,31 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
             {
-                //if (_lastHoveredItem != null)
-                //    _lastHoveredItem.OnHoverExit();
+                if (currentEquippedItem == null && _lastHoveredItem != item)
+                {
+                    if (_lastHoveredItem != null)
+                        _lastHoveredItem.OnHoverExit();
 
-                //_lastHoveredItem = outlineItem;
-                //outlineItem.OnHoverEnter();
+                    _lastHoveredItem = item;
+                    item.OnHoverEnter();
+                }
 
                 if (_isPickingUp)
                 {
-                    _playerPickingUp.PickUp(hit.collider.gameObject);
+                    _playerPickingUp.PickUp(item.gameObject);
+                }
+            }
+            if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
+            {
+                if (_isInteracting)
+                {
+                    _isInteracting = false;
+                    interactabelObject.Interact();
                 }
             }
         }
+
+        _isInteracting = false;
     }
 
     private void Movement()
@@ -181,7 +201,7 @@ public class Player : MonoBehaviour
         if (_controller.isGrounded)
             _verticalVelocity.y = 0;
 
-        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isTryingToCrouch ? _speedCrouching : _speedWalking);
+        Vector3 horizontalVelocity = (transform.right * _movementInput.x + transform.forward * _movementInput.y) * (_isCrouching ? _speedCrouching : _speedWalking);
         _controller.Move(horizontalVelocity * Time.deltaTime);
 
         _verticalVelocity.y += _gravity * Time.deltaTime;
