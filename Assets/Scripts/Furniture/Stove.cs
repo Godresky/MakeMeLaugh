@@ -2,19 +2,18 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Stove : Furniture
+public class Stove : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _fireEffect;
     [SerializeField] private float _bakingTime;
+    [SerializeField] private Door _door;
 
     private void OnTriggerEnter(Collider other) {
-        if (other.TryGetComponent(out Dough dough) && dough.CurrentState == Dough.State.ReadyForBaking && IsClosed==true) {
+        if (other.TryGetComponent(out Dough dough) && dough.CurrentState == Dough.State.ReadyForBaking && _door.IsOpen== false) {
             StartCoroutine(Baking(dough));
         }
     }
 
     private IEnumerator Baking(Dough dough){
-        _fireEffect.Play();
         yield return new WaitForSeconds(_bakingTime);
         dough.Bake();
     }

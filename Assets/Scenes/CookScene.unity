@@ -229,8 +229,9 @@ GameObject:
   - component: {fileID: 74925376}
   - component: {fileID: 74925375}
   - component: {fileID: 74925374}
+  - component: {fileID: 74925377}
   m_Layer: 0
-  m_Name: Kachalka
+  m_Name: RollStick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,6 +323,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74925372}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &74925377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74925372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1f27fdb1fd601429018a7f8f50051a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _endScale: 1
 --- !u!1 &137634179
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cca345300ea3ed418030cd5ef235af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _endDoughScale: 2
+  _rollStick: {fileID: 74925377}
+  _bowlwithJam: {fileID: 1413687465}
 --- !u!65 &313426232
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -601,12 +616,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.7155087, z: 1}
+  m_Center: {x: 0, y: 0.35775435, z: 0}
 --- !u!23 &313426233
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1153,9 +1168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a623c447de4404ebff28bb4296f1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: {fileID: 1459254873}
-  _fireEffect: {fileID: 0}
   _bakingTime: 5
+  _door: {fileID: 1459254876}
 --- !u!65 &817620554
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1175,8 +1189,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5178766, y: 1.6830069, z: 1.2583656}
-  m_Center: {x: 0.07723665, y: 0.34150356, z: -0.12918282}
+  m_Size: {x: 2.5178766, y: 1.6830069, z: 0.92259526}
+  m_Center: {x: 0.07723665, y: 0.34150356, z: 0.03870237}
 --- !u!4 &817620555
 Transform:
   m_ObjectHideFlags: 0
@@ -1730,8 +1744,9 @@ GameObject:
   - component: {fileID: 1413687464}
   - component: {fileID: 1413687463}
   - component: {fileID: 1413687462}
+  - component: {fileID: 1413687465}
   m_Layer: 0
-  m_Name: Button
+  m_Name: BowlWithJam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1823,6 +1838,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413687460}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1413687465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413687460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351047959b9efd643beabe255bce3bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1459254872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,6 +1861,8 @@ GameObject:
   - component: {fileID: 1459254873}
   - component: {fileID: 1459254875}
   - component: {fileID: 1459254874}
+  - component: {fileID: 1459254876}
+  - component: {fileID: 1459254877}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1850,7 +1879,7 @@ Transform:
   m_GameObject: {fileID: 1459254872}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07199955, y: 0, z: -0.81899977}
+  m_LocalPosition: {x: -0.03, y: 0, z: -3.685}
   m_LocalScale: {x: 2, y: 2, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1906,6 +1935,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459254872}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1459254876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459254872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72ae455674f8224b9aa3f275b214ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _angle: {x: 0, y: 90, z: 0}
+--- !u!65 &1459254877
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459254872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.98958683, y: 1, z: 0.6319766}
+  m_Center: {x: 0.005206585, y: 0, z: -0.1840117}
 --- !u!1 &1522731392
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef89d2d8b8c0824794013b25e8f6efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: {fileID: 0}
   _ingridients:
   - {fileID: 1197305078}
   - {fileID: 150678674}
@@ -2604,8 +2666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86175fb9faeb9114197720774f60a9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: {fileID: 0}
-  _makingAnimation: {fileID: 0}
   _dough: {fileID: -8937450094178226026, guid: 3355ec47c0b6d40c39af9b7b60cac465, type: 3}
   _doughSpawnpoint: {fileID: 137634180}
   _fridge: {fileID: 2057403840}

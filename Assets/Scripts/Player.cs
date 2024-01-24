@@ -182,12 +182,12 @@ public class Player : MonoBehaviour
                     _playerPickingUp.PickUp(item.gameObject);
                 }
             }
-            if (hit.collider.TryGetComponent(out Furniture furniture))
+            if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
             {
                 if (_isInteracting)
                 {
                     _isInteracting = false;
-                    furniture.Interact();
+                    interactabelObject.Interact();
                 }
             }
         }

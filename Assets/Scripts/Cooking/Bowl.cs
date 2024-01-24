@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Bowl : Furniture
+public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 {
     [Header("Dough")]
-    [SerializeField]
-    private Animation _makingAnimation;
     [SerializeField]
     private Dough _dough;
     [SerializeField]
@@ -43,16 +41,13 @@ public class Bowl : Furniture
             return;
 
         _ingridientsInBowl.Clear();
-        //_makingAnimation.Play();
         _fridge.UpdateFridge();
 
         Instantiate(_dough.gameObject, _doughSpawnpoint.position, _doughSpawnpoint.rotation);
         HasWater = false;
     }
 
-    public override void Interact()
-    {
-        base.Interact();
+    public void Interact(){
         TryMakeDough();
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fridge : Furniture
+public class Fridge : MonoBehaviour
 {
     [SerializeField] private List<Transform> _ingridients;
     [SerializeField] private List<Transform> _defaultPositions;

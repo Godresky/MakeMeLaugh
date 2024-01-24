@@ -23,7 +23,7 @@ public class Dough : PickableItem
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
-
+        Destroy(gameObject);
     }
 
     public void Rollig(float endScale){
