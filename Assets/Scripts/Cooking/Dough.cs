@@ -14,7 +14,9 @@ public class Dough : PickableItem
     [Range(1,7)]
     [SerializeField] private float _endScale;
 
-    private void Start(){
+    private void Start()
+    {
+        SetOutline();
         Grow();
     }
 

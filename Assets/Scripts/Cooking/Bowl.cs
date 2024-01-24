@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Bowl : MonoBehaviour
+public class Bowl : Furniture
 {
     [Header("Dough")]
     [SerializeField]
@@ -48,5 +48,11 @@ public class Bowl : MonoBehaviour
 
         Instantiate(_dough.gameObject, _doughSpawnpoint.position, _doughSpawnpoint.rotation);
         HasWater = false;
+    }
+
+    public override void Interact()
+    {
+        base.Interact();
+        TryMakeDough();
     }
 }

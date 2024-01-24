@@ -156,18 +156,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Switch Flashlight",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "0571f7e4-9277-4b57-b1b5-987b56eee449",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TurnOnCheat",
-                    "type": "Button",
-                    "id": "3e4c6db2-cfe7-47bd-b916-d82a9b1be9a1",
+                    "id": "f1280eb3-9c79-43ed-b5cf-dd6673bc4612",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -188,17 +179,6 @@
                 },
                 {
                     "name": "",
-                    "id": "35cce722-8a83-492b-b483-b41f66ea55f1",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Switch Flashlight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9bf58aab-6ec2-4ade-9e91-5130af728423",
                     "path": "<Keyboard>/g",
                     "interactions": "",
@@ -210,12 +190,12 @@
                 },
                 {
                     "name": "",
-                    "id": "941648f4-2b20-401a-9e7f-26747361cc37",
-                    "path": "<Keyboard>/r",
+                    "id": "edd49075-2c26-48ce-98b3-7e6d93f42ab2",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TurnOnCheat",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
