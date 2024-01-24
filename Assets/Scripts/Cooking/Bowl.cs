@@ -33,6 +33,13 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
         if (other.TryGetComponent(out DoughIngridient ingridient)){
             _ingridientsInBowl.Remove(ingridient.CurrentType);
         }
+        if (other.TryGetComponent(out Dough dough))
+        {
+            if (dough.CurrentState == Dough.State.Unrised)
+            {
+                dough.Grow();
+            }
+        }
     }
 
     public void TryMakeDough()

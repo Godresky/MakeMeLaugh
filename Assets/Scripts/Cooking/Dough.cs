@@ -17,16 +17,16 @@ public class Dough : PickableItem
     private void Start()
     {
         SetOutline();
-        Grow();
     }
 
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
+        _state = State.Cooked;
         Destroy(gameObject);
     }
 
-    public void Rollig(float endScale){
+    public void Rolling(float endScale){
         _state = State.Rolled;
         transform.localScale *= endScale;
     }
@@ -39,12 +39,15 @@ public class Dough : PickableItem
     }
 
     private IEnumerator Growing(){
+        _state = State.Rising;
         yield return new WaitForSeconds(_growTime);
         transform.localScale *= _endScale;
+        _state = State.ReadyForBaking;
     }
 
     public enum State{
         Unrised,
+        Rising,
         Rised,
         ReadyForBaking,
         Rolled,

@@ -2,24 +2,40 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractableWithPlayerObject
 {
-    [SerializeField] private Vector3 _angle;
+    [SerializeField] private Vector3 _openedRotation;
+    [SerializeField] private Vector3 _closedRotation;
+    [SerializeField] private Transform _pivotPoint;
 
     private bool _isOpen = false;
-    public bool IsOpen => _isOpen;
+
+    public bool IsOpen { get => _isOpen; }
+
+    private void Start()
+    {
+        if (_pivotPoint == null)
+        {
+            _pivotPoint = transform;
+        }
+    }
 
     private void Open(){
         _isOpen = true;
-        transform.Rotate(_angle);
+        _pivotPoint.Rotate(_openedRotation);
     }
 
     private void Close(){
         _isOpen = false;
-        transform.Rotate(new Vector3(0, 0, 0));
+        _pivotPoint.Rotate(_closedRotation);
     }
 
     public void Interact(){
-        if (_isOpen == true)
+        if (_isOpen)
+        {
             Close();
-        Open();
+        }
+        else
+        {
+            Open();
+        }
     }
 }
