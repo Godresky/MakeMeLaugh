@@ -29,15 +29,12 @@ public class Dough : PickableItem
     {
         _meshFilter = GetComponent<MeshFilter>();
         _meshCollider = GetComponent<MeshCollider>();
-
-        SetOutline();
     }
 
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
         ChangeState(State.Cooked);
-        //Destroy(gameObject);
     }
 
     public void Rolling(float endScale){

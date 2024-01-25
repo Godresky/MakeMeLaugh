@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5627268222099739078}
   - component: {fileID: 6942676884694264163}
   - component: {fileID: 3497028703088542116}
-  - component: {fileID: 8844246696183440071}
   - component: {fileID: 7561500071859198424}
   - component: {fileID: 3094303148346591826}
   - component: {fileID: 2749915795047708700}
@@ -113,25 +112,7 @@ MonoBehaviour:
   _doughSpawnpoint: {fileID: 6966725540843118261}
   _fridge: {fileID: 0}
   _ingridientsInBowl: 
-  HasWater: 0
---- !u!114 &8844246696183440071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210827058301464456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  _hasWater: 0
 --- !u!114 &7561500071859198424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,9 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b65f4929d99065438225612a643e55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outline: {fileID: 8844246696183440071}
-  _outlineColor: {r: 0, g: 1, b: 1, a: 1}
-  _outlineWidth: 10
 --- !u!54 &3094303148346591826
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -173,7 +151,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!135 &2749915795047708700
 SphereCollider:
   m_ObjectHideFlags: 0
