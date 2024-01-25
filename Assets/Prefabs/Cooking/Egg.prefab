@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8775772190054671376}
   - component: {fileID: 3765619713035046097}
   - component: {fileID: 1647448378676960826}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,6 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75487af185628a142a477ad9291b8247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMaskRaycast:
+    serializedVersion: 2
+    m_Bits: 0
   _type: 0
   _magnitudeBroken: 20
 --- !u!54 &1647448378676960826
