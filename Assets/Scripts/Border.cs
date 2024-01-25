@@ -7,7 +7,7 @@ public class Border : MonoBehaviour
     [SerializeField]
     private Transform _missingSpawnPoin;
     [SerializeField]
-    private Transform _plateSpawnPoint;
+    private Transform _bowlSpawnPoint;
     [SerializeField]
     private Transform _playerSpawnPoint;
 
@@ -21,12 +21,12 @@ public class Border : MonoBehaviour
 
         other.transform.rotation = Quaternion.identity;
 
-        if (other.gameObject.tag == "Plate" && _plateSpawnPoint != null)
+        if (other.TryGetComponent(out Bowl bowl) && _bowlSpawnPoint != null)
         {
-            other.transform.position = _plateSpawnPoint.position;
+            other.transform.position = _bowlSpawnPoint.position;
 
         }
-        else if (other.gameObject.tag == "Player" && _playerSpawnPoint != null)
+        else if (other.TryGetComponent(out Player player) && _playerSpawnPoint != null)
         {
             other.transform.position = _playerSpawnPoint.position;
         }

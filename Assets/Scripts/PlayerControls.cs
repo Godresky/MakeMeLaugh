@@ -189,7 +189,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Clock"",
                     ""type"": ""Button"",
-                    ""id"": ""447a0b51-5b28-42dd-ba84-45208ab0333c"",
+                    ""id"": ""8d6683b2-c8c5-4e9a-ae6f-595bb8bbc372"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -232,7 +232,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a5de7fbe-d730-4632-ac85-1b1c11ecd904"",
+                    ""id"": ""b0f026db-6d71-4ed6-acd8-26781088d3bc"",
                     ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
