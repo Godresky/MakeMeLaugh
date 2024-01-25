@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Outline))]
 public class PickableItem : MonoBehaviour
