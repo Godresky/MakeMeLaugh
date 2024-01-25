@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 //[RequireComponent(typeof(UI))]
@@ -19,6 +16,7 @@ public class PlayerKeyboard : MonoBehaviour
 
         _playerControls = new PlayerControls();
         _playerControls.Enable();
+
 
         _playerControls.FPSControl.Movement.performed += ctx => _movementInput = ctx.ReadValue<Vector2>();
         _playerControls.FPSControl.MouseX.performed += ctx => _mouseInput.x = ctx.ReadValue<float>();

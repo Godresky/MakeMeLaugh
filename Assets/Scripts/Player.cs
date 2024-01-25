@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform _cameraTransform;
     [SerializeField]
-    private CrosshairColorChanger _crosshairColorChanger;
+    private CrosshairChanger _crosshairColorChanger;
 
     [Header("Pucking Up Settings")]
     [SerializeField]
@@ -167,13 +167,13 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
             {
-                _crosshairColorChanger.ChangeColor(Color.yellow);
+                _crosshairColorChanger.Change(Color.yellow);
                 if (currentEquippedItem == null && _lastHoveredItem != item)
                 {
                     if (_lastHoveredItem != null)
                         _lastHoveredItem.OnHoverExit();
 
-                    _lastHoveredItem = item;
+                    _lastHoveredItem = item;    
                     item.OnHoverEnter();
                 }
 
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
             }
             if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
             {
-                _crosshairColorChanger.ChangeColor(Color.red);
+                _crosshairColorChanger.Change(Color.red);
                 if (_isInteracting)
                 {
                     _isInteracting = false;
@@ -192,6 +192,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        else
+            _crosshairColorChanger.SetDefault();
         _isInteracting = false;
     }
 

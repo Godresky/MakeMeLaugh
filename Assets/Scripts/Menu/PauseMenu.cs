@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _restartButton;
@@ -14,14 +13,19 @@ public class PauseMenu : MonoBehaviour
         _exitButton.onClick.AddListener(OnExitButtonClicked);
         _restartButton.onClick.AddListener(OnRestartButtonClicked);
         _resumeButton.onClick.AddListener(OnResumeButtonClicked);
-        _pauseButton.onClick.AddListener(OnPauseButtonClicked);
     }
 
     private void OnDisable(){
         _exitButton.onClick.RemoveListener(OnExitButtonClicked);
         _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
-        _pauseButton.onClick.RemoveListener(OnPauseButtonClicked);
+    }
+
+    private void FixedUpdate(){
+        //if (Input.GetKey(KeyCode.Escape) == true){
+        //    _menuPlane.SetActive(true);
+        //    Time.timeScale = 0f;
+        //}
     }
 
     private void OnExitButtonClicked(){
@@ -37,7 +41,4 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    private void OnPauseButtonClicked(){
-        _menuPlane.SetActive(true);
-    }
 }
