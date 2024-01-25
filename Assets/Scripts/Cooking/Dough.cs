@@ -1,6 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshCollider))]
 public class Dough : PickableItem
 {
     [SerializeField]
@@ -10,23 +13,34 @@ public class Dough : PickableItem
 
     [Space(2)]
     [Header("Grow")]
-    [SerializeField] private float _growTime;
+    [SerializeField]
+    private float _growTime;
     [Range(1,7)]
-    [SerializeField] private float _endScale;
+    [SerializeField]
+    private float _endScale;
+
+    [SerializeField]
+    private List<Mesh> _meshes;
+
+    private MeshFilter _meshFilter;
+    private MeshCollider _meshCollider;
 
     private void Start()
     {
+        _meshFilter = GetComponent<MeshFilter>();
+        _meshCollider = GetComponent<MeshCollider>();
+
         SetOutline();
-        Grow();
     }
 
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
-        Destroy(gameObject);
+        ChangeState(State.Cooked);
+        //Destroy(gameObject);
     }
 
-    public void Rollig(float endScale){
+    public void Rolling(float endScale){
         _state = State.Rolled;
         transform.localScale *= endScale;
     }
@@ -39,12 +53,22 @@ public class Dough : PickableItem
     }
 
     private IEnumerator Growing(){
+        _state = State.Rising;
         yield return new WaitForSeconds(_growTime);
         transform.localScale *= _endScale;
+        _state = State.ReadyForBaking;
     }
 
-    public enum State{
+    private void ChangeState(State newState)
+    {
+        _state = newState;
+        _meshFilter.mesh = _meshes[(int)_state];
+    }
+
+    public enum State
+    {
         Unrised,
+        Rising,
         Rised,
         ReadyForBaking,
         Rolled,

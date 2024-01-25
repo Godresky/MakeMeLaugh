@@ -14,6 +14,11 @@ public class PlayerPickingUp : MonoBehaviour
     [SerializeField]
     private GameObject _objectGrabPoint;
 
+    [SerializeField]
+    private AudioSource _getItemSound;
+    [SerializeField]
+    private AudioSource _dropItemSound;
+
     private GameObject _equippedItem;
     private PickableItem _equippedItemClass;
     private Rigidbody _equippedItemRb;
@@ -27,7 +32,11 @@ public class PlayerPickingUp : MonoBehaviour
             _equippedItem = null;
 
             _equippedItemRb.useGravity = true;
+            _equippedItemRb.freezeRotation = false;
             _equippedItemRb.velocity = Vector3.zero;
+
+            if (!_dropItemSound.isPlaying)
+                _dropItemSound.Play();
         }
     }
 
@@ -44,6 +53,10 @@ public class PlayerPickingUp : MonoBehaviour
 
             _equippedItemRb = item.GetComponent<Rigidbody>();
             _equippedItemRb.useGravity = false;
+            _equippedItemRb.freezeRotation = true;
+
+            if (!_getItemSound.isPlaying)
+                _getItemSound.Play();
         }
     }
 

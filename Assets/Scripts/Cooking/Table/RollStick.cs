@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RollStick : MonoBehaviour,IInteractableWithPlayerObject
+public class RollStick : MonoBehaviour, IInteractableWithPlayerObject
 {
     [SerializeField] private float _endScale;
     private Dough _dough;
@@ -9,7 +9,7 @@ public class RollStick : MonoBehaviour,IInteractableWithPlayerObject
         _dough = dough;
     }
     public void Interact(){
-        _dough.Rollig(_endScale);
+        _dough.Rolling(_endScale);
     }
 
 }

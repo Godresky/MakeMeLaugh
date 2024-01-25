@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
 public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 {
     [Header("Dough")]
@@ -16,7 +15,10 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     [SerializeField]
     private List<DoughIngridient.Type> _ingridientsInBowl;
 
-    public bool HasWater = false;
+    [SerializeField]
+    private bool _hasWater = false;
+
+    public bool HasWater { get => _hasWater; set => _hasWater = value; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,11 +35,18 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
         if (other.TryGetComponent(out DoughIngridient ingridient)){
             _ingridientsInBowl.Remove(ingridient.CurrentType);
         }
+        if (other.TryGetComponent(out Dough dough))
+        {
+            if (dough.CurrentState == Dough.State.Unrised)
+            {
+                dough.Grow();
+            }
+        }
     }
 
     public void TryMakeDough()
     {
-        if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Water) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
+        if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_hasWater || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
             return;
 
         _ingridientsInBowl.Clear();
