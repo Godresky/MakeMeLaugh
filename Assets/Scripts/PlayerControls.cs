@@ -185,6 +185,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Clock"",
+                    ""type"": ""Button"",
+                    ""id"": ""447a0b51-5b28-42dd-ba84-45208ab0333c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -218,6 +227,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5de7fbe-d730-4632-ac85-1b1c11ecd904"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Clock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -304,6 +324,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Action = m_Actions.FindAction("Action", throwIfNotFound: true);
         m_Actions_Drop = m_Actions.FindAction("Drop", throwIfNotFound: true);
+        m_Actions_Clock = m_Actions.FindAction("Clock", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
@@ -443,6 +464,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
     private readonly InputAction m_Actions_Action;
     private readonly InputAction m_Actions_Drop;
+    private readonly InputAction m_Actions_Clock;
     private readonly InputAction m_Actions_Interact;
     public struct ActionsActions
     {
@@ -450,6 +472,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Action => m_Wrapper.m_Actions_Action;
         public InputAction @Drop => m_Wrapper.m_Actions_Drop;
+        public InputAction @Clock => m_Wrapper.m_Actions_Clock;
         public InputAction @Interact => m_Wrapper.m_Actions_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
@@ -466,6 +489,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
+            @Clock.started += instance.OnClock;
+            @Clock.performed += instance.OnClock;
+            @Clock.canceled += instance.OnClock;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -479,6 +505,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
+            @Clock.started -= instance.OnClock;
+            @Clock.performed -= instance.OnClock;
+            @Clock.canceled -= instance.OnClock;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -572,6 +601,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnAction(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
+        void OnClock(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
     public interface IMenuActions
