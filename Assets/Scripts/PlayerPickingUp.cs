@@ -22,7 +22,9 @@ public class PlayerPickingUp : MonoBehaviour
         if (_equipped)
         {
             _equipped = false;
+
             _equippedItem.Drop();
+            _equippedItem.OnWantDrop -= Drop;
 
             _equippedItem = null;
 
@@ -42,6 +44,7 @@ public class PlayerPickingUp : MonoBehaviour
             _objectGrabPoint.position = _equippedItem.transform.position;
 
             _equippedItem.Grab(_objectGrabPoint.transform);
+            _equippedItem.OnWantDrop += Drop;
 
             if (!_getItemSound.isPlaying)
                 _getItemSound.Play();
