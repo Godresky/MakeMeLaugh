@@ -6,7 +6,8 @@ public class Fridge : MonoBehaviour
     [SerializeField] private List<Transform> _ingridients;
     [SerializeField] private List<Transform> _defaultPositions;
 
-    private void Start(){
+    private void Start()
+    {
         UpdateFridge();
     }
 
