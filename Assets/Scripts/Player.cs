@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         }
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
-
+        _crosshairColorChanger.SetDefault();
         if (Physics.Raycast(ray, out RaycastHit hit, _distanceRaycast, _layerMaskRaycast, QueryTriggerInteraction.Ignore))
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
@@ -192,8 +192,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else
-            _crosshairColorChanger.SetDefault();
         _isInteracting = false;
     }
 
