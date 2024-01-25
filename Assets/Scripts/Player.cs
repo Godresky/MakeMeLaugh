@@ -1,6 +1,5 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -37,6 +36,8 @@ public class Player : MonoBehaviour
     private float _xClamp;
     [SerializeField]
     private Transform _cameraTransform;
+    [SerializeField]
+    private CrosshairChanger _crosshairColorChanger;
 
     [Header("Pucking Up Settings")]
     [SerializeField]
@@ -196,17 +197,18 @@ public class Player : MonoBehaviour
         }
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
-
+        _crosshairColorChanger.SetDefault();
         if (Physics.Raycast(ray, out RaycastHit hit, _distanceRaycast, _layerMaskRaycast, QueryTriggerInteraction.Ignore))
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
             {
+                _crosshairColorChanger.Change(Color.yellow);
                 if (currentEquippedItem == null && _lastHoveredItem != item)
                 {
                     if (_lastHoveredItem != null)
                         _lastHoveredItem.OnHoverExit();
 
-                    _lastHoveredItem = item;
+                    _lastHoveredItem = item;    
                     item.OnHoverEnter();
                 }
 
@@ -217,6 +219,7 @@ public class Player : MonoBehaviour
             }
             if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
             {
+                _crosshairColorChanger.Change(Color.red);
                 if (_isInteracting)
                 {
                     _isInteracting = false;
@@ -224,7 +227,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-
         _isInteracting = false;
     }
 
@@ -250,5 +252,6 @@ public class Player : MonoBehaviour
         Crouching();
 
         CheckRaycast();
+        
     }
 }

@@ -7,7 +7,8 @@ public class Stove : MonoBehaviour
 {
     [SerializeField] private float _bakingTime;
     [SerializeField] private Door _door;
-
+    [SerializeField] private BakesCounter _bakesCounter;
+    
     [SerializeField] private AudioClip _soundOvenDone;
     [SerializeField] private AudioClip _soundOvenWorking;
 
@@ -40,6 +41,7 @@ public class Stove : MonoBehaviour
         _audioSource.loop = true;
         _audioSource.Play();
         yield return new WaitForSeconds(_bakingTime);
+        _bakesCounter.Count++;
         dough.Bake();
         _isBaking = false;
         _audioSource.Stop();
