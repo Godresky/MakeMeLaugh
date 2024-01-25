@@ -1,0 +1,919 @@
+fileFormatVersion: 2
+guid: 3267ff9e4bd754cfe82dc1a7a779048f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 288, z: 516, w: 1}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 288
+        width: 64
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 394da0d4a7e8b4ce58faa5e9e5874a8d
+      internalID: -61309854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 288
+        width: 60
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5e02a25bee7b4d3c9228de6c8c09537
+      internalID: 2083481437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_2
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 285
+        width: 55
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 927fd64fb10ef40c2b48e768f0f360aa
+      internalID: -1959050821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_3
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 284
+        width: 50
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96f15033a31df4c8db1b9952bc90f065
+      internalID: 570126413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_4
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 285
+        width: 48
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 362856463525e4fe89ba085bdf34d292
+      internalID: 1433032529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_5
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 285
+        width: 57
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 440eb8960d7da49cebb682908864234e
+      internalID: -2044900502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_6
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 287
+        width: 61
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba7b931be985b40ce9858d46cf58b75b
+      internalID: -1982342149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_7
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 291
+        width: 62
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c352d2fe8f194a25b5912cb47c6814f
+      internalID: -1190595093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_8
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 217
+        width: 51
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70e48e58755ed40cc85d27aa1b13dce6
+      internalID: 1514140641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_9
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 217
+        width: 51
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5afb30918c48448f0bb47804ba10a945
+      internalID: -1014827318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_10
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 220
+        width: 55
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dbdf1f5e11ec45f48e3bd9a46c19b18
+      internalID: -145296646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_11
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 149
+        width: 61
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7657ae487dcca473698adb12efbbdcc8
+      internalID: 114790940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_12
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 149
+        width: 53
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 662444cdf083c4322ba6159f5a82424f
+      internalID: -609742026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_13
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 152
+        width: 48
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26c7a641852264648a6e0eda652116f9
+      internalID: -61887940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_14
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 153
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7038aac32fb64d68acdddb5b1e0e530
+      internalID: 864157162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_15
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 156
+        width: 45
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9527ec22759fd4cb8b211632291cbd93
+      internalID: -783403528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_16
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 153
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4e0f7ba05c4642c5b78f9d65a79ea7c
+      internalID: -744813771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_17
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 154
+        width: 51
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53e34d5e95524876a7acfce243e4963
+      internalID: -1164953424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_18
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 158
+        width: 55
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f3936c1c16f84b7b8d6965759ed0017
+      internalID: 1044850575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_19
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 78
+        width: 66
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e08cd1a1457447091e15d21cbecea7
+      internalID: 2074080831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_20
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 78
+        width: 71
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 897a7e1e9b33b4be7ae64817141670fb
+      internalID: -1525207965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_21
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 73
+        width: 58
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9842baa20bda45babb3637ed1dd0143
+      internalID: -1237166628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_22
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 84
+        width: 39
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8a47a8e23f35416784bc8c25219df21
+      internalID: -387113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_23
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 84
+        width: 40
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2667bae46f1d543f78c1ec8d1638dd6b
+      internalID: -519472962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_24
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 85
+        width: 43
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d0dd858e54844bdaa858a0bbeec3044
+      internalID: -1487969090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_25
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 0
+        width: 52
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddbbca89dfd6043edac2cfdd791511b9
+      internalID: -354875374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_26
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 0
+        width: 52
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bc8d6568242347b5b4f0412d075b9f3
+      internalID: 1236542542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_27
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 0
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc06c1a94209489993a13f6ee1151eb
+      internalID: -289691024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_28
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 103
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42f5ea185ef674e5cb9bb396aad9e002
+      internalID: 1256859751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_29
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 16
+        width: 75
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c585a1aa26f407eb03ad19ac9de0be
+      internalID: 55379010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_30
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 16
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acbda5babd3a64c4d8b671f17cb399e0
+      internalID: -1379603729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_31
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 16
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7c52d186e13420292de8fde45eb812
+      internalID: 1334810597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_32
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 34
+        width: 10
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d36e2cd1261d4b29b15050859ac0075
+      internalID: -1240393171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_33
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 14
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f0067a835ee143fea6c76bc751b5289
+      internalID: 464164563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_34
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 16
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43cf25a8626674d76b556bc57541179c
+      internalID: -305787285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SeekPng.com_master-hand-png_492210_35
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 14
+        width: 41
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a092e2165cdf4d0d9f191d39799e2c4
+      internalID: 1830280340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SeekPng.com_master-hand-png_492210_0: -61309854
+      SeekPng.com_master-hand-png_492210_1: 2083481437
+      SeekPng.com_master-hand-png_492210_10: -145296646
+      SeekPng.com_master-hand-png_492210_11: 114790940
+      SeekPng.com_master-hand-png_492210_12: -609742026
+      SeekPng.com_master-hand-png_492210_13: -61887940
+      SeekPng.com_master-hand-png_492210_14: 864157162
+      SeekPng.com_master-hand-png_492210_15: -783403528
+      SeekPng.com_master-hand-png_492210_16: -744813771
+      SeekPng.com_master-hand-png_492210_17: -1164953424
+      SeekPng.com_master-hand-png_492210_18: 1044850575
+      SeekPng.com_master-hand-png_492210_19: 2074080831
+      SeekPng.com_master-hand-png_492210_2: -1959050821
+      SeekPng.com_master-hand-png_492210_20: -1525207965
+      SeekPng.com_master-hand-png_492210_21: -1237166628
+      SeekPng.com_master-hand-png_492210_22: -387113
+      SeekPng.com_master-hand-png_492210_23: -519472962
+      SeekPng.com_master-hand-png_492210_24: -1487969090
+      SeekPng.com_master-hand-png_492210_25: -354875374
+      SeekPng.com_master-hand-png_492210_26: 1236542542
+      SeekPng.com_master-hand-png_492210_27: -289691024
+      SeekPng.com_master-hand-png_492210_28: 1256859751
+      SeekPng.com_master-hand-png_492210_29: 55379010
+      SeekPng.com_master-hand-png_492210_3: 570126413
+      SeekPng.com_master-hand-png_492210_30: -1379603729
+      SeekPng.com_master-hand-png_492210_31: 1334810597
+      SeekPng.com_master-hand-png_492210_32: -1240393171
+      SeekPng.com_master-hand-png_492210_33: 464164563
+      SeekPng.com_master-hand-png_492210_34: -305787285
+      SeekPng.com_master-hand-png_492210_35: 1830280340
+      SeekPng.com_master-hand-png_492210_4: 1433032529
+      SeekPng.com_master-hand-png_492210_5: -2044900502
+      SeekPng.com_master-hand-png_492210_6: -1982342149
+      SeekPng.com_master-hand-png_492210_7: -1190595093
+      SeekPng.com_master-hand-png_492210_8: 1514140641
+      SeekPng.com_master-hand-png_492210_9: -1014827318
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

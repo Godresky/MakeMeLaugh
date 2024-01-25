@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform _cameraTransform;
     [SerializeField]
-    private CrosshairChanger _crosshairColorChanger;
+    private CrosshairChanger _crosshairChanger;
 
     [Header("Pucking Up Settings")]
     [SerializeField]
@@ -87,6 +87,8 @@ public class Player : MonoBehaviour
 
         _camera = _cameraTransform.GetComponent<Camera>();
         _initialCameraPosition = _cameraTransform.localPosition;
+
+        _crosshairChanger = FindObjectOfType<CrosshairChanger>();
     }
 
     public void RecieveInputMovement(Vector2 input)
@@ -197,12 +199,15 @@ public class Player : MonoBehaviour
         }
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
-        _crosshairColorChanger.SetDefault();
+
+        if (!_isPickingUp)
+            _crosshairChanger.SetDefault();
+
         if (Physics.Raycast(ray, out RaycastHit hit, _distanceRaycast, _layerMaskRaycast, QueryTriggerInteraction.Ignore))
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
             {
-                _crosshairColorChanger.Change(Color.yellow);
+                _crosshairChanger.SetGrabHand();
                 if (currentEquippedItem == null && _lastHoveredItem != item)
                 {
                     if (_lastHoveredItem != null)
@@ -219,12 +224,17 @@ public class Player : MonoBehaviour
             }
             if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
             {
-                _crosshairColorChanger.Change(Color.red);
+                _crosshairChanger.SetInteractHand();
                 if (_isInteracting)
                 {
                     _isInteracting = false;
                     interactabelObject.Interact();
                 }
+            }
+
+            if (hit.collider.gameObject.GetComponent<Bowl>())
+            {
+                _crosshairChanger.SetDoubleHand();
             }
         }
         _isInteracting = false;
