@@ -27,6 +27,7 @@ public class PlayerPickingUp : MonoBehaviour
             _equippedItem = null;
 
             _equippedItemRb.useGravity = true;
+            _equippedItemRb.freezeRotation = false;
             _equippedItemRb.velocity = Vector3.zero;
         }
     }
@@ -44,6 +45,7 @@ public class PlayerPickingUp : MonoBehaviour
 
             _equippedItemRb = item.GetComponent<Rigidbody>();
             _equippedItemRb.useGravity = false;
+            _equippedItemRb.freezeRotation = true;
         }
     }
 

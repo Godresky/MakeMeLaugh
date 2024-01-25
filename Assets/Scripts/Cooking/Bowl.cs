@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
 public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 {
     [Header("Dough")]
