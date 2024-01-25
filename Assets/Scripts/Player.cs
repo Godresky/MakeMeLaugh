@@ -207,7 +207,9 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
             {
-                _crosshairChanger.SetGrabHand();
+                if (!_isPickingUp)
+                    _crosshairChanger.SetGrabHand();
+
                 if (currentEquippedItem == null && _lastHoveredItem != item)
                 {
                     if (_lastHoveredItem != null)
@@ -224,7 +226,9 @@ public class Player : MonoBehaviour
             }
             if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
             {
-                _crosshairChanger.SetInteractHand();
+                if (!_isPickingUp)
+                    _crosshairChanger.SetInteractHand();
+
                 if (_isInteracting)
                 {
                     _isInteracting = false;
@@ -232,7 +236,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (hit.collider.gameObject.GetComponent<Bowl>())
+            if (hit.collider.gameObject.GetComponent<Bowl>() && !_isPickingUp)
             {
                 _crosshairChanger.SetDoubleHand();
             }
