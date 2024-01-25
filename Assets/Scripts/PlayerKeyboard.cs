@@ -26,12 +26,11 @@ public class PlayerKeyboard : MonoBehaviour
         _playerControls.FPSControl.MouseY.performed += ctx => _mouseInput.y = ctx.ReadValue<float>();
 
         _playerControls.FPSControl.Crouch.performed += ctx => Player.SwitchCrouching();
-        //_playerControls.FPSControl.Crouch.performed += ctx => Player.SwitchCrouching(ctx.ReadValue<float>());
-        //_playerControls.FPSControl.Crouch.performed -= ctx => Player.SwitchCrouching(ctx.ReadValue<float>());
 
         _playerControls.Actions.Clock.performed += ctx => Clock.SwitchActive();
 
         _playerControls.Actions.Action.performed += ctx => Player.RecievePickUp();
+        _playerControls.Actions.Interact.performed += ctx => Player.RecieveInteract();
         //_playerControls.Actions.Drop.performed += ctx => Player.DropItem();
 
         //_playerControls.Menu.SwitchPad.performed += ctx => Stats.singleton.SwitchPadMenu();

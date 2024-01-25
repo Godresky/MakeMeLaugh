@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Bowl : MonoBehaviour
+public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 {
     [Header("Dough")]
-    [SerializeField]
-    private Animation _makingAnimation;
     [SerializeField]
     private Dough _dough;
     [SerializeField]
@@ -35,6 +33,13 @@ public class Bowl : MonoBehaviour
         if (other.TryGetComponent(out DoughIngridient ingridient)){
             _ingridientsInBowl.Remove(ingridient.CurrentType);
         }
+        if (other.TryGetComponent(out Dough dough))
+        {
+            if (dough.CurrentState == Dough.State.Unrised)
+            {
+                dough.Grow();
+            }
+        }
     }
 
     public void TryMakeDough()
@@ -43,10 +48,13 @@ public class Bowl : MonoBehaviour
             return;
 
         _ingridientsInBowl.Clear();
-        //_makingAnimation.Play();
         _fridge.UpdateFridge();
 
         Instantiate(_dough.gameObject, _doughSpawnpoint.position, _doughSpawnpoint.rotation);
         HasWater = false;
+    }
+
+    public void Interact(){
+        TryMakeDough();
     }
 }

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Outline))]
 public class PickableItem : MonoBehaviour
 {
+    [SerializeField]
     private Outline _outline;
     [SerializeField]
     private Color _outlineColor = Color.cyan;
@@ -15,13 +17,9 @@ public class PickableItem : MonoBehaviour
 
     private bool _loadedOutline = false;
 
-
     private void Start()
     {
-        _outline = GetComponent<Outline>();
-
-        _outline.OutlineColor = _outlineColor;
-        _outline.OutlineWidth = _outlineWidth;
+        SetOutline();
     }
 
     private void LateUpdate()
@@ -31,6 +29,13 @@ public class PickableItem : MonoBehaviour
             _loadedOutline = true;
             _outline.enabled = false;
         }
+    }
+
+    protected void SetOutline()
+    {
+        _outline = GetComponent<Outline>();
+        _outline.OutlineColor = _outlineColor;
+        _outline.OutlineWidth = _outlineWidth;
     }
 
     public void OnHoverEnter()

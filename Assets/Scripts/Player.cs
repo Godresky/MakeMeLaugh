@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     private LayerMask _layerMaskRaycast;
 
     private bool _isPickingUp = false;
+    private bool _isInteracting = false;
 
     private float _xRotation = 0f;
     private Vector2 _mouseInput;
@@ -88,6 +89,11 @@ public class Player : MonoBehaviour
         {
             _playerPickingUp.Drop();
         }
+    }
+
+    public void RecieveInteract()
+    {
+        _isInteracting = true;
     }
 
     public void SwitchCrouching()
@@ -176,7 +182,17 @@ public class Player : MonoBehaviour
                     _playerPickingUp.PickUp(item.gameObject);
                 }
             }
+            if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
+            {
+                if (_isInteracting)
+                {
+                    _isInteracting = false;
+                    interactabelObject.Interact();
+                }
+            }
         }
+
+        _isInteracting = false;
     }
 
     private void Movement()

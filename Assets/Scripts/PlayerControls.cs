@@ -178,18 +178,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Switch Flashlight"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
-                    ""id"": ""0571f7e4-9277-4b57-b1b5-987b56eee449"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TurnOnCheat"",
-                    ""type"": ""Button"",
-                    ""id"": ""3e4c6db2-cfe7-47bd-b916-d82a9b1be9a1"",
+                    ""id"": ""f1280eb3-9c79-43ed-b5cf-dd6673bc4612"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -219,17 +210,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""35cce722-8a83-492b-b483-b41f66ea55f1"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Switch Flashlight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""9bf58aab-6ec2-4ade-9e91-5130af728423"",
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
@@ -241,12 +221,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""941648f4-2b20-401a-9e7f-26747361cc37"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""id"": ""edd49075-2c26-48ce-98b3-7e6d93f42ab2"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TurnOnCheat"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -344,9 +324,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Action = m_Actions.FindAction("Action", throwIfNotFound: true);
         m_Actions_Drop = m_Actions.FindAction("Drop", throwIfNotFound: true);
-        m_Actions_SwitchFlashlight = m_Actions.FindAction("Switch Flashlight", throwIfNotFound: true);
-        m_Actions_TurnOnCheat = m_Actions.FindAction("TurnOnCheat", throwIfNotFound: true);
         m_Actions_Clock = m_Actions.FindAction("Clock", throwIfNotFound: true);
+        m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_SwitchPad = m_Menu.FindAction("Switch Pad", throwIfNotFound: true);
@@ -485,18 +464,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
     private readonly InputAction m_Actions_Action;
     private readonly InputAction m_Actions_Drop;
-    private readonly InputAction m_Actions_SwitchFlashlight;
-    private readonly InputAction m_Actions_TurnOnCheat;
     private readonly InputAction m_Actions_Clock;
+    private readonly InputAction m_Actions_Interact;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
         public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Action => m_Wrapper.m_Actions_Action;
         public InputAction @Drop => m_Wrapper.m_Actions_Drop;
-        public InputAction @SwitchFlashlight => m_Wrapper.m_Actions_SwitchFlashlight;
-        public InputAction @TurnOnCheat => m_Wrapper.m_Actions_TurnOnCheat;
         public InputAction @Clock => m_Wrapper.m_Actions_Clock;
+        public InputAction @Interact => m_Wrapper.m_Actions_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -512,15 +489,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
-            @SwitchFlashlight.started += instance.OnSwitchFlashlight;
-            @SwitchFlashlight.performed += instance.OnSwitchFlashlight;
-            @SwitchFlashlight.canceled += instance.OnSwitchFlashlight;
-            @TurnOnCheat.started += instance.OnTurnOnCheat;
-            @TurnOnCheat.performed += instance.OnTurnOnCheat;
-            @TurnOnCheat.canceled += instance.OnTurnOnCheat;
             @Clock.started += instance.OnClock;
             @Clock.performed += instance.OnClock;
             @Clock.canceled += instance.OnClock;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -531,15 +505,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
-            @SwitchFlashlight.started -= instance.OnSwitchFlashlight;
-            @SwitchFlashlight.performed -= instance.OnSwitchFlashlight;
-            @SwitchFlashlight.canceled -= instance.OnSwitchFlashlight;
-            @TurnOnCheat.started -= instance.OnTurnOnCheat;
-            @TurnOnCheat.performed -= instance.OnTurnOnCheat;
-            @TurnOnCheat.canceled -= instance.OnTurnOnCheat;
             @Clock.started -= instance.OnClock;
             @Clock.performed -= instance.OnClock;
             @Clock.canceled -= instance.OnClock;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -630,9 +601,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnAction(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
-        void OnSwitchFlashlight(InputAction.CallbackContext context);
-        void OnTurnOnCheat(InputAction.CallbackContext context);
         void OnClock(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
