@@ -6,7 +6,7 @@ public class Stove : MonoBehaviour
 {
     [SerializeField] private float _bakingTime;
     [SerializeField] private Door _door;
-
+    [SerializeField] private BakesCounter _bakesCounter;
     private void OnTriggerEnter(Collider other) {
         if (other.TryGetComponent(out Dough dough) && dough.CurrentState == Dough.State.ReadyForBaking && _door.IsOpen== false) {
             StartCoroutine(Baking(dough));
@@ -15,6 +15,7 @@ public class Stove : MonoBehaviour
 
     private IEnumerator Baking(Dough dough){
         yield return new WaitForSeconds(_bakingTime);
+        _bakesCounter.Count++;
         dough.Bake();
     }
 }
