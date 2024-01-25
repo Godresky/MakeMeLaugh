@@ -67,9 +67,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _delayСrouching;
     [SerializeField]
-    private AudioSource _getItemSound;
+    private Vector2 _rangeFootstepsVolume = new(0.65f, 0.75f);
     [SerializeField]
-    private AudioSource _dropItemSound;
+    private Vector2 _rangeFootstepsPitch = new(0.8f, 1.1f);
     [SerializeField]
     private bool _canPlayAudio = true;
 
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
 
     private void CheckAudio(float speed)
     {
-        if (_controller.isGrounded && speed > 2f && !_audio.isPlaying && _canPlayAudio)
+        if (_controller.isGrounded && speed > 1f && !_audio.isPlaying && _canPlayAudio)
         {
             StartCoroutine(Footstep());
             _canPlayAudio = false;
@@ -177,8 +177,8 @@ public class Player : MonoBehaviour
 
         _audio.clip = _footstepsClips[numberRandomClip];
 
-        _audio.volume = Random.Range(0.65f, 0.75f);
-        _audio.pitch = Random.Range(0.8f, 1.1f);
+        _audio.volume = Random.Range(_rangeFootstepsVolume.x, _rangeFootstepsVolume.y);
+        _audio.pitch = Random.Range(_rangeFootstepsPitch.x, _rangeFootstepsPitch.y);
         _audio.Play();
 
         yield return new WaitForSeconds(_isCrouching ? _delayСrouching : _delayWalk);

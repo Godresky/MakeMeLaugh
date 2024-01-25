@@ -15,7 +15,10 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     [SerializeField]
     private List<DoughIngridient.Type> _ingridientsInBowl;
 
-    public bool HasWater = false;
+    [SerializeField]
+    private bool _hasWater = false;
+
+    public bool HasWater { get => _hasWater; set => _hasWater = value; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,7 +46,7 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 
     public void TryMakeDough()
     {
-        if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Water) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
+        if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_hasWater || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
             return;
 
         _ingridientsInBowl.Clear();

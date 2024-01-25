@@ -144,14 +144,15 @@ MonoBehaviour:
   _outlineWidth: 10
   _state: 0
   _growTime: 5
-  _endScale: 1.5
+  _endScale: 2
   _meshes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 150581138598605843, guid: 7fe3c868df38143689626e3301220132, type: 3}
+  - {fileID: 150581138598605843, guid: 7fe3c868df38143689626e3301220132, type: 3}
+  - {fileID: 150581138598605843, guid: 7fe3c868df38143689626e3301220132, type: 3}
+  - {fileID: 150581138598605843, guid: 7fe3c868df38143689626e3301220132, type: 3}
+  - {fileID: 150581138598605843, guid: 7fe3c868df38143689626e3301220132, type: 3}
+  - {fileID: 150581138598605843, guid: 7fe3c868df38143689626e3301220132, type: 3}
+  - {fileID: 150581138598605843, guid: 72497f7d367294d4f89e91efca6a8937, type: 3}
 --- !u!54 &2484623505291383910
 Rigidbody:
   m_ObjectHideFlags: 0
