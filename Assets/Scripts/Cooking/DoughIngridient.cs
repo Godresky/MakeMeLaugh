@@ -1,18 +1,9 @@
 using UnityEngine;
 
-public class DoughIngridient : PickableItem
+public class DoughIngridient : Food
 {
     [SerializeField]
-    private Type _type;
+    private DoughIngridients _type;
 
-    public Type CurrentType { get => _type; }
-
-    public enum Type
-    {
-        Egg,
-        Milk,
-        Yeast,
-        Flour,
-        Water
-    }
+    public new DoughIngridients CurrentType { get => _type; }
 }

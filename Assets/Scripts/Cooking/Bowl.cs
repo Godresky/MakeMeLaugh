@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static Food;
 
 public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 {
@@ -13,7 +15,7 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     private Fridge _fridge;
 
     [SerializeField]
-    private List<DoughIngridient.Type> _ingridientsInBowl;
+    private List<DoughIngridient.DoughIngridients> _ingridientsInBowl;
 
     [SerializeField]
     private bool _hasWater = false;
@@ -46,7 +48,7 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 
     public void TryMakeDough()
     {
-        if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_hasWater || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
+        if (!_ingridientsInBowl.Contains(DoughIngridient.DoughIngridients.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.DoughIngridients.Flour) || !_hasWater || !_ingridientsInBowl.Contains(DoughIngridient.DoughIngridients.Yeast))
             return;
 
         _ingridientsInBowl.Clear();
