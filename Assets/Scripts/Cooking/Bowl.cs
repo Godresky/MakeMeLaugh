@@ -8,6 +8,8 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     private Dough _dough;
     [SerializeField]
     private Transform _doughSpawnpoint;
+    [SerializeField]
+    private GameObject _waterPlane;
     [Space(3)]
     [SerializeField]
     private List<DoughIngridient.Type> _ingridientsInBowl;
@@ -15,7 +17,14 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     [SerializeField]
     private bool _hasWater = false;
 
-    public bool HasWater { get => _hasWater; set => _hasWater = value; }
+    public bool HasWater { 
+        get => _hasWater;
+        set
+        { 
+            _hasWater = value;
+            _waterPlane.SetActive(_hasWater);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,8 +73,8 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 
     private void Update()
     {
-        if (_hasWater && CheckBowlRotation())
-            _hasWater = false;
+        if (HasWater && CheckBowlRotation())
+            HasWater = false;
     }
 
     private bool CheckBowlRotation()
