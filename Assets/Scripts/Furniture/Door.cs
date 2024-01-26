@@ -19,7 +19,7 @@ public class Door : MonoBehaviour, IInteractableWithPlayerObject
 
     private AudioSource _audioSource;
 
-
+    private bool _isLocked = false;
     private bool _isOpen = false;
     private bool _isChangingRotation = false;
 
@@ -50,14 +50,27 @@ public class Door : MonoBehaviour, IInteractableWithPlayerObject
     }
 
     public void Interact(){
-        if (_isOpen)
+        if (!_isLocked)
         {
-            Close();
+            if (_isOpen)
+            {
+                Close();
+            }
+            else
+            {
+                Open();
+            }
         }
-        else
-        {
-            Open();
-        }
+    }
+
+    public void Lock()
+    {
+        _isLocked = true;
+    }
+
+    public void Unlock()
+    {
+        _isLocked = false;
     }
 
     private void Update()

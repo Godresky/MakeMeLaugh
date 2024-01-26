@@ -23,10 +23,11 @@ public class Egg : DoughIngridient
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (_rigidbody.angularVelocity.magnitude > _magnitudeBroken)
+        if (collision.relativeVelocity.magnitude > _magnitudeBroken)
         {
             _audioSource.Play();
             Fridge.Singleton.UpdateFridgeItem(_fridgeItem);
+
         }
     }
 }

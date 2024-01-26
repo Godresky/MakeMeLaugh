@@ -45,8 +45,7 @@ public class Fridge : MonoBehaviour
     private void UpdateItem(FridgeItem fridgeItem, Transform position)
     {
         fridgeItem.IsUsing = false;
-        fridgeItem.Rigidbody.Sleep();
+        fridgeItem.Rigidbody.velocity = Vector3.zero;
         fridgeItem.gameObject.transform.SetPositionAndRotation(position.position, position.rotation);
-        fridgeItem.Rigidbody.WakeUp();
     }
 }

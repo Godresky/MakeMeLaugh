@@ -70,7 +70,7 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 
     private bool CheckBowlRotation()
     {
-        return (transform.rotation.x > 0.4f || transform.localRotation.x < -0.4f);
+        return ((transform.rotation.x > 0.4f || transform.localRotation.x < -0.4f) || (transform.rotation.z > 0.4f || transform.localRotation.z < -0.4f));
     }
 
     public void Interact(){
