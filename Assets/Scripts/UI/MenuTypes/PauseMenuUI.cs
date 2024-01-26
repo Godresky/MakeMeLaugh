@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenuUI : MonoBehaviour
 {
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _resumeButton;
@@ -19,13 +19,6 @@ public class PauseMenu : MonoBehaviour
         _exitButton.onClick.RemoveListener(OnExitButtonClicked);
         _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
-    }
-
-    private void FixedUpdate(){
-        //if (Input.GetKey(KeyCode.Escape) == true){
-        //    _menuPlane.SetActive(true);
-        //    Time.timeScale = 0f;
-        //}
     }
 
     private void OnExitButtonClicked(){

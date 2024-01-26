@@ -1,8 +1,8 @@
 using UnityEngine;
-
+    
 public class DoughIngridient : PickableItem
 {
-    [SerializeField]
+    [SerializeField] 
     private Type _type;
 
     public Type CurrentType { get => _type; }
