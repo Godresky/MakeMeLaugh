@@ -200,16 +200,16 @@ public class Player : MonoBehaviour
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
 
-        if (!_isPickingUp)
-            _crosshairChanger.SetDefault();
+        _crosshairChanger.SetDefault();
+
+        bool isInteractCursor = false;
+        bool isBowlCursor = false;
 
         if (Physics.Raycast(ray, out RaycastHit hit, _distanceRaycast, _layerMaskRaycast, QueryTriggerInteraction.Ignore))
         {
             if (hit.collider.TryGetComponent(out PickableItem item))
             {
-                if (!_isPickingUp)
-                    _crosshairChanger.SetGrabHand();
-
+                _crosshairChanger.SetGrabHand();
                 //if (currentEquippedItem == null && _lastHoveredItem != item)
                 //{
                 //    if (_lastHoveredItem != null)
@@ -221,18 +221,13 @@ public class Player : MonoBehaviour
 
                 if (_isPickingUp)
                 {
-                    //if (currentEquippedItem != item)
-                    //{
-                    //    _playerPickingUp.Drop();
-                    //}
-
                     _playerPickingUp.Grab(item);
                 }
             }
             if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))
             {
-                if (!_isPickingUp)
-                    _crosshairChanger.SetInteractHand();
+                _crosshairChanger.SetInteractHand();
+                isInteractCursor = true;
 
                 if (_isInteracting)
                 {
@@ -241,12 +236,30 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (hit.collider.gameObject.GetComponent<Bowl>() && !_isPickingUp)
+            if (hit.collider.gameObject.GetComponent<Bowl>())
             {
+                isBowlCursor = true;
                 _crosshairChanger.SetDoubleHand();
             }
         }
         _isInteracting = false;
+
+        if (isInteractCursor && !isBowlCursor && !_playerPickingUp.Equipped)
+            return;
+
+        if (isBowlCursor && _isPickingUp && _playerPickingUp.Equipped)
+        {
+            _crosshairChanger.SetGrabHand();
+            return;
+        }
+
+        if (_isPickingUp)
+        {
+            if (_playerPickingUp.Equipped)
+                _crosshairChanger.SetGrabHand();
+            else
+                _crosshairChanger.SetDefault();
+        }
     }
 
     private void Movement()

@@ -5,11 +5,14 @@ using UnityEngine;
 public class Border : MonoBehaviour
 {
     [SerializeField]
-    private Transform _missingSpawnPoin;
+    private Transform _missingSpawnPoint;
     [SerializeField]
     private Transform _bowlSpawnPoint;
     [SerializeField]
     private Transform _playerSpawnPoint;
+
+    [SerializeField]
+    private bool _isInteractWithPlayer = true, _isInteractWithBowl = true, _isInteractWithIngridients = true, _isInteractWithOthers = true;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,18 +24,24 @@ public class Border : MonoBehaviour
 
         other.transform.rotation = Quaternion.identity;
 
-        if (other.TryGetComponent(out Bowl bowl) && _bowlSpawnPoint != null)
+        if (other.TryGetComponent(out Bowl bowl) && _bowlSpawnPoint != null && _isInteractWithBowl)
         {
+            bowl.GetComponent<PickableItem>().Drop();
             other.transform.position = _bowlSpawnPoint.position;
 
         }
-        else if (other.TryGetComponent(out Player player) && _playerSpawnPoint != null)
+        else if (other.TryGetComponent(out Player player) && _playerSpawnPoint != null && _isInteractWithPlayer)
         {
             other.transform.position = _playerSpawnPoint.position;
         }
-        else if (_missingSpawnPoin != null)
+        else if (other.TryGetComponent(out DoughIngridient doughIngridient) && _isInteractWithIngridients)
         {
-            other.transform.position = _missingSpawnPoin.position;
+            doughIngridient.Drop();
+            // Update fridge
+        }
+        else if (_missingSpawnPoint != null && _isInteractWithOthers)
+        {
+            other.transform.position = _missingSpawnPoint.position;
         }
         else
         {

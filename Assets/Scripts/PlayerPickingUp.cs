@@ -17,6 +17,8 @@ public class PlayerPickingUp : MonoBehaviour
 
     private PickableItem _equippedItem;
 
+    public bool Equipped { get => _equipped; }
+
     public void Drop()
     {
         if (_equipped)
