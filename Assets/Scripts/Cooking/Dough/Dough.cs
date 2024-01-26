@@ -10,6 +10,7 @@ public class Dough : PickableItem
     private State _state;
 
     public State CurrentState { get => _state; }
+    public BakingType Type { get;  set; }
 
     [Space(2)]
     [Header("Grow")]
@@ -35,19 +36,46 @@ public class Dough : PickableItem
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
-        ChangeState(State.Cooked);
+        switch (_state){
+            case State.Circle:
+                Type = BakingType.CircleBread;
+                break;
+
+            case State.LongSqueare:
+                Type = BakingType.LongSqueareBread;
+                break;
+
+            case State.SqueareWithJam:
+                Type = BakingType.SqueareBreadWithJam;
+                break;
+
+            case State.LongSqueareWithJam:
+                Type = BakingType.Rollet;
+                break;
+        }
     }
 
     public void Rolling(float endScale){
-        _state = State.Rolled;
+        _state = State.LongSqueare;
+
         transform.localScale *= endScale;
     }
 
-    public void Filling() => _state = State.Filled;
+    public void Filling(){
+
+        switch (_state) {
+            case State.Circle:
+                _state = State.SqueareWithJam;
+                break;
+
+            case State.LongSqueare:
+                _state= State.LongSqueareWithJam;
+                break;
+        }
+    }
 
     public void IsReady(){
-        if (_state == State.Filled || _state == State.Rolled)
-            _state = State.ReadyForBaking;
+
     }
 
     private IEnumerator Growing(){
@@ -69,8 +97,10 @@ public class Dough : PickableItem
         Rising,
         Rised,
         ReadyForBaking,
-        Rolled,
-        Filled,
-        Cooked
+        LongSqueare,
+        SqueareWithJam,
+        LongSqueareWithJam,
+        Cooked,
+        Circle,
     }
 }
