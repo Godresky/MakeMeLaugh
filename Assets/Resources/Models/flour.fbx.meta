@@ -3,7 +3,12 @@ guid: e9b78b8bbf9694af5a6afd65bfa9c065
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__flour_pix_png
+    second: {fileID: 2100000, guid: 857f9f3ad7d4f4eca8cc35c6f2e5a20a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

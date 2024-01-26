@@ -3,7 +3,12 @@ guid: cad126c111ce74249bb30fb333357d93
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__commode_pix_png
+    second: {fileID: 2100000, guid: dcf974d49f90942e7944485418802758, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

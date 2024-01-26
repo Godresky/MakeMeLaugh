@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -7,7 +8,14 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
     [SerializeField] private AudioClip _soundFaucetWorking;
     [SerializeField] private AudioClip _soundFaucetClosing;
 
+    [SerializeField] private AudioClip _soundValveOpening;
+    [SerializeField] private AudioClip _soundValveClosing;
+
+    [SerializeField] private float _toSwitchStateTime;
+
     private AudioSource _audioSource;
+    [SerializeField]
+    private AudioSource _valveAudioSource;
 
     private bool _isOpen = false;
 
@@ -18,23 +26,36 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
 
     public void Interact()
     {
-        _isOpen = !_isOpen;
+        StartCoroutine(ToSwitchState());
+    }
 
-        if (_isOpen)
+    private IEnumerator ToSwitchState()
+    {
+        _audioSource?.Stop();
+        _valveAudioSource?.Stop();
+
+        if (!_isOpen)
         {
-            _audioSource?.Stop();
-
-            _audioSource.PlayOneShot(_soundFaucetOpening);
-
-            _audioSource.loop = true;
-            _audioSource.clip = _soundFaucetWorking;
+            _valveAudioSource.PlayOneShot(_soundValveOpening);
         }
         else
         {
-            _audioSource?.Stop();
+            _audioSource.loop = false;
 
             _audioSource.PlayOneShot(_soundFaucetClosing);
+            _valveAudioSource.PlayOneShot(_soundValveClosing);
         }
+
+        yield return new WaitForSeconds(_toSwitchStateTime);
+
+        if (!_isOpen)
+        {
+            _audioSource.PlayOneShot(_soundFaucetOpening);
+            _audioSource.loop = true;
+            _audioSource.clip = _soundFaucetWorking;
+        }
+
+        _isOpen = !_isOpen;
     }
 
     private void Update()

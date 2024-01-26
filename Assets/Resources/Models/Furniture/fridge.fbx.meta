@@ -3,7 +3,22 @@ guid: 52ebf2c2bf2b4d54bba055e9b6de717a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_001__fridge_pix_png
+    second: {fileID: 2100000, guid: 3cfe5f1f568c040ac9a6f5f3bed9a398, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__fridge_pix_png
+    second: {fileID: 2100000, guid: aaae6522705fc4b4ebd0cf642f90e7d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__fridge_pix_png
+    second: {fileID: 2100000, guid: fa9e1a423aa5e428c9869e04e1a85809, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
