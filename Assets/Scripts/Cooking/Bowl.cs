@@ -11,7 +11,6 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     [Space(3)]
     [SerializeField]
     private Fridge _fridge;
-
     [SerializeField]
     private List<DoughIngridient.Type> _ingridientsInBowl;
 
@@ -27,6 +26,9 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
             if (other.TryGetComponent(out Egg egg) && egg.IsBroken == true)
                 return;
 
+            if (ingridient.TryGetComponent(out FridgeItem item))
+                item.IsUsing = true;
+
             _ingridientsInBowl.Add(ingridient.CurrentType);
         }
     }
@@ -34,6 +36,9 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     private void OnTriggerExit(Collider other){
         if (other.TryGetComponent(out DoughIngridient ingridient)){
             _ingridientsInBowl.Remove(ingridient.CurrentType);
+
+            if (ingridient.TryGetComponent(out FridgeItem item))
+                item.IsUsing = false;
         }
         if (other.TryGetComponent(out Dough dough))
         {
@@ -50,8 +55,8 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
             return;
 
         _ingridientsInBowl.Clear();
-        _fridge.UpdateFridge();
 
+        _fridge.UpdateFridge();
         Instantiate(_dough.gameObject, _doughSpawnpoint.position, _doughSpawnpoint.rotation);
         HasWater = false;
     }
