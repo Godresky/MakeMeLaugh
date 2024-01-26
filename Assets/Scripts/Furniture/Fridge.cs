@@ -10,11 +10,21 @@ public class Fridge : MonoBehaviour
         UpdateFridge();
     }
 
-    public void UpdateFridge(){
+    public void UpdateFridge()
+    {
         for(int i = 0; i < _ingridients.Count; i++) {
-            if (_ingridients[i].IsUsing == true) {
-                _ingridients[i].IsUsing = false;
-                _ingridients[i].gameObject.transform.SetPositionAndRotation(_defaultPositions[i].position, _defaultPositions[i].rotation);
+            _ingridients[i].gameObject.transform.SetPositionAndRotation(_defaultPositions[i].position, _defaultPositions[i].rotation);
+        }
+    }
+
+    public void UpdateFridgeItem(FridgeItem fridgeItem)
+    {
+        if (_ingridients.Contains(fridgeItem))
+        {
+            for (int i = 0; i < _ingridients.Count; i++)
+            {
+                if (_ingridients[i] == fridgeItem)
+                    _ingridients[i].gameObject.transform.SetPositionAndRotation(_defaultPositions[i].position, _defaultPositions[i].rotation);
             }
         }
     }
