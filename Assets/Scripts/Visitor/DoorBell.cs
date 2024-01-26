@@ -14,9 +14,6 @@ public class DoorBell : MonoBehaviour
     [SerializeField]
     private float _delayTime;
     private AudioSource _audio;
-    [SerializeField]
-    private List<string> _enterLst;
-
 
     private void Start()
     {
@@ -25,20 +22,11 @@ public class DoorBell : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("! - DOOR - !");
-        if (!IsObjNameInLst(other.name))
-        {
-            _enterLst.Add(other.name);
-            _audio.clip = _audioDoorOpen;
-            _audio.Play();
-        }
-        else
-        {
-            _enterLst.Remove(other.name);
-            _audio.clip = _audioDoorClose;
-            _audio.Play();
-        }
+        _audio.clip = _audioDoorOpen;
+        _audio.Play();
         Invoke(nameof(CallBell), _delayTime);
+        _audio.clip = _audioDoorClose;
+        _audio.Play();
         
     }
 
@@ -46,15 +34,5 @@ public class DoorBell : MonoBehaviour
     {
         _audio.clip = _audioDoorBell;
         _audio.Play();
-    }
-
-    private bool IsObjNameInLst(string name)
-    {
-        for (int i = 0; i < _enterLst.Count; i++)
-        {
-            if (_enterLst[i] == name)
-                return true;
-        }
-        return false;
     }
 }

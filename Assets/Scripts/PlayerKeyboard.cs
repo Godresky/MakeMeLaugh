@@ -8,6 +8,7 @@ public class PlayerKeyboard : MonoBehaviour
 {
     public Player Player;
     public ClockUI Clock;
+    public OrderPaperUI Order;
     
     private PlayerControls _playerControls;
 
@@ -18,6 +19,7 @@ public class PlayerKeyboard : MonoBehaviour
     {
         Player = FindObjectOfType<Player>();
         Clock = FindObjectOfType<ClockUI>();
+        Order = FindObjectOfType<OrderPaperUI>();
 
         _playerControls = new PlayerControls();
         _playerControls.Enable();
@@ -31,6 +33,7 @@ public class PlayerKeyboard : MonoBehaviour
         _playerControls.Actions.Action.performed += ctx => Player.RecievePickUp();
         _playerControls.Actions.Interact.performed += ctx => Player.RecieveInteract();
         _playerControls.Actions.Clock.performed += ctx => Clock.SwitchActive();
+        _playerControls.Actions.OrderPaper.performed += ctx => Order.SwitchActive();
         //_playerControls.Actions.Drop.performed += ctx => Player.DropItem();
 
         //_playerControls.Menu.SwitchPad.performed += ctx => Stats.singleton.SwitchPadMenu();

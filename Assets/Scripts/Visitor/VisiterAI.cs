@@ -8,47 +8,99 @@ public class VisiterAI : MonoBehaviour
 {
     [Header("Move Setting")]
     [SerializeField]
-    private Vector3 _tablePosition;   // setted
+    private GameObject _tablePoint;   // setted
     private Vector3 _startPosition;
     [SerializeField]
     private NavMeshAgent _agent;
     [SerializeField]
-    private float _waitTime;
+    private float _waitTime;          // setted
 
-    [Header("Texures Setting")]
+    // Texture Settings
+    [Header("Texture Settings")]
     [SerializeField]
-    private Material _faceFuny; // setted
+    private GameObject _faceFuny;
     [SerializeField]
-    private Material _faceSad;  // setted
+    private GameObject _faceSad;
     [SerializeField]
-    private Material _faceNone; // setted
+    private GameObject _faceNone;
+
+    // Orders Setting
+    [Header("Orders Setting")]
+    [SerializeField]
+    private GameObject _order;
 
     void Start()
     {
         _startPosition = GetComponent<Transform>().position;
         _agent = GetComponent<NavMeshAgent>();
+        //GameObject[] gameObj = GetComponentsInChildren<GameObject>();
+        //for (int i = 0; i < gameObject.transform.childCount; i++)
+        //{
+        //    if (gameObj[i].name == "_FunyHead")
+        //    {
+        //        Debug.Log("F");
+        //        _faceFuny = gameObj[i];
+        //    }
+        //    else if (gameObj[i].name == "_SadHead")
+        //    {
+        //        Debug.Log("S");
+        //        _faceSad = gameObj[i];
+        //    }
+        //    else if (gameObj[i].name == "_NoneHead")
+        //    {
+        //        Debug.Log("N");
+        //        _faceNone = gameObj[i];
+        //    }
+        //    else if (gameObj[i].name == "_Order")
+        //    {
+        //        Debug.Log("O");
+        //        _order = gameObj[i];
+        //    }
+        //}
+        SetMood("none");
+        _order.SetActive(false);
     }
 
-    public void SetMoveSetting(Vector3 tablePos, float waitTime)
+    public void SetMoveSetting(GameObject tablePoint, float waitTime)
     {
-        _tablePosition = tablePos;
+        _tablePoint = tablePoint;
         _waitTime = waitTime;
-    }
-
-    public void SetTexuresSetting(Material ffuny, Material fsad, Material fnone)
-    {
-        _faceFuny = ffuny;
-        _faceSad = fsad;    
-        _faceNone = fnone;
     }
 
     public void Come()
     {
-        _agent.SetDestination(new Vector3(_tablePosition.x, _startPosition.y, _tablePosition.z));
+        _agent.SetDestination(new Vector3(_tablePoint.transform.position.x, _startPosition.y, _tablePoint.transform.position.z));
     }
 
     public void Leave()
     {
         _agent.SetDestination(_startPosition);
+    }
+
+    public void SetPaperStatus(bool status)
+    {
+        _order.gameObject.SetActive(status);
+    }
+
+    public void SetMood(string mood)
+    {
+        if (mood == "funy")
+        {
+            _faceFuny.SetActive(true);
+            _faceSad.SetActive(false);
+            _faceNone.SetActive(false);
+        }
+        else if (mood == "sad")
+        {
+            _faceFuny.SetActive(false);
+            _faceSad.SetActive(true);
+            _faceNone.SetActive(false);
+        }
+        else if (mood == "none")
+        {
+            _faceFuny.SetActive(false);
+            _faceSad.SetActive(false);
+            _faceNone.SetActive(true);
+        }
     }
 }

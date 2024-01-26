@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Antlr3.Runtime.Tree.TreeWizard;
 
 public class VisitorsController : MonoBehaviour
 {
     [SerializeField]
-    private VisiterAI _visitor;
+    private VisiterAI[] _visitor;
     [SerializeField]
-    private Transform[] _tableSpots;
-
-    [Header("Texures Setting")]
+    private int _visitorID = 0;
     [SerializeField]
-    private Material _faceFuny;
+    private GameObject[] _tableSpots;
     [SerializeField]
-    private Material _faceSad;
+    private int _spotID = 0;
     [SerializeField]
-    private Material _faceNone;
+    private Animator _animator;
 
     [Header("TEST Setting")]
     [SerializeField]
@@ -27,8 +26,10 @@ public class VisitorsController : MonoBehaviour
 
     void Start()
     {
-        _visitor.SetTexuresSetting(_faceFuny, _faceSad, _faceNone);
-        _visitor.SetMoveSetting(_tableSpots[0].position, 0);
+        for (int i = 0; i < _visitor.Length; i++)
+        {
+            _visitor[i].SetMoveSetting(_tableSpots[i], 0);
+        }
     }
 
     void Update()
@@ -37,17 +38,17 @@ public class VisitorsController : MonoBehaviour
         {
             _isVisiter = true;
             _timeToCome = false;
-            _visitor.Come();
+            _visitor[_visitorID].Come();
         }
         if (_timeToLeave)
         {
             _isVisiter = false;
             _timeToLeave = false;
-            _visitor.Leave();
+            _visitor[_visitorID].Leave();
         }
     }
 
-    public bool GetVisitorStatus()
+    public bool GetVisitStatus()
     {
         return _isVisiter;
     }
@@ -55,5 +56,10 @@ public class VisitorsController : MonoBehaviour
     public void CallVisitor()
     {
         _timeToCome = true;
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        collision.GetComponent<VisiterAI>()?.SetPaperStatus(true);
     }
 }

@@ -37,7 +37,7 @@ public class Bell : MonoBehaviour, IInteractableWithPlayerObject
 
     public void Interact()
     {
-        if (!_visitorsController.GetVisitorStatus()) 
+        if (!_visitorsController.GetVisitStatus()) 
         {
             _isMove = true;
             _visitorsController.CallVisitor();
