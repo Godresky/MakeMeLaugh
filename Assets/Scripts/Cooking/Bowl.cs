@@ -66,8 +66,6 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     {
         if (_hasWater && CheckBowlRotation())
             _hasWater = false;
-
-        Debug.Log(transform.localRotation.x);
     }
 
     private bool CheckBowlRotation()

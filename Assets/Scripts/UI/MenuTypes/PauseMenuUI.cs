@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenuUI : MonoBehaviour
@@ -19,6 +20,12 @@ public class PauseMenuUI : MonoBehaviour
         _exitButton.onClick.RemoveListener(OnExitButtonClicked);
         _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
+    }
+
+    public void Switch()
+    {
+        _menuPlane.SetActive(!_menuPlane.activeSelf);
+        Time.timeScale = 1f;
     }
 
     private void OnExitButtonClicked(){

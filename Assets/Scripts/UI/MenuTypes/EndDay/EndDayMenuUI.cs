@@ -18,7 +18,7 @@ public class EndDayMenuUI : MonoBehaviour
         _exitButton.onClick.AddListener(OnExitButtonCliked);
         _counter.BakesCountChanged += OnBakesCountChanged;
 
-        TimeManager.OnHourChanged += CheckNeededHour;
+        TimeManager.OnEndWorkDay += EndWorkDay;
     }
 
     private void OnDisable(){
@@ -26,7 +26,7 @@ public class EndDayMenuUI : MonoBehaviour
         _exitButton.onClick.RemoveListener(OnExitButtonCliked);
         _counter.BakesCountChanged -= OnBakesCountChanged;
 
-        TimeManager.OnHourChanged -= CheckNeededHour;
+        TimeManager.OnEndWorkDay -= EndWorkDay;
     }
 
     private void OnExitButtonCliked(){
@@ -37,9 +37,8 @@ public class EndDayMenuUI : MonoBehaviour
         
     }
 
-    private void CheckNeededHour(){
-        if (TimeManager.Hour == 9)
-            _menuPlane.SetActive(true);
+    private void EndWorkDay(){
+        _menuPlane.SetActive(true);
     }
 
     private void OnBakesCountChanged(int count){

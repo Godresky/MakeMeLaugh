@@ -5,7 +5,8 @@ public class PlayerKeyboard : MonoBehaviour
 {
     public Player Player;
     public ClockUI Clock;
-    
+    public PauseMenuUI PauseMenu;
+
     private PlayerControls _playerControls;
 
     private Vector2 _movementInput;
@@ -15,6 +16,7 @@ public class PlayerKeyboard : MonoBehaviour
     {
         Player = FindObjectOfType<Player>();
         Clock = FindObjectOfType<ClockUI>();
+        PauseMenu = FindObjectOfType<PauseMenuUI>();
 
         _playerControls = new PlayerControls();
         _playerControls.Enable();
@@ -33,6 +35,7 @@ public class PlayerKeyboard : MonoBehaviour
 
         //_playerControls.Menu.SwitchPad.performed += ctx => Stats.singleton.SwitchPadMenu();
         _playerControls.Menu.Exit.performed += ctx => Application.Quit();
+        //_playerControls.Menu.Exit.performed += ctx => PauseMenu.Switch();
         //_playerControls.Menu.Restart.performed += ctx => _level.Restart();
 
     }
