@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1505196918008593872}
   - component: {fileID: 6113851728473373437}
   - component: {fileID: 5800724532052582149}
+  - component: {fileID: 4232922349143723052}
   m_Layer: 10
   m_Name: "\u0423east"
   m_TagString: Untagged
@@ -150,3 +151,17 @@ MonoBehaviour:
   _lerpSpeed: 200
   _dragModifier: 2
   _type: 2
+--- !u!114 &4232922349143723052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784845296964605294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d67e6e7039112447a317be80fcba9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsUsing: 0
+  Rigidbody: {fileID: 0}

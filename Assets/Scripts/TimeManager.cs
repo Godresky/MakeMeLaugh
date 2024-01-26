@@ -5,9 +5,11 @@ public class TimeManager : MonoBehaviour
 {
     public static Action OnMinuteChanged;
     public static Action OnHourChanged;
-
     public static int Minute { get; private set; }
     public static int Hour { get; private set; }
+
+    [SerializeField]
+    private AudioSource _ticking;
 
     [SerializeField, Range(0,59)]
     private int _startMinute = 0;
@@ -39,6 +41,8 @@ public class TimeManager : MonoBehaviour
                 Hour++;
                 Minute = 0;
                 OnHourChanged?.Invoke();
+
+                _ticking?.Play();
             }
             if (Hour >= 24)
             {

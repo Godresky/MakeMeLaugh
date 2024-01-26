@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3753052683615207237}
   - component: {fileID: 8623050718237944637}
+  - component: {fileID: 4377870953242073921}
+  - component: {fileID: 5167973089049229253}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -45,3 +47,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  Clock: {fileID: 0}
+--- !u!114 &4377870953242073921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411504907640930424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f1481e8f67fb948b8831986aee7bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startMinute: 0
+  _startHour: 0
+  _minuteToRealTime: 10
+--- !u!114 &5167973089049229253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411504907640930424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39856168a74f3d5489c0ab5e85faef2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultCrosshair: {fileID: 0}
+  _grabHandCrosshair: {fileID: 0}
+  _interactHandCrosshair: {fileID: 0}
+  _doubleHandCrosshair: {fileID: 0}

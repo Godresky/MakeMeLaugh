@@ -1933,7 +1933,6 @@ GameObject:
   - component: {fileID: 5279901489756942298}
   - component: {fileID: 3239180548743267989}
   - component: {fileID: 8485511872921441034}
-  - component: {fileID: 3729605273943110090}
   - component: {fileID: 779360546539311634}
   - component: {fileID: 629035615386363399}
   m_Layer: 5
@@ -2030,22 +2029,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3729605273943110090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7924409303454584450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825ae226e9b0b4c45aeec6da7922d64e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _exitButton: {fileID: 6313687013447915666}
-  _resumeButton: {fileID: 1267671526852462634}
-  _restartButton: {fileID: 485425669621710812}
-  _menuPlane: {fileID: 8814786995935713445}
 --- !u!114 &779360546539311634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2062,6 +2045,7 @@ MonoBehaviour:
   _exitButton: {fileID: 3566631404029550453}
   _countText: {fileID: 4282824758922933326}
   _counter: {fileID: 629035615386363399}
+  _menuPlane: {fileID: 0}
 --- !u!114 &629035615386363399
 MonoBehaviour:
   m_ObjectHideFlags: 0

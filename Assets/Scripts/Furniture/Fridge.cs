@@ -6,6 +6,13 @@ public class Fridge : MonoBehaviour
     [SerializeField] private List<FridgeItem> _ingridients;
     [SerializeField] private List<Transform> _defaultPositions;
 
+    public static Fridge Singleton;
+
+    private void Awake()
+    {
+        Singleton = this;
+    }
+
     private void Start(){
         UpdateFridge();
     }
@@ -13,7 +20,10 @@ public class Fridge : MonoBehaviour
     public void UpdateFridge()
     {
         for(int i = 0; i < _ingridients.Count; i++) {
-            _ingridients[i].gameObject.transform.SetPositionAndRotation(_defaultPositions[i].position, _defaultPositions[i].rotation);
+            if (_ingridients[i].IsUsing)
+            {
+                UpdateItem(_ingridients[i], _defaultPositions[i]);
+            }
         }
     }
 
@@ -24,8 +34,19 @@ public class Fridge : MonoBehaviour
             for (int i = 0; i < _ingridients.Count; i++)
             {
                 if (_ingridients[i] == fridgeItem)
-                    _ingridients[i].gameObject.transform.SetPositionAndRotation(_defaultPositions[i].position, _defaultPositions[i].rotation);
+                {
+                    UpdateItem(fridgeItem, _defaultPositions[i]);
+                    break;
+                }
             }
         }
+    }
+
+    private void UpdateItem(FridgeItem fridgeItem, Transform position)
+    {
+        fridgeItem.IsUsing = false;
+        fridgeItem.Rigidbody.Sleep();
+        fridgeItem.gameObject.transform.SetPositionAndRotation(position.position, position.rotation);
+        fridgeItem.Rigidbody.WakeUp();
     }
 }

@@ -37,7 +37,10 @@ public class Border : MonoBehaviour
         else if (other.TryGetComponent(out DoughIngridient doughIngridient) && _isInteractWithIngridients)
         {
             doughIngridient.Drop();
-            // Update fridge
+            if (doughIngridient.TryGetComponent(out FridgeItem item))
+            {
+                Fridge.Singleton.UpdateFridgeItem(item);
+            }
         }
         else if (_missingSpawnPoint != null && _isInteractWithOthers)
         {

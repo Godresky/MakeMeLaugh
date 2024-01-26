@@ -10,8 +10,6 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     private Transform _doughSpawnpoint;
     [Space(3)]
     [SerializeField]
-    private Fridge _fridge;
-    [SerializeField]
     private List<DoughIngridient.Type> _ingridientsInBowl;
 
     [SerializeField]
@@ -51,14 +49,30 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 
     public void TryMakeDough()
     {
+        if (CheckBowlRotation())
+            return;
+
         if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_hasWater || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
             return;
 
         _ingridientsInBowl.Clear();
 
-        _fridge.UpdateFridge();
+        Fridge.Singleton.UpdateFridge();
         Instantiate(_dough.gameObject, _doughSpawnpoint.position, _doughSpawnpoint.rotation);
         HasWater = false;
+    }
+
+    private void Update()
+    {
+        if (_hasWater && CheckBowlRotation())
+            _hasWater = false;
+
+        Debug.Log(transform.localRotation.x);
+    }
+
+    private bool CheckBowlRotation()
+    {
+        return (transform.rotation.x > 0.4f || transform.localRotation.x < -0.4f);
     }
 
     public void Interact(){
