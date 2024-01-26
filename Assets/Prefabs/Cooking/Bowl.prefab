@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5627268222099739078}
   - component: {fileID: 6942676884694264163}
   - component: {fileID: 3497028703088542116}
-  - component: {fileID: 8844246696183440071}
   - component: {fileID: 7561500071859198424}
   - component: {fileID: 3094303148346591826}
   - component: {fileID: 2749915795047708700}
@@ -24,7 +23,7 @@ GameObject:
   - component: {fileID: 6258369944585380870}
   - component: {fileID: 4951919128462937638}
   - component: {fileID: 518411097958846161}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bowl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,9 +38,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: 0.0000000259746, z: -0.000000025974595, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.827, y: 1.12, z: -3.781}
-  m_LocalScale: {x: 9, y: 9, z: 9}
+  m_LocalScale: {x: 9, y: 7.5, z: 9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6966725540843118261}
@@ -113,25 +112,7 @@ MonoBehaviour:
   _doughSpawnpoint: {fileID: 6966725540843118261}
   _fridge: {fileID: 0}
   _ingridientsInBowl: 
-  HasWater: 0
---- !u!114 &8844246696183440071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210827058301464456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  _hasWater: 0
 --- !u!114 &7561500071859198424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,9 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b65f4929d99065438225612a643e55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outline: {fileID: 8844246696183440071}
-  _outlineColor: {r: 0, g: 1, b: 1, a: 1}
-  _outlineWidth: 10
+  _lerpSpeed: 400
+  _dragModifier: 2
 --- !u!54 &3094303148346591826
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,8 +135,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 10
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -173,7 +153,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!135 &2749915795047708700
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -202,7 +182,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -214,8 +194,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.04534618, y: 0.009224345, z: 0.04855156}
-  m_Center: {x: 0.0011176036, y: -0.017821481, z: -0.000059465565}
+  m_Size: {x: 0.03885595, y: 0.009224345, z: 0.038963743}
+  m_Center: {x: 0.00038006905, y: -0.017821481, z: 0.00016178687}
 --- !u!65 &7265377456234633171
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -223,7 +203,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -244,7 +224,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -265,7 +245,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -286,7 +266,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -307,7 +287,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -319,8 +299,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.061711814, y: 0.011386481, z: 0.006414791}
-  m_Center: {x: -0.000084108775, y: -0.0071246587, z: 0.027642654}
+  m_Size: {x: 0.05738897, y: 0.011386481, z: 0.0033469466}
+  m_Center: {x: 0.0020773155, y: -0.0071246596, z: 0.026108736}
 --- !u!65 &4951919128462937638
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -328,7 +308,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -340,8 +320,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06962653, y: 0.011386482, z: 0.0064147846}
-  m_Center: {x: 0.0038732127, y: -0.0071246587, z: -0.027642664}
+  m_Size: {x: 0.057355244, y: 0.011386482, z: 0.0032075148}
+  m_Center: {x: 0.0021998254, y: -0.0071246587, z: -0.025760168}
 --- !u!65 &518411097958846161
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -349,7 +329,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210827058301464456}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9ea038f35cbc2134f98f9e11295ad265, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -361,8 +341,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.07606484, y: 0.011512731, z: 0.04846165}
-  m_Center: {x: 0.00052407716, y: -0.007215668, z: 0.00011142758}
+  m_Size: {x: 0.057295322, y: 0.011512731, z: 0.04846165}
+  m_Center: {x: 0.0020998477, y: -0.007215668, z: 0.00011142757}
 --- !u!1 &2292002603421611544
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6966725540843118261}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoughSpawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

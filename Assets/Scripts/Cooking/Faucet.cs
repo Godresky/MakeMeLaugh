@@ -3,7 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
 {
+    [SerializeField] private AudioClip _soundFaucetOpening;
     [SerializeField] private AudioClip _soundFaucetWorking;
+    [SerializeField] private AudioClip _soundFaucetClosing;
 
     private AudioSource _audioSource;
 
@@ -22,13 +24,24 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
         {
             _audioSource?.Stop();
 
+            _audioSource.PlayOneShot(_soundFaucetOpening);
+
             _audioSource.loop = true;
             _audioSource.clip = _soundFaucetWorking;
-            _audioSource.Play();
         }
         else
         {
             _audioSource?.Stop();
+
+            _audioSource.PlayOneShot(_soundFaucetClosing);
+        }
+    }
+
+    private void Update()
+    {
+        if (_isOpen && !_audioSource.isPlaying)
+        {
+            _audioSource.Play();
         }
     }
 

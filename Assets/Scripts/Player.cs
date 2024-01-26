@@ -192,11 +192,11 @@ public class Player : MonoBehaviour
     private void CheckRaycast()
     {
         PickableItem currentEquippedItem = _playerPickingUp.GetEquippedItem();
-        if (_lastHoveredItem != null && currentEquippedItem != _lastHoveredItem)
-        {
-            _lastHoveredItem.OnHoverExit();
-            _lastHoveredItem = null;
-        }
+        //if (_lasthovereditem != null && currentequippeditem != _lasthovereditem)
+        //{
+        //    _lasthovereditem.onhoverexit();
+        //    _lasthovereditem = null;
+        //}
 
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
 
@@ -210,18 +210,23 @@ public class Player : MonoBehaviour
                 if (!_isPickingUp)
                     _crosshairChanger.SetGrabHand();
 
-                if (currentEquippedItem == null && _lastHoveredItem != item)
-                {
-                    if (_lastHoveredItem != null)
-                        _lastHoveredItem.OnHoverExit();
+                //if (currentEquippedItem == null && _lastHoveredItem != item)
+                //{
+                //    if (_lastHoveredItem != null)
+                //        _lastHoveredItem.OnHoverExit();
 
-                    _lastHoveredItem = item;    
-                    item.OnHoverEnter();
-                }
+                //    _lastHoveredItem = item;
+                //    item.OnHoverEnter();
+                //}
 
                 if (_isPickingUp)
                 {
-                    _playerPickingUp.PickUp(item.gameObject);
+                    //if (currentEquippedItem != item)
+                    //{
+                    //    _playerPickingUp.Drop();
+                    //}
+
+                    _playerPickingUp.Grab(item);
                 }
             }
             if (hit.collider.TryGetComponent(out IInteractableWithPlayerObject interactabelObject))

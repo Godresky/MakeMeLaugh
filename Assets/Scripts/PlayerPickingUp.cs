@@ -8,20 +8,14 @@ public class PlayerPickingUp : MonoBehaviour
     [SerializeField]
     private bool _equipped = false;
     [SerializeField]
-    private Transform _cameraTransform;
-    [SerializeField]
-    private float _lerpSpeed;
-    [SerializeField]
-    private GameObject _objectGrabPoint;
+    private Transform _objectGrabPoint;
 
     [SerializeField]
     private AudioSource _getItemSound;
     [SerializeField]
     private AudioSource _dropItemSound;
 
-    private GameObject _equippedItem;
-    private PickableItem _equippedItemClass;
-    private Rigidbody _equippedItemRb;
+    private PickableItem _equippedItem;
 
     public void Drop()
     {
@@ -29,31 +23,28 @@ public class PlayerPickingUp : MonoBehaviour
         {
             _equipped = false;
 
-            _equippedItem = null;
+            _equippedItem.Drop();
+            _equippedItem.OnWantDrop -= Drop;
 
-            _equippedItemRb.useGravity = true;
-            _equippedItemRb.freezeRotation = false;
-            _equippedItemRb.velocity = Vector3.zero;
+            _equippedItem = null;
 
             if (!_dropItemSound.isPlaying)
                 _dropItemSound.Play();
+
         }
     }
 
-    public void PickUp(GameObject item)
+    public void Grab(PickableItem item)
     {
         if (!_equipped)
         {
             _equipped = true;
             _equippedItem = item;
 
-            _objectGrabPoint.transform.position = _equippedItem.transform.position;
+            _objectGrabPoint.position = _equippedItem.transform.position;
 
-            _equippedItemClass = item.GetComponent<PickableItem>();
-
-            _equippedItemRb = item.GetComponent<Rigidbody>();
-            _equippedItemRb.useGravity = false;
-            _equippedItemRb.freezeRotation = true;
+            _equippedItem.Grab(_objectGrabPoint.transform);
+            _equippedItem.OnWantDrop += Drop;
 
             if (!_getItemSound.isPlaying)
                 _getItemSound.Play();
@@ -62,15 +53,7 @@ public class PlayerPickingUp : MonoBehaviour
 
     public PickableItem GetEquippedItem()
     {
-        return _equippedItem != null ? _equippedItemClass : null;
+        return _equipped ? _equippedItem : null;
     }
 
-    private void Update()
-    {
-        if (_equipped)
-        {
-            Vector3 newPosition = Vector3.Lerp(_equippedItem.transform.position, _objectGrabPoint.transform.position, Time.deltaTime * _lerpSpeed);
-            _equippedItemRb.MovePosition(newPosition);
-        }
-    }
 }
