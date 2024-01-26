@@ -396,7 +396,6 @@ GameObject:
   - component: {fileID: 225555983}
   - component: {fileID: 225555986}
   - component: {fileID: 225555985}
-  - component: {fileID: 225555984}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -419,29 +418,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1688901847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &225555984
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225555982}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &225555985
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3827,6 +3803,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1068250248}
   - component: {fileID: 1068250247}
+  - component: {fileID: 1068250250}
+  - component: {fileID: 1068250249}
   m_Layer: 0
   m_Name: DoorCollider
   m_TagString: Untagged
@@ -3849,12 +3827,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6004641, y: 2.2657676, z: 0.115880966}
-  m_Center: {x: 0.042110097, y: 1.1324842, z: -0.44204843}
+  m_Size: {x: 1.6004641, y: 2.2657676, z: 0.6476619}
+  m_Center: {x: 0.042115666, y: 1.1324842, z: -0.6975738}
 --- !u!4 &1068250248
 Transform:
   m_ObjectHideFlags: 0
@@ -3870,6 +3848,119 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -40, z: 0}
+--- !u!82 &1068250249
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068250246}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1068250250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068250246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b1b1a7c367ef542b7b47a9d3ca8997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioDoorOpen: {fileID: 8300000, guid: 82d78a984eb328646b3c979cbaf2c1e6, type: 3}
+  _audioDoorClose: {fileID: 8300000, guid: 4be3f5ca7ffad1447a7056b6a2c66527, type: 3}
+  _audioDoorBell: {fileID: 8300000, guid: c22d47f2a97326c4d802c57a98ab18fa, type: 3}
+  _delayTime: 0.2
+  _enterLst: []
 --- !u!43 &1077586936
 Mesh:
   m_ObjectHideFlags: 0
@@ -7835,9 +7926,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1688901847}
-  - component: {fileID: 1688901846}
   - component: {fileID: 1688901848}
   - component: {fileID: 1688901849}
+  - component: {fileID: 1688901850}
   m_Layer: 0
   m_Name: Visitor
   m_TagString: Untagged
@@ -7845,18 +7936,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1688901846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688901845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12fe0e6b088b9ce4ab8e82ebaed2ef06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1688901847
 Transform:
   m_ObjectHideFlags: 0
@@ -7914,6 +7993,29 @@ MonoBehaviour:
   _faceFuny: {fileID: 0}
   _faceSad: {fileID: 0}
   _faceNone: {fileID: 0}
+--- !u!136 &1688901850
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688901845}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.1654773
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.0189803, z: 0}
 --- !u!1 &1721473528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6411504907640930424, guid: dea1c6a5e7c5eed42b6fda99bb730c7e, type: 3}
