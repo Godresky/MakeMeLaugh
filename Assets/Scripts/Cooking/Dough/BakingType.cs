@@ -2,7 +2,7 @@ public enum BakingType : int
 {
     CircleBread,
     SqueareBreadWithJam,
-    LongSqueareBread,
+    RectangleBread,
     GreenBread,
     BlackBread,
     Rollet,

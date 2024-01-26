@@ -13,9 +13,4 @@ public class Table : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other){
-        if (other.TryGetComponent(out Dough dough))
-            dough.IsReady();
-    }
-
 }

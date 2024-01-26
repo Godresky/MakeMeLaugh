@@ -27,8 +27,7 @@ public class Stove : MonoBehaviour
         {
             if (other.TryGetComponent(out Dough dough) && !_isBaking)
             {
-                if (dough.CurrentState == Dough.State.ReadyForBaking)
-                {
+                if (dough.IsReadyForBaking==true){
                     StartCoroutine(Baking(dough));
                     _isBaking = true;
                 }
