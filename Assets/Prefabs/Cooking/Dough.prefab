@@ -120,9 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1a0796293dbe94183a198e2638e33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMaskRaycast:
-    serializedVersion: 2
-    m_Bits: 0
+  _lerpSpeed: 200
+  _dragModifier: 2
   _state: 0
   _growTime: 5
   _endScale: 2

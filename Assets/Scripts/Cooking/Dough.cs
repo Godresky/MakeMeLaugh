@@ -27,6 +27,7 @@ public class Dough : PickableItem
 
     private void Start()
     {
+        base.Start();
         _meshFilter = GetComponent<MeshFilter>();
         _meshCollider = GetComponent<MeshCollider>();
     }

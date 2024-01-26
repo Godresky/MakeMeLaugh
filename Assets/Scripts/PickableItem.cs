@@ -13,12 +13,14 @@ public class PickableItem : MonoBehaviour
     public Action OnWantDrop;
 
     [SerializeField]
-    private float _lerpSpeed = 0.25f;
-    private float _distanceForDrop = 1.4f;
+    private float _lerpSpeed = 200f;
+    [SerializeField]
+    private float _dragModifier = 2f;
 
+    private float _distanceForDrop = 1.4f;
     private float _oldDrag;
 
-    private void Start()
+    protected void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
@@ -61,16 +63,10 @@ public class PickableItem : MonoBehaviour
                 OnWantDrop?.Invoke();
             }
 
-            if (distance >= 0.001f)
+            if (distance >= 0.01f)
             {
-                //Vector3 newForce = new(distance / direction.x )
-
-                float localY = Mathf.Pow(Mathf.Cos((Mathf.PI * _lerpSpeed) / 2), 3);
-
-                _rigidbody.AddForce(direction * localY * 1000);
-                //_rigidbody.drag = (2 / _rigidbody.mass) * distance;
-
-                Debug.Log(localY);
+                _rigidbody.AddForce(direction * _lerpSpeed * distance);
+                _rigidbody.drag = _dragModifier / distance;
             }
         }
     }
