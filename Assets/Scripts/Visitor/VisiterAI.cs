@@ -6,44 +6,57 @@ using UnityEngine.AI;
 
 public class VisiterAI : MonoBehaviour
 {
-    // Move Setting
-    private GameObject _tablePoint;   // setted by VisitorController
+    [Header("Move Setting")]
+    [SerializeField]
+    private GameObject _tablePoint;   // setted
     private Vector3 _startPosition;
+    [SerializeField]
     private NavMeshAgent _agent;
-    private float _waitTime;          // setted by VisitorController
+    [SerializeField]
+    private float _waitTime;          // setted
 
     // Texture Settings
+    [Header("Texture Settings")]
+    [SerializeField]
     private GameObject _faceFuny;
+    [SerializeField]
     private GameObject _faceSad;
+    [SerializeField]
     private GameObject _faceNone;
 
     // Orders Setting
+    [Header("Orders Setting")]
+    [SerializeField]
     private GameObject _order;
-    //private List<>
 
     void Start()
     {
         _startPosition = GetComponent<Transform>().position;
         _agent = GetComponent<NavMeshAgent>();
-        for (int i = 0, children = transform.childCount; i < children; i++)
-        {
-            if (transform.GetChild(i).name == "_FunyHead")
-            {
-                _faceFuny = transform.GetChild(i).gameObject;
-            }
-            else if (transform.GetChild(i).name == "_SadHead")
-            {
-                _faceSad = transform.GetChild(i).gameObject;
-            }
-            else if (transform.GetChild(i).name == "_NoneHead")
-            {
-                _faceNone = transform.GetChild(i).gameObject;
-            }
-            else if (transform.GetChild(i).name == "_Order")
-            {
-                _order = transform.GetChild(i).gameObject;
-            }
-        }
+        //GameObject[] gameObj = GetComponentsInChildren<GameObject>();
+        //for (int i = 0; i < gameObject.transform.childCount; i++)
+        //{
+        //    if (gameObj[i].name == "_FunyHead")
+        //    {
+        //        Debug.Log("F");
+        //        _faceFuny = gameObj[i];
+        //    }
+        //    else if (gameObj[i].name == "_SadHead")
+        //    {
+        //        Debug.Log("S");
+        //        _faceSad = gameObj[i];
+        //    }
+        //    else if (gameObj[i].name == "_NoneHead")
+        //    {
+        //        Debug.Log("N");
+        //        _faceNone = gameObj[i];
+        //    }
+        //    else if (gameObj[i].name == "_Order")
+        //    {
+        //        Debug.Log("O");
+        //        _order = gameObj[i];
+        //    }
+        //}
         SetMood("none");
         _order.SetActive(false);
     }
