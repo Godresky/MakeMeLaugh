@@ -11,6 +11,10 @@ public class OrderPaper : MonoBehaviour, IInteractableWithPlayerObject
     private float _delayTime;
 
     [Header("Wish Setting")]
+    [SerializeField]
+    private int _simpleFoodCount;
+    [SerializeField]
+    private int _hardFoodCount;
     private string[] _simpleFoodList =
     {
         "Egg",
@@ -22,14 +26,12 @@ public class OrderPaper : MonoBehaviour, IInteractableWithPlayerObject
         "Flour",
         "RoundBread",
     };
-    [SerializeField]
-    private int _simpleFoodCount;
-    [SerializeField]
-    private int _hardFoodCount;
 
     [Header("TESTING")]
     [SerializeField]
     private List<string> _wishList;
+    [SerializeField]
+    private List<bool> _statusList;
 
     private void Start()
     {
@@ -40,31 +42,33 @@ public class OrderPaper : MonoBehaviour, IInteractableWithPlayerObject
         {
 
             _wishList.Add((_simpleFoodList[random.Next(0, _simpleFoodList.Length)]));
+            _statusList.Add(false);
         }
         for (int i = 0; i < _hardFoodCount; i++)
         {
 
             _wishList.Add((_hardFoodList[random.Next(0, _hardFoodList.Length)]));
+            _statusList.Add(false);
         }
     }
 
     public void Interact()
     {
         gameObject.SetActive(false);
-        _paperUI.ChangeText(GetOrderText());
         SwitchAtionUI();
+        OrderTextUpdate();
         Invoke(nameof(SwitchAtionUI), _delayTime);
     }
 
-    private string GetOrderText()
+    private void OrderTextUpdate()
     {
         string text = "";
         for (int i = 0, count = _wishList.Count; i < count; i++)
         {
-            text += "[ ] " + _wishList[i] + "\n";
+            text += (_statusList[i] ? "[*] " : "[ ] ") + _wishList[i] + "\n";
         }
         Debug.Log(text);
-        return text;
+        _paperUI.ChangeText(text);
     }
 
     private void SwitchAtionUI()
