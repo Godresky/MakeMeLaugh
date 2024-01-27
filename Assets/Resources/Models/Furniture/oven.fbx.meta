@@ -3,22 +3,7 @@ guid: 03f0afedc0f6d35449e68cd66c1c17ea
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material_001__oven_pix_png
-    second: {fileID: 2100000, guid: 2cdc69415743849b7b302ef3d8174037, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material__oven_pix_png
-    second: {fileID: 2100000, guid: d9a0deb755aa4456bbd35a17119efe36, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: None__oven_pix_png
-    second: {fileID: 2100000, guid: 4eb39f37912594ace9ff58f94f4dca3e, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

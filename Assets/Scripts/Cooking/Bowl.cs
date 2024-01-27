@@ -39,7 +39,7 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
             _ingridientsInBowl.Add(ingridient.CurrentType);
         }
         else
-            _dough.Type = BakingType.Error;
+            _dough.FutureBakingType = Baking.Type.Error;
     }
 
     private void OnTriggerExit(Collider other){

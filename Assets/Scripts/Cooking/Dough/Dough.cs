@@ -8,14 +8,17 @@ public class Dough : PickableItem
 {
     [SerializeField]
     private State _state;
+    [SerializeField]
+    private Baking.Type _futureBakingType;
 
     public State CurrentState { get => _state; }
-    public BakingType Type { get;  set; }
+    public Baking.Type FutureBakingType { get => _futureBakingType; set => _futureBakingType = value; }
     public bool IsReadyForBaking = false;
+
+    [SerializeField]
 
     [Space(2)]
     [Header("Grow")]
-    [SerializeField]
     private float _growTime;
     [Range(1,7)]
     [SerializeField]
@@ -39,25 +42,25 @@ public class Dough : PickableItem
     public void Bake(){
         switch (_state){
             case State.Circle:
-                Type = BakingType.CircleBread;
+                futureBakingType = Baking.Type.CircleBread;
                 break;
 
-            case State.Rectangle:
-                Type = BakingType.RectangleBread;
+            case State.Triangle:
+                futureBakingType = Baking.Type.RectangleBread;
                 break;
 
-            case State.SqueareWithJam:
-                Type = BakingType.SqueareBreadWithJam;
+            case State.SquareWithFilling:
+                futureBakingType = Baking.Type.SquareBreadWithFilling;
                 break;
 
-            case State.RectangleWithJam:
-                Type = BakingType.Rollet;
+            case State.TriangleWithFilling:
+                futureBakingType = Baking.Type.Rollet;
                 break;
         }
     }
 
     public void Rolling(float endScale){
-        _state = State.Rectangle;
+        _state = State.Triangle;
 
         transform.localScale *= endScale;
     }
@@ -66,11 +69,11 @@ public class Dough : PickableItem
 
         switch (_state) {
             case State.Circle:
-                _state = State.SqueareWithJam;
+                _state = State.SquareWithFilling;
                 break;
 
-            case State.Rectangle:
-                _state= State.RectangleWithJam;
+            case State.Triangle:
+                _state= State.TriangleWithFilling;
                 break;
         }
     }
@@ -78,25 +81,18 @@ public class Dough : PickableItem
     private IEnumerator Growing(){
         _state = State.Rising;
         yield return new WaitForSeconds(_growTime);
+        _state = State.Circle;
         transform.localScale *= _endScale;
         IsReadyForBaking = true;
-    }
-
-    private void ChangeState(State newState)
-    {
-        _state = newState;
-        _meshFilter.mesh = _meshes[(int)_state];
     }
 
     public enum State
     {
         Unrised,
         Rising,
-        Rised,
-        Rectangle,
-        SqueareWithJam,
-        RectangleWithJam,
-        Cooked,
         Circle,
+        Triangle,
+        SquareWithFilling,
+        TriangleWithFilling
     }
 }
