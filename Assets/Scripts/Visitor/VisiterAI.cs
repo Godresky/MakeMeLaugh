@@ -12,6 +12,9 @@ public class VisiterAI : MonoBehaviour
     private NavMeshAgent _agent;
     private float _waitTime;          // setted
 
+    [SerializeField]
+    private Mood _mood;
+
     // Texture Settings
     private GameObject _faceFuny;
     private GameObject _faceSad;
@@ -20,7 +23,7 @@ public class VisiterAI : MonoBehaviour
     // Orders Setting
     private OrderPaper _order;
 
-    void Start()
+    private void Start()
     {
         _startPosition = GetComponent<Transform>().position;
         _agent = GetComponent<NavMeshAgent>();
@@ -43,7 +46,7 @@ public class VisiterAI : MonoBehaviour
                 _order = transform.GetChild(i).gameObject.GetComponent<OrderPaper>();
             }
         }
-        SetMood("none");
+        SetMood(Mood.None);
         _order.gameObject.SetActive(false);
     }
 
@@ -72,23 +75,32 @@ public class VisiterAI : MonoBehaviour
 
     public void SetMood(string mood)
     {
-        if (mood == "funy")
+        _mood = mood;
+
+        if (mood == Mood.Funny)
         {
             _faceFuny.SetActive(true);
             _faceSad.SetActive(false);
             _faceNone.SetActive(false);
         }
-        else if (mood == "sad")
+        else if (mood == Mood.Sad)
         {
             _faceFuny.SetActive(false);
             _faceSad.SetActive(true);
             _faceNone.SetActive(false);
         }
-        else if (mood == "none")
+        else if (mood == Mood.None)
         {
             _faceFuny.SetActive(false);
             _faceSad.SetActive(false);
             _faceNone.SetActive(true);
         }
+    }
+
+    public enum Mood
+    {
+        Funny,
+        Sad,
+        None
     }
 }
