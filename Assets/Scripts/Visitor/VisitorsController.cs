@@ -35,11 +35,9 @@ public class VisitorsController : MonoBehaviour
     [SerializeField]
     private VisitorPlate _plate;
     [SerializeField]
-    private int _visitorID = 0;
+    private int _calledVisitorID = 0;
     [SerializeField]
-    private bool _timeToCome = false;
-    [SerializeField]
-    private bool _timeToLeave = false;
+    private int _leavedVisitorID = 0;
     [SerializeField]
     private bool _isEndOfQueue = false;
     public bool IsEndOfQueue { get => _isEndOfQueue; }
@@ -63,54 +61,40 @@ public class VisitorsController : MonoBehaviour
     {
         if (_isEndOfQueue || !_isShiftStarted) return;
 
-        if (_visitorID == _visitorsList.Length)
+        if (_calledVisitorID == _visitorsList.Length)
         {
-            _visitorID = 0;
+            _calledVisitorID = 0;
+        }
+        if (_leavedVisitorID == _visitorsList.Length)
+        {
+            _leavedVisitorID = 0;
         }
 
-        CheckPlate();
-        if (_plate != null && _plate.DishMark != 0)
+        for (int vi = 0, vl = _visitorsList.Length; vi < vl; vi++)
         {
-            _plate.LiftDown();
-            switch (_plate.DishMark)
+            CheckPlate(vi);
+            if (_plate != null && _plate.DishMark != 0)
             {
-                case 1:
-                    UncallVisitor(VisitorAI.Mood.Funny);
-                    break;
-                case -1:
-                    UncallVisitor(VisitorAI.Mood.Sad);
-                    break;
+                _plate.LiftDown();
+                switch (_plate.DishMark)
+                {
+                    case 1:
+                        UncallVisitor(VisitorAI.Mood.Funny);
+                        break;
+                    case -1:
+                        UncallVisitor(VisitorAI.Mood.Sad);
+                        break;
+                }
             }
         }
-
-        if (_timeToCome)
-        {
-            // ******* NEED wait _visitorWaitTime *******
-            _visitorCount++;
-            _timeToCome = false;
-            _visitorsList[_visitorID].Come();
-        }
-        else if (_timeToLeave)
-        {
-            // ******* NEED wait _visitorWaitTime *******
-            _visitorCount--;
-            _timeToLeave = false;
-            _visitorsList[_visitorID].Leave();
-            _servedVisitors++;
-            if (_servedVisitors == _todayVisitorCount)
-            {
-                _isEndOfQueue = true;
-            }
-        }
-        _visitorID++;
     }
 
-    private void CheckPlate()
+    private void CheckPlate(int visitorID)
     {
-        _plate = _visitorsList[_visitorID].TablePoint.GetComponentInChildren<VisitorPlate>();
+        _plate = _visitorsList[visitorID].TablePoint.GetComponentInChildren<VisitorPlate>();
         if (_plate != null)
         {
-            _plate.SetWishDish(_visitorsList[_visitorID].WishDish);
+            _plate.SetWishDish(_visitorsList[visitorID].WishDish);
         }
     }
 
@@ -121,13 +105,25 @@ public class VisitorsController : MonoBehaviour
 
     public void CallVisitor()
     {
-        _timeToCome = true;
+        // ******* NEED wait _visitorWaitTime *******
+        _visitorsList[_calledVisitorID].Come();
+        CheckPlate(_calledVisitorID);
+        _visitorCount++;
+        _calledVisitorID++;
     }
 
     public void UncallVisitor(VisitorAI.Mood mood)
     {
-        _visitorsList[_visitorID].SetMood(mood);
-        _timeToLeave = true;
+        _visitorsList[_leavedVisitorID].SetMood(mood);
+        // ******* NEED wait _visitorWaitTime *******
+        _visitorsList[_leavedVisitorID].Leave();
+        _visitorCount--;
+        _leavedVisitorID++;
+        _servedVisitors++;
+        if (_servedVisitors == _todayVisitorCount)
+        {
+            _isEndOfQueue = true;
+        }
     }
 
     public void EndQueue()
