@@ -194,6 +194,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OrderPaper"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9301f9b-e10c-4b67-810c-8c73257bceb0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +247,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Clock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bae7bcd7-ca43-488d-94cf-ea5ca7a7ea98"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OrderPaper"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -326,6 +346,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_Drop = m_Actions.FindAction("Drop", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
         m_Actions_Clock = m_Actions.FindAction("Clock", throwIfNotFound: true);
+        m_Actions_OrderPaper = m_Actions.FindAction("OrderPaper", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_SwitchPad = m_Menu.FindAction("Switch Pad", throwIfNotFound: true);
@@ -466,6 +487,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Drop;
     private readonly InputAction m_Actions_Interact;
     private readonly InputAction m_Actions_Clock;
+    private readonly InputAction m_Actions_OrderPaper;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -474,6 +496,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Drop => m_Wrapper.m_Actions_Drop;
         public InputAction @Interact => m_Wrapper.m_Actions_Interact;
         public InputAction @Clock => m_Wrapper.m_Actions_Clock;
+        public InputAction @OrderPaper => m_Wrapper.m_Actions_OrderPaper;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -495,6 +518,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Clock.started += instance.OnClock;
             @Clock.performed += instance.OnClock;
             @Clock.canceled += instance.OnClock;
+            @OrderPaper.started += instance.OnOrderPaper;
+            @OrderPaper.performed += instance.OnOrderPaper;
+            @OrderPaper.canceled += instance.OnOrderPaper;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -511,6 +537,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Clock.started -= instance.OnClock;
             @Clock.performed -= instance.OnClock;
             @Clock.canceled -= instance.OnClock;
+            @OrderPaper.started -= instance.OnOrderPaper;
+            @OrderPaper.performed -= instance.OnOrderPaper;
+            @OrderPaper.canceled -= instance.OnOrderPaper;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -603,6 +632,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDrop(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnClock(InputAction.CallbackContext context);
+        void OnOrderPaper(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
