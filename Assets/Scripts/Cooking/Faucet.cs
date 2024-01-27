@@ -18,6 +18,7 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
     private AudioSource _valveAudioSource;
 
     private bool _isOpen = false;
+    private bool _isChanging = false;
 
     private void Start()
     {
@@ -31,8 +32,10 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
 
     private IEnumerator ToSwitchState()
     {
-        _audioSource?.Stop();
-        _valveAudioSource?.Stop();
+        _isChanging = true;
+
+        _audioSource.Stop();
+        _valveAudioSource.Stop();
 
         if (!_isOpen)
         {
@@ -42,7 +45,7 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
         {
             _audioSource.loop = false;
 
-            _audioSource.PlayOneShot(_soundFaucetClosing);
+            //_audioSource.PlayOneShot(_soundFaucetClosing);
             _valveAudioSource.PlayOneShot(_soundValveClosing);
         }
 
@@ -55,12 +58,14 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
             _audioSource.clip = _soundFaucetWorking;
         }
 
+        _isChanging = false;
+
         _isOpen = !_isOpen;
     }
 
     private void Update()
     {
-        if (_isOpen && !_audioSource.isPlaying)
+        if (_isOpen && !_audioSource.isPlaying && !_isChanging)
         {
             _audioSource.Play();
         }

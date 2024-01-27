@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
@@ -11,79 +12,87 @@ public class Dough : PickableItem
     [SerializeField]
     private Baking.Type _futureBakingType;
 
+    [SerializeField]
+    private bool _isReadyForBaking = false;
+    [SerializeField]
+    private bool _isPoisoned = false;
+    [SerializeField]
+    private bool _isIncorect = false;
+
     public State CurrentState { get => _state; }
     public Baking.Type FutureBakingType { get => _futureBakingType; set => _futureBakingType = value; }
-    public bool IsReadyForBaking = false;
-
-    [SerializeField]
+    public bool IsReadyForBaking { get => _isReadyForBaking; }
+    public bool IsPoisoned { get => _isPoisoned; set => _isPoisoned = value; }
+    public bool IsIncorect { get => _isIncorect; set => _isIncorect = value; }
 
     [Space(2)]
     [Header("Grow")]
+    [SerializeField]
     private float _growTime;
     [Range(1,7)]
     [SerializeField]
     private float _endScale;
-
-    [SerializeField]
-    private List<Mesh> _meshes;
-
-    private MeshFilter _meshFilter;
-    private MeshCollider _meshCollider;
-
-    private void Start()
-    {
-        base.Start();
-        _meshFilter = GetComponent<MeshFilter>();
-        _meshCollider = GetComponent<MeshCollider>();
-    }
 
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
         switch (_state){
             case State.Circle:
-                futureBakingType = Baking.Type.CircleBread;
+                _futureBakingType = Baking.Type.CircleBread;
                 break;
 
             case State.Triangle:
-                futureBakingType = Baking.Type.RectangleBread;
+                _futureBakingType = Baking.Type.RectangleBread;
                 break;
 
             case State.SquareWithFilling:
-                futureBakingType = Baking.Type.SquareBreadWithFilling;
+                _futureBakingType = Baking.Type.SquareBreadWithFilling;
                 break;
 
             case State.TriangleWithFilling:
-                futureBakingType = Baking.Type.Rollet;
+                _futureBakingType = Baking.Type.Rollet;
+                break;
+
+            default:
+                Destroy(gameObject);
+                return;
                 break;
         }
+
+        BakeryController.Singleton.LoadCookedBaking(this, _futureBakingType);
     }
 
-    public void Rolling(float endScale){
-        _state = State.Triangle;
-
-        transform.localScale *= endScale;
+    public void Rolling()
+    {
+        ChangeState(State.Triangle);
     }
 
-    public void Filling(){
-
+    public void Filling()
+    {
         switch (_state) {
             case State.Circle:
-                _state = State.SquareWithFilling;
+                ChangeState(State.SquareWithFilling);
                 break;
 
             case State.Triangle:
-                _state= State.TriangleWithFilling;
+                ChangeState(State.TriangleWithFilling);
                 break;
         }
     }
 
+    private void ChangeState(State state)
+    {
+        _state = state;
+        if (state != State.Unrised  && state != State.Rising)
+            BakeryController.Singleton.LoadDough(this, _state);
+    }
+
     private IEnumerator Growing(){
-        _state = State.Rising;
+        ChangeState(State.Rising);
         yield return new WaitForSeconds(_growTime);
-        _state = State.Circle;
         transform.localScale *= _endScale;
-        IsReadyForBaking = true;
+        _isReadyForBaking = true;
+        ChangeState(State.Circle);
     }
 
     public enum State
