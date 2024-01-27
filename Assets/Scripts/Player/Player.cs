@@ -76,8 +76,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
         _audio = GetComponent<AudioSource>();
         _controller = GetComponent<CharacterController>();
