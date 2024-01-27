@@ -9,6 +9,8 @@ using static UnityEditor.Progress;
 public class PickableItem : MonoBehaviour
 {
     [SerializeField]
+    private string _itemName;
+    [SerializeField]
     private Outline _outline;
     [SerializeField]
     private Color _outlineColor = Color.cyan;
@@ -46,5 +48,10 @@ public class PickableItem : MonoBehaviour
     public void OnHoverExit()
     {
         _outline.enabled = false;
+    }
+
+    public string GetItemName()
+    {
+        return _itemName;
     }
 }

@@ -7,11 +7,9 @@ using UnityEngine.AI;
 public class VisiterAI : MonoBehaviour
 {
     [Header("Move Setting")]
-    [SerializeField]
     private GameObject _tablePoint;   // setted
     private Vector3 _startPosition;
     private NavMeshAgent _agent;
-    [SerializeField]
     private float _waitTime;          // setted
 
     // Texture Settings
@@ -69,6 +67,8 @@ public class VisiterAI : MonoBehaviour
     {
         _order.gameObject.SetActive(status);
     }
+
+    public string WishDish { get => _order.WishDish; }
 
     public void SetMood(string mood)
     {
