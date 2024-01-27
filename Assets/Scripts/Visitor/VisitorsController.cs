@@ -56,10 +56,10 @@ public class VisitorsController : MonoBehaviour
             switch (_plate.DishMark)
             {
                 case 1:
-                    UncallVisitor("funy");
+                    UncallVisitor(VisiterAI.Mood.Funny);
                     break;
                 case -1:
-                    UncallVisitor("sad");
+                    UncallVisitor(VisiterAI.Mood.Sad);
                     break;
             }
         }
@@ -101,7 +101,7 @@ public class VisitorsController : MonoBehaviour
         _timeToCome = true;
     }
 
-    public void UncallVisitor(string mood)
+    public void UncallVisitor(VisiterAI.Mood mood)
     {
         _visitors[_visitorID].SetMood(mood);
         _timeToLeave = true;

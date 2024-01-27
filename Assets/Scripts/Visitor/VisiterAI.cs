@@ -10,6 +10,7 @@ public class VisiterAI : MonoBehaviour
     private GameObject _tablePoint;   // setted
     private Vector3 _startPosition;
     private NavMeshAgent _agent;
+    private Animator _animator;
 
     // Texture Settings
     private GameObject _faceFuny;
@@ -21,6 +22,7 @@ public class VisiterAI : MonoBehaviour
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _startPosition = GetComponent<Transform>().position;
         _agent = GetComponent<NavMeshAgent>();
         for (int i = 0, children = transform.childCount; i < children; i++)
@@ -42,7 +44,7 @@ public class VisiterAI : MonoBehaviour
                 _order = transform.GetChild(i).gameObject.GetComponent<OrderPaper>();
             }
         }
-        SetMood("none");
+        SetMood(Mood.None);
         _order.gameObject.SetActive(false);
     }
 
@@ -68,21 +70,21 @@ public class VisiterAI : MonoBehaviour
 
     public string WishDish { get => _order.WishDish; }
 
-    public void SetMood(string mood)
+    public void SetMood(Mood mood)
     {
-        if (mood == "funy")
+        if (mood == Mood.Funny)
         {
             _faceFuny.SetActive(true);
             _faceSad.SetActive(false);
             _faceNone.SetActive(false);
         }
-        else if (mood == "sad")
+        else if (mood == Mood.Sad)
         {
             _faceFuny.SetActive(false);
             _faceSad.SetActive(true);
             _faceNone.SetActive(false);
         }
-        else if (mood == "none")
+        else if (mood == Mood.None)
         {
             _faceFuny.SetActive(false);
             _faceSad.SetActive(false);

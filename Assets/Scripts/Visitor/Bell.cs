@@ -15,10 +15,10 @@ public class Bell : MonoBehaviour, IInteractableWithPlayerObject
     private float _speed;
     [SerializeField]
     private float _deepDistanse;
-    [SerializeField]
     private bool _isMove = false;
-    [SerializeField]
     private bool _isDown = false;
+    [SerializeField, Range(1, 3)]
+    private int _visitorsLimit = 2;
 
     private void Start()
     {
