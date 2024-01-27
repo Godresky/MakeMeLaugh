@@ -38,6 +38,8 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
 
             _ingridientsInBowl.Add(ingridient.CurrentType);
         }
+        else
+            _dough.Type = BakingType.Error;
     }
 
     private void OnTriggerExit(Collider other){

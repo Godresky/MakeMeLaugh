@@ -10,6 +10,8 @@ public class Dough : PickableItem
     private State _state;
 
     public State CurrentState { get => _state; }
+    public BakingType Type { get;  set; }
+    public bool IsReadyForBaking = false;
 
     [Space(2)]
     [Header("Grow")]
@@ -35,26 +37,49 @@ public class Dough : PickableItem
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
-        ChangeState(State.Cooked);
+        switch (_state){
+            case State.Circle:
+                Type = BakingType.CircleBread;
+                break;
+
+            case State.Rectangle:
+                Type = BakingType.RectangleBread;
+                break;
+
+            case State.SqueareWithJam:
+                Type = BakingType.SqueareBreadWithJam;
+                break;
+
+            case State.RectangleWithJam:
+                Type = BakingType.Rollet;
+                break;
+        }
     }
 
     public void Rolling(float endScale){
-        _state = State.Rolled;
+        _state = State.Rectangle;
+
         transform.localScale *= endScale;
     }
 
-    public void Filling() => _state = State.Filled;
+    public void Filling(){
 
-    public void IsReady(){
-        if (_state == State.Filled || _state == State.Rolled)
-            _state = State.ReadyForBaking;
+        switch (_state) {
+            case State.Circle:
+                _state = State.SqueareWithJam;
+                break;
+
+            case State.Rectangle:
+                _state= State.RectangleWithJam;
+                break;
+        }
     }
 
     private IEnumerator Growing(){
         _state = State.Rising;
         yield return new WaitForSeconds(_growTime);
         transform.localScale *= _endScale;
-        _state = State.ReadyForBaking;
+        IsReadyForBaking = true;
     }
 
     private void ChangeState(State newState)
@@ -68,9 +93,10 @@ public class Dough : PickableItem
         Unrised,
         Rising,
         Rised,
-        ReadyForBaking,
-        Rolled,
-        Filled,
-        Cooked
+        Rectangle,
+        SqueareWithJam,
+        RectangleWithJam,
+        Cooked,
+        Circle,
     }
 }

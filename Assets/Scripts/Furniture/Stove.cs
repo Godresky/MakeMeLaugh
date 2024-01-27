@@ -36,7 +36,7 @@ public class Stove : MonoBehaviour
     {
         if (other.TryGetComponent(out Dough dough))
         {
-            if (dough.CurrentState == Dough.State.ReadyForBaking)
+            if (dough.IsReadyForBaking==true){
             {
                 _doughsInStove.Add(dough);
             }
