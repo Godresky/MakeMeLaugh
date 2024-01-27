@@ -49,7 +49,6 @@ public class VisitorPlate : MonoBehaviour, IInteractableWithPlayerObject
 
     public void Interact()
     {
-        Debug.Log("Interact");
         if (_playerDish != null)
         {
             if (_playerDish.GetComponent<PickableItem>().GetItemName() == _whishDish)
