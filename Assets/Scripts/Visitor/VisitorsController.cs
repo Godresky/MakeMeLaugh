@@ -104,7 +104,6 @@ public class VisitorsController : MonoBehaviour
     {
         collision.GetComponent<VisiterAI>()?.SetPaperStatus(true);
         _plate = _tableSpots[_spotID].GetComponentInChildren<VisitorPlate>();
-        Debug.Log(_plate);
         if (_plate != null)
         {
             _plate.LiftUp();
