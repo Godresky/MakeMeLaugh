@@ -4606,7 +4606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa68eec2df7e3945ad05b38b3a2a5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayTime: 1
+  _delayTime: 1.5
   _dishesMenu:
   - "\u041A\u0440\u0443\u0433\u043B\u0438\u0439 \u0445\u043B\u0456\u0431"
   - "\u041F\u0440\u044F\u043C\u043E\u043A\u0443\u0442\u043D\u0438\u0439 \u0445\u043B\u0456\u0431"
@@ -9924,6 +9924,8 @@ MonoBehaviour:
   - {fileID: 1090321067}
   - {fileID: 1283964854}
   _textEndOfShift: {fileID: 2102231184}
+  _visitorWaitTime: 10
+  _EndTextWaitTime: 5
   _plate: {fileID: 0}
   _visitorID: 0
   _spotID: 0

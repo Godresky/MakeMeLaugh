@@ -10,7 +10,6 @@ public class VisiterAI : MonoBehaviour
     private GameObject _tablePoint;   // setted
     private Vector3 _startPosition;
     private NavMeshAgent _agent;
-    private float _waitTime;          // setted
 
     // Texture Settings
     private GameObject _faceFuny;
@@ -47,10 +46,9 @@ public class VisiterAI : MonoBehaviour
         _order.gameObject.SetActive(false);
     }
 
-    public void SetMoveSetting(GameObject tablePoint, float waitTime)
+    public void SetTablePoint(GameObject tablePoint)
     {
         _tablePoint = tablePoint;
-        _waitTime = waitTime;
     }
 
     public void Come()

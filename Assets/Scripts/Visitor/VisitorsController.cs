@@ -11,6 +11,10 @@ public class VisitorsController : MonoBehaviour
     private GameObject[] _tableSpots;
     [SerializeField]
     private GameObject _textEndOfShift;
+    [SerializeField]
+    private float _visitorWaitTime;
+    [SerializeField]
+    private float _EndTextWaitTime;
 
     [Header("TEST SerializeFields")]
     [SerializeField]
@@ -28,11 +32,11 @@ public class VisitorsController : MonoBehaviour
     [SerializeField]
     private bool _isEndOfQueue = false;
 
-    void Start()
+    private void Start()
     {
         for (int vi = 0, si = 0, vl = _visitors.Length, tsl = _tableSpots.Length; vi < vl; vi++, si++)
         {
-            _visitors[vi].SetMoveSetting(_tableSpots[si], 0);
+            _visitors[vi].SetTablePoint(_tableSpots[si]);
             if (si == tsl)
             {
                 si = 0;
@@ -40,7 +44,7 @@ public class VisitorsController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (_isEndOfQueue)
         {
@@ -61,12 +65,14 @@ public class VisitorsController : MonoBehaviour
         }
         if (_timeToCome)
         {
+            // NEED wait _visitorWaitTime
             _isVisiter = true;
             _timeToCome = false;
             _visitors[_visitorID].Come();
         }
         else if (_timeToLeave)
         {
+            // NEED wait _visitorWaitTime
             _isVisiter = false;
             _timeToLeave = false;
             _visitors[_visitorID].Leave();
@@ -79,6 +85,7 @@ public class VisitorsController : MonoBehaviour
             if (_visitorID == _visitors.Length)
             {
                 _isEndOfQueue = true;
+                // NEED wait _EndTextWaitTime
                 _textEndOfShift.SetActive(true);
             }
         }
