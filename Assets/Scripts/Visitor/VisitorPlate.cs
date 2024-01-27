@@ -44,7 +44,6 @@ public class VisitorPlate : MonoBehaviour, IInteractableWithPlayerObject
         {
             _playerDish = null;
         }
-        
     }
 
     public void Interact()

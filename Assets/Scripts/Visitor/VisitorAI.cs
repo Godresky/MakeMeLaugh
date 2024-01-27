@@ -4,10 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class VisiterAI : MonoBehaviour
+public class VisitorAI : MonoBehaviour
 {
     [Header("Move Setting")]
     private GameObject _tablePoint;   // setted
+    public GameObject TablePoint { get => _tablePoint; }
     private Vector3 _startPosition;
     private NavMeshAgent _agent;
     private Animator _animator;

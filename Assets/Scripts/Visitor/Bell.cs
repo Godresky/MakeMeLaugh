@@ -7,6 +7,8 @@ public class Bell : MonoBehaviour, IInteractableWithPlayerObject
 {
     [SerializeField]
     private VisitorsController _visitorsController;
+
+    [Header("Animation Settings")]
     private AudioSource _audioSource;
     [SerializeField]
     private Transform _button;
@@ -17,8 +19,6 @@ public class Bell : MonoBehaviour, IInteractableWithPlayerObject
     private float _deepDistanse;
     private bool _isMove = false;
     private bool _isDown = false;
-    [SerializeField, Range(1, 3)]
-    private int _visitorsLimit = 2;
 
     private void Start()
     {
@@ -29,6 +29,8 @@ public class Bell : MonoBehaviour, IInteractableWithPlayerObject
 
     private void Update()
     {
+        if (_visitorsController.IsEndOfQueue) return;
+
         if (_isMove)
         {
             ButtonAnimation();
@@ -37,7 +39,7 @@ public class Bell : MonoBehaviour, IInteractableWithPlayerObject
 
     public void Interact()
     {
-        if (!_visitorsController.GetVisitStatus()) 
+        if (_visitorsController.IsFreeSpots()) 
         {
             _isMove = true;
             _visitorsController.CallVisitor();
