@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 62c4201b470ff744aa4f42ebcf2b5cdf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 8247160890781113035}
   - component: {fileID: 8032424177716527950}
   - component: {fileID: 5441467485524966326}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,6 +244,7 @@ MonoBehaviour:
   _sensetivity: {x: 35, y: 0.5}
   _xClamp: 60
   _cameraTransform: {fileID: 8613558378818726905}
+  _crosshairChanger: {fileID: 0}
   _distanceRaycast: 2.5
   _layerMaskRaycast:
     serializedVersion: 2

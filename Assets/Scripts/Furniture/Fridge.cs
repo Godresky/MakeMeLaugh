@@ -23,6 +23,7 @@ public class Fridge : MonoBehaviour
             if (_ingridients[i].IsUsing)
             {
                 UpdateItem(_ingridients[i], _defaultPositions[i]);
+                Debug.Log(_ingridients[i].gameObject);
             }
         }
     }
@@ -45,7 +46,9 @@ public class Fridge : MonoBehaviour
     private void UpdateItem(FridgeItem fridgeItem, Transform position)
     {
         fridgeItem.IsUsing = false;
+        fridgeItem.Rigidbody.Sleep();
         fridgeItem.Rigidbody.velocity = Vector3.zero;
         fridgeItem.gameObject.transform.SetPositionAndRotation(position.position, position.rotation);
+        fridgeItem.Rigidbody.WakeUp();
     }
 }

@@ -24,17 +24,32 @@ public class PauseMenuUI : MonoBehaviour
 
     public void Switch()
     {
-        _menuPlane.SetActive(!_menuPlane.activeSelf);
-        Time.timeScale = 1f;
+        if (!TimeManager.Singleton.IsEndWorkDay())
+        {
+            _menuPlane.SetActive(!_menuPlane.activeSelf);
+
+            if (_menuPlane.activeSelf)
+            {
+                GameState.Singleton.SetUIState();
+            }
+            else
+            {
+                GameState.Singleton.SetGameState();
+            }
+        }
     }
 
     private void OnExitButtonClicked(){
         Application.Quit();
     }
 
-    private void OnResumeButtonClicked(){
-        _menuPlane.SetActive(false);
-        Time.timeScale = 1f;
+    private void OnResumeButtonClicked()
+    {
+        if (!TimeManager.Singleton.IsEndWorkDay())
+        {
+            _menuPlane.SetActive(false);
+            GameState.Singleton.SetGameState();
+        }
     }
 
     private void OnRestartButtonClicked(){

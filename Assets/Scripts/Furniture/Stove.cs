@@ -84,7 +84,10 @@ public class Stove : MonoBehaviour
 
         foreach (var dough in _doughsInStove)
         {
-            dough.Bake();
+            if (dough)
+            {
+                dough.Bake();
+            }
         }
 
         _door.Unlock();
@@ -95,6 +98,8 @@ public class Stove : MonoBehaviour
         _audioSource.loop = false;
         _audioSource.clip = _soundOvenDone;
         _audioSource.Play();
+
+        _doughsInStove.Clear();
 
         _isBaked = true;
 

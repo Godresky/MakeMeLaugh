@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter))]
-[RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(AudioSource))]
 public class Dough : PickableItem
 {
     [SerializeField]
@@ -18,6 +17,8 @@ public class Dough : PickableItem
     private bool _isPoisoned = false;
     [SerializeField]
     private bool _isIncorect = false;
+
+    private AudioSource _audioSource;
 
     public State CurrentState { get => _state; }
     public Baking.Type FutureBakingType { get => _futureBakingType; set => _futureBakingType = value; }
@@ -33,12 +34,17 @@ public class Dough : PickableItem
     [SerializeField]
     private float _endScale;
 
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     public void Grow() => StartCoroutine(Growing());
 
     public void Bake(){
         switch (_state){
             case State.Circle:
-                _futureBakingType = Baking.Type.CircleBread;
+                _futureBakingType = Baking.Type.RoundBread;
                 break;
 
             case State.Triangle:
@@ -50,7 +56,7 @@ public class Dough : PickableItem
                 break;
 
             case State.TriangleWithFilling:
-                _futureBakingType = Baking.Type.Rollet;
+                _futureBakingType = Baking.Type.Roll;
                 break;
 
             default:
@@ -64,11 +70,16 @@ public class Dough : PickableItem
 
     public void Rolling()
     {
-        ChangeState(State.Triangle);
+        if (_state == State.Circle)
+        {
+            _audioSource.Play();
+            ChangeState(State.Triangle);
+        }
     }
 
     public void Filling()
     {
+        _audioSource.Play();
         switch (_state) {
             case State.Circle:
                 ChangeState(State.SquareWithFilling);
@@ -83,7 +94,7 @@ public class Dough : PickableItem
     private void ChangeState(State state)
     {
         _state = state;
-        if (state != State.Unrised  && state != State.Rising)
+        if (state != State.Unrised && state != State.Rising && state != State.Circle)
             BakeryController.Singleton.LoadDough(this, _state);
     }
 

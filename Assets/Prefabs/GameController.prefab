@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8623050718237944637}
   - component: {fileID: 4377870953242073921}
   - component: {fileID: 5167973089049229253}
+  - component: {fileID: 8570715238358331574}
+  - component: {fileID: 404317072206686998}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -48,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Clock: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  Order: {fileID: 0}
 --- !u!114 &4377870953242073921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,8 +64,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f1481e8f67fb948b8831986aee7bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ticking: {fileID: 0}
   _startMinute: 0
   _startHour: 0
+  _endMinute: 55
+  _endHour: 5
   _minuteToRealTime: 10
 --- !u!114 &5167973089049229253
 MonoBehaviour:
@@ -79,3 +86,41 @@ MonoBehaviour:
   _grabHandCrosshair: {fileID: 0}
   _interactHandCrosshair: {fileID: 0}
   _doubleHandCrosshair: {fileID: 0}
+--- !u!114 &8570715238358331574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411504907640930424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df3575728628694cbf6d58d8fcaaf88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cookedBakings:
+  - {fileID: 756197205043766836, guid: 91390911664a74045b613737129f3731, type: 3}
+  - {fileID: 3123420724852792959, guid: 07a03fc32c07ecb40a6db5a260e3757f, type: 3}
+  - {fileID: 436684678494316464, guid: 8c2f02b9d64b09641ab055e0354c3323, type: 3}
+  - {fileID: 2758833292424054103, guid: 95a0a60430f416c4b8fef06274f7d81c, type: 3}
+  _doughtStates:
+  - {fileID: 866268631897243941, guid: 3355ec47c0b6d40c39af9b7b60cac465, type: 3}
+  - {fileID: 866268631897243941, guid: 3355ec47c0b6d40c39af9b7b60cac465, type: 3}
+  - {fileID: 2526238010402579020, guid: fa0f3f055d11a684d99ecb8777021963, type: 3}
+  - {fileID: 6398990354090844620, guid: 893d9f81bff1ebe48aafc5df79a5744b, type: 3}
+  - {fileID: 269528099643619789, guid: 9b506c6404729fc43a4daa36464759ec, type: 3}
+  - {fileID: 1602943674417453809, guid: 8053d46c526bf2544913e395ad05a22b, type: 3}
+--- !u!114 &404317072206686998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411504907640930424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930862fe5065c4e89acf6b10c0e7e373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tmpText: {fileID: 0}
+  _tmpName: {fileID: 0}
