@@ -9,6 +9,7 @@ using UnityEngine.UIElements.Experimental;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(OrderTrigger))]
+[RequireComponent(typeof(AudioSource))]
 public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
 {
     [Header("Move Setting")]
@@ -26,15 +27,16 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
     [SerializeField]
     private Material _sadVisitor;
 
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _happyVisitorAudio;
+    [SerializeField]
+    private AudioClip _sadVisitorAudio;
+
     private OrderPaperUI _orderPanel;
 
     private OrderTrigger _orderTrigger;
     private NavMeshAgent _agent;
-
-    // Texture Settings
-    private GameObject _faceFuny;
-    private GameObject _faceSad;
-    private GameObject _faceNone;
 
     private State _state;
 
@@ -49,27 +51,9 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
         _startPosition = GetComponent<Transform>().position;
         _agent = GetComponent<NavMeshAgent>();
         _orderTrigger = GetComponent<OrderTrigger>();
-        for (int i = 0, children = transform.childCount; i < children; i++)
-        {
-            if (transform.GetChild(i).name == "_FunyHead")
-            {
-                _faceFuny = transform.GetChild(i).gameObject;
-            }
-            else if (transform.GetChild(i).name == "_SadHead")
-            {
-                _faceSad = transform.GetChild(i).gameObject;
-            }
-            else if (transform.GetChild(i).name == "_NoneHead")
-            {
-                _faceNone = transform.GetChild(i).gameObject;
-            }
-            else if (transform.GetChild(i).name == "_Order")
-            {
-                //_order = transform.GetChild(i).gameObject.GetComponent<OrderPaper>();
-            }
-        }
+        _audioSource = GetComponent<AudioSource>();
+
         SetMood(Mood.None);
-        //_order.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -169,16 +153,24 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
         if (baking.CurrentType == (Baking.Type)_orderTrigger.ChoosenBaking)
         {
             SetMood(Mood.Funny);
+            _audioSource.PlayOneShot(_happyVisitorAudio);
         }
         else
         {
             SetMood(Mood.Sad);
+            _audioSource.PlayOneShot(_sadVisitorAudio);
         }
 
         Destroy(baking.gameObject);
         _visitorPlace.Plate.LiftDown();
         _visitorPlace.IsUsed = false;
 
+        StartCoroutine(WaitToLeave());
+    }
+
+    private IEnumerator WaitToLeave()
+    {
+        yield return new WaitForSeconds(2f);
         VisitorsController.Singleton.UncallVisitor(this);
     }
 

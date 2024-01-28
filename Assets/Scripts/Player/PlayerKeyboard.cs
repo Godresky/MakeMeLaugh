@@ -42,7 +42,7 @@ public class PlayerKeyboard : MonoBehaviour
 
         //_playerControls.Menu.SwitchPad.performed += ctx => Stats.singleton.SwitchPadMenu();
         //_playerControls.Menu.Exit.performed += ctx => Application.Quit();
-        _playerControls.Menu.Exit.performed += ctx => PauseMenu.Switch();
+        _playerControls.Menu.Pause.performed += ctx => PauseMenu.Switch();
         //_playerControls.Menu.Restart.performed += ctx => _level.Restart();
 
     }

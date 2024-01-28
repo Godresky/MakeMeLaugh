@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshFilter))]
-[RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(AudioSource))]
 public class Dough : PickableItem
 {
     [SerializeField]
@@ -19,6 +18,8 @@ public class Dough : PickableItem
     [SerializeField]
     private bool _isIncorect = false;
 
+    private AudioSource _audioSource;
+
     public State CurrentState { get => _state; }
     public Baking.Type FutureBakingType { get => _futureBakingType; set => _futureBakingType = value; }
     public bool IsReadyForBaking { get => _isReadyForBaking; }
@@ -32,6 +33,11 @@ public class Dough : PickableItem
     [Range(1,7)]
     [SerializeField]
     private float _endScale;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     public void Grow() => StartCoroutine(Growing());
 
@@ -66,12 +72,14 @@ public class Dough : PickableItem
     {
         if (_state == State.Circle)
         {
+            _audioSource.Play();
             ChangeState(State.Triangle);
         }
     }
 
     public void Filling()
     {
+        _audioSource.Play();
         switch (_state) {
             case State.Circle:
                 ChangeState(State.SquareWithFilling);

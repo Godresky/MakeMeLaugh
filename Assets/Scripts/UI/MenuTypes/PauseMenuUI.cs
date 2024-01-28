@@ -24,7 +24,7 @@ public class PauseMenuUI : MonoBehaviour
 
     public void Switch()
     {
-        if (TimeManager.Singleton.IsEndWorkDay())
+        if (!TimeManager.Singleton.IsEndWorkDay())
         {
             _menuPlane.SetActive(!_menuPlane.activeSelf);
 
@@ -45,7 +45,7 @@ public class PauseMenuUI : MonoBehaviour
 
     private void OnResumeButtonClicked()
     {
-        if (TimeManager.Singleton.IsEndWorkDay())
+        if (!TimeManager.Singleton.IsEndWorkDay())
         {
             _menuPlane.SetActive(false);
             GameState.Singleton.SetGameState();

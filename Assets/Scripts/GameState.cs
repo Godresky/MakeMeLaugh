@@ -7,6 +7,9 @@ public class GameState : MonoBehaviour
     [SerializeField]
     private State _state;
 
+    [SerializeField]
+    private AudioSource _ostGame, _ostUI;
+
     public static GameState Singleton;
 
     private Player _player;
@@ -24,6 +27,8 @@ public class GameState : MonoBehaviour
         _state = State.InUI;
 
         _player.GameInUIState();
+        _ostUI.volume = 1f;
+        _ostGame.volume = 0f;
     }
 
     public void SetGameState()
@@ -31,6 +36,8 @@ public class GameState : MonoBehaviour
         _state = State.InGame;
 
         _player.GameInGameState();
+        _ostUI.volume = 0f;
+        _ostGame.volume = 1f;
     }
 
     public enum State
