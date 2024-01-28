@@ -8765,8 +8765,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9112,7 +9112,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2944662538361486882}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: FullScreenToggle
         m_Mode: 6
@@ -9358,8 +9358,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9501,7 +9501,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1844741942813695795}
-  - component: {fileID: 2944662538361486882}
   - component: {fileID: 2208022407715006916}
   m_Layer: 5
   m_Name: SettingMenu
@@ -10263,7 +10262,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2944662538361486882}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: SetSensitivityY
         m_Mode: 0
@@ -10496,23 +10495,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2944662538361486882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695443576473355692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f5fd013ae96bc48a7dfe5e7d9e0183, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioMixer: {fileID: 24100000, guid: ee2a849123b68a94bb58dfb847517946, type: 2}
-  _resolutionDropdown: {fileID: 8391959739438920255}
-  _sensitiveSliderX: {fileID: 5771287252666104900}
-  _sensitiveSliderY: {fileID: 2758884410682968258}
-  _volumeSlider: {fileID: 8887143183864498779}
 --- !u!1 &2962381918832848657
 GameObject:
   m_ObjectHideFlags: 0
@@ -11193,8 +11175,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11399,7 +11381,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2944662538361486882}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: FullScreenToggle
         m_Mode: 6
@@ -11460,6 +11442,7 @@ GameObject:
   - component: {fileID: 7569719841842219439}
   - component: {fileID: 4519084626137139507}
   - component: {fileID: 3963114223495194091}
+  - component: {fileID: 7569719841842219440}
   m_Layer: 5
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -12347,7 +12330,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2944662538361486882}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: SetSensitivityX
         m_Mode: 0
@@ -13593,6 +13576,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &7569719841842219440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4269987434006360288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f5fd013ae96bc48a7dfe5e7d9e0183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: ee2a849123b68a94bb58dfb847517946, type: 2}
+  _resolutionDropdown: {fileID: 8391959739438920255}
+  _sensitiveSliderX: {fileID: 5771287252666104900}
+  _sensitiveSliderY: {fileID: 2758884410682968258}
+  _volumeSlider: {fileID: 8887143183864498779}
 --- !u!114 &7574520328422938691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14233,7 +14233,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2944662538361486882}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
@@ -14527,7 +14527,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2944662538361486882}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0

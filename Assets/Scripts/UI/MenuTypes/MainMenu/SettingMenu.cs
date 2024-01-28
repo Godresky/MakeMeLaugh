@@ -22,9 +22,9 @@ public class SettingMenu : MonoBehaviour
 
     private void Start()
     {
-        _sensitiveSliderX.value = PlayerPrefs.GetFloat("SensitiveX");
-        _sensitiveSliderY.value = PlayerPrefs.GetFloat("SensitiveY");
-        _volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+        _sensitiveSliderX.value = PlayerPrefs.GetFloat("SensitiveX", 35);
+        _sensitiveSliderY.value = PlayerPrefs.GetFloat("SensitiveY", 0.5f);
+        _volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1);
 
         _resolutions = Screen.resolutions;
 
