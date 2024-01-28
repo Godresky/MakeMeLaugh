@@ -26,21 +26,28 @@ public class OrderPaperUI : MonoBehaviour
         _animator.SetBool("show", _isShown);
     }
 
-    public IEnumerable NewOrder()
+    public void NewOrder()
     {
-        Debug.Log("NewOrder");
         _animator.SetBool("newOrder", true);
-        yield return new WaitForSeconds(13f);
-        _animator.SetBool("newOrder", false);
+        Invoke(nameof(OffNewOrderValue), 3f);
     }
 
-    public IEnumerable Busy()
+    private void OffNewOrderValue()
     {
-        Debug.Log("Busy");
+        _animator.SetBool("newOrder", false);
+
+    }
+
+    public void Busy()
+    {
         _animator.SetBool("busy", true);
-        yield return new WaitForSeconds(13f);
+        Invoke(nameof(OffBusyValue), 3f);
+    }
+
+    private void OffBusyValue()
+    {
         _animator.SetBool("busy", false);
-        yield return new WaitForSeconds(3f);
+
     }
 
     public void SetText(Baking.Type bakingType)
