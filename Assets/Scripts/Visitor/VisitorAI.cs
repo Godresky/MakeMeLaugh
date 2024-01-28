@@ -171,6 +171,7 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
             return;
 
         _state = State.GotOrder;
+        _orderPanel.ClearText();
         if (baking.CurrentType == (Baking.Type)_orderTrigger.ChoosenBaking)
         {
             SetMood(Mood.Funny);

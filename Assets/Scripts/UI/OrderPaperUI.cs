@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class OrderPaperUI : MonoBehaviour
 {
+    [SerializeField]
+    private float _newOrderWaitTime = 1f;
+    [SerializeField]
+    private float _busyWaitTime = 1f;
     private Animator _animator;
     private TextMeshProUGUI _text;
     public string Text {get => _text.text; }
-    [SerializeField]
     private bool _isShown = false;
 
     //private List<string> _orderTexts;
@@ -29,7 +32,7 @@ public class OrderPaperUI : MonoBehaviour
     public void NewOrder()
     {
         _animator.SetBool("newOrder", true);
-        Invoke(nameof(OffNewOrderValue), 3f);
+        Invoke(nameof(OffNewOrderValue), _newOrderWaitTime);
     }
 
     private void OffNewOrderValue()
@@ -41,7 +44,7 @@ public class OrderPaperUI : MonoBehaviour
     public void Busy()
     {
         _animator.SetBool("busy", true);
-        Invoke(nameof(OffBusyValue), 3f);
+        Invoke(nameof(OffBusyValue), _busyWaitTime);
     }
 
     private void OffBusyValue()
