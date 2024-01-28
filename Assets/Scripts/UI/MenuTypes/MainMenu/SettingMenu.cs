@@ -13,8 +13,11 @@ public class SettingMenu : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown _resolutionDropdown;
     private Resolution[] _resolutions;
+    [SerializeField]
     private Slider _sensitiveSliderX;
+    [SerializeField]
     private Slider _sensitiveSliderY;
+    [SerializeField]
     private Slider _volumeSlider;
 
     private void Start()

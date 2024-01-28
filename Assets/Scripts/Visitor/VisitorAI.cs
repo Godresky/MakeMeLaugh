@@ -78,6 +78,7 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
     public void Come(PlaceForVisitor place)
     {
         _state = State.Visitor;
+        SetMood(Mood.None);
 
         _visitorPlace = place;
 
@@ -129,6 +130,7 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
             }
             else
             {
+                _orderPanel.Hide();
                 _orderPanel.SetText((Baking.Type)_orderTrigger.ChoosenBaking);
                 _orderPanel.Show();
             }

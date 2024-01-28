@@ -6,19 +6,19 @@ public class PauseMenuUI : MonoBehaviour
 {
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _resumeButton;
-    [SerializeField] private Button _restartButton;
+    [SerializeField] private Button _mainMenuButton;
     [Space(2)]
     [SerializeField] private GameObject _menuPlane;
 
     private void OnEnable(){
         _exitButton.onClick.AddListener(OnExitButtonClicked);
-        _restartButton.onClick.AddListener(OnRestartButtonClicked);
+        _mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         _resumeButton.onClick.AddListener(OnResumeButtonClicked);
     }
 
     private void OnDisable(){
         _exitButton.onClick.RemoveListener(OnExitButtonClicked);
-        _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
+        _mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
     }
 
@@ -52,8 +52,9 @@ public class PauseMenuUI : MonoBehaviour
         }
     }
 
-    private void OnRestartButtonClicked(){
-
+    private void OnMainMenuButtonClicked()
+    {
+        Application.LoadLevel(0);
     }
 
 }

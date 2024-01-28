@@ -57,6 +57,7 @@ public class VisitorPlate : MonoBehaviour
         {
             _isHide = true;
             transform.localPosition -= new Vector3(0, _hightHideY, 0);
+            _bakingsInPlate.Clear();
         }
     }
 }

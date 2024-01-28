@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
 
     private void OpenSceneDelay()
     {
-        Application.LoadLevel("Level1");
+        Application.LoadLevel(1);
     }
 
     public void ExitGame()

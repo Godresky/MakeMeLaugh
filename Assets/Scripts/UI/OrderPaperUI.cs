@@ -35,6 +35,12 @@ public class OrderPaperUI : MonoBehaviour
         _animator.SetBool("show", _isShown);
     }
 
+    public void Hide()
+    {
+        _isShown = false;
+        _animator.SetBool("show", _isShown);
+    }
+
     public void NewOrder()
     {
         _animator.SetBool("newOrder", true);
