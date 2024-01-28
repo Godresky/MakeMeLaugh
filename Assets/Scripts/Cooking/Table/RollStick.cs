@@ -7,8 +7,12 @@ public class RollStick : MonoBehaviour, IInteractableWithPlayerObject
     public void GetDough(Dough dough){
         _dough = dough;
     }
-    public void Interact(){
-        _dough.Rolling();
+    public void Interact()
+    {
+        if (_dough)
+        {
+            _dough.Rolling();
+        }
     }
 
 }

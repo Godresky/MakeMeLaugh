@@ -7,6 +7,9 @@ public class BowlWithJam : MonoBehaviour,IInteractableWithPlayerObject
         _dough = dough;
     }
     public void Interact(){
-        _dough.Filling();
+        if (_dough)
+        {
+            _dough.Filling();
+        }
     }
 }

@@ -172,6 +172,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OrderPaper",
+                    "type": "Button",
+                    "id": "f9301f9b-e10c-4b67-810c-8c73257bceb0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -218,6 +227,17 @@
                     "action": "Clock",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bae7bcd7-ca43-488d-94cf-ea5ca7a7ea98",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OrderPaper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -235,7 +255,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Exit",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "2ecdb85b-456d-4191-b0c6-d6a26a5c4f57",
                     "expectedControlType": "Button",
@@ -272,7 +292,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Exit",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6cdec0af-3ca4-4206-96a4-70d4d023eae1",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

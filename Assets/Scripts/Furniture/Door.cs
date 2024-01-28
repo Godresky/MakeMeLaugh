@@ -20,7 +20,9 @@ public class Door : MonoBehaviour, IInteractableWithPlayerObject
     private AudioSource _audioSource;
 
     private bool _isLocked = false;
+    [SerializeField]
     private bool _isOpen = false;
+    [SerializeField]
     private bool _isChangingRotation = false;
 
     public bool IsOpen { get => _isOpen; }

@@ -12,11 +12,9 @@ public class Egg : DoughIngridient
     [SerializeField]
     private AudioSource _audioSource;
 
-    private Rigidbody _rigidbody;
     private FridgeItem _fridgeItem;
 
     private void Awake(){
-        _rigidbody = GetComponent<Rigidbody>();
         _fridgeItem = GetComponent<FridgeItem>();
         _audioSource = GetComponent<AudioSource>();
     }

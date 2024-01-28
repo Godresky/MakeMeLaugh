@@ -18,10 +18,10 @@ public class Baking : PickableItem
 
     public enum Type : int
     {
-        CircleBread,
+        RoundBread,
         SquareBreadWithFilling,
         RectangleBread,
-        Rollet,
+        Roll,
         Error
     }
 
