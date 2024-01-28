@@ -81,7 +81,7 @@ public class TimeManager : MonoBehaviour
             timer = _minuteToRealTime;
         }
 
-        if (Hour == _endHour && Minute == _endMinute)
+        if (IsEndWorkDay())
         {
             OnEndWorkDay.Invoke();
         }
