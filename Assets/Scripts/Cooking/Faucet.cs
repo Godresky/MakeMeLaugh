@@ -17,12 +17,17 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
     [SerializeField]
     private AudioSource _valveAudioSource;
 
+    [SerializeField]
+    private ParticleSystem _waterParticles;
+
     private bool _isOpen = false;
     private bool _isChanging = false;
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+
+        _waterParticles.Stop();
     }
 
     public void Interact()
@@ -47,12 +52,14 @@ public class Faucet : MonoBehaviour, IInteractableWithPlayerObject
 
             //_audioSource.PlayOneShot(_soundFaucetClosing);
             _valveAudioSource.PlayOneShot(_soundValveClosing);
+            _waterParticles.Stop();
         }
 
         yield return new WaitForSeconds(_toSwitchStateTime);
 
         if (!_isOpen)
         {
+            _waterParticles.Play();
             _audioSource.PlayOneShot(_soundFaucetOpening);
             _audioSource.loop = true;
             _audioSource.clip = _soundFaucetWorking;

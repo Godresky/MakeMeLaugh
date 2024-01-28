@@ -24,7 +24,7 @@ public class OrderTrigger : MonoBehaviour
 
     private int GetRandomBread()
     {
-        int id = Random.Range(0, _allBakingTypes.Count - 1);
+        int id = Random.Range(0, _allBakingTypes.Count);
 
         return id;
     }
