@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class SettingMenu : MonoBehaviour
@@ -12,9 +13,16 @@ public class SettingMenu : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown _resolutionDropdown;
     private Resolution[] _resolutions;
+    private Slider _sensitiveSliderX;
+    private Slider _sensitiveSliderY;
+    private Slider _volumeSlider;
 
     private void Start()
     {
+        _sensitiveSliderX.value = PlayerPrefs.GetFloat("SensitiveX");
+        _sensitiveSliderY.value = PlayerPrefs.GetFloat("SensitiveY");
+        _volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+
         _resolutions = Screen.resolutions;
 
         _resolutionDropdown.ClearOptions();
@@ -37,7 +45,19 @@ public class SettingMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        _audioMixer.SetFloat("volume", volume);
+        //_audioMixer.SetFloat("volume", volume);
+        PlayerPrefs.SetFloat("Volum", volume);
+        AudioListener.volume = volume;
+    }
+
+    public void SetSensitivityX(float sensitivity)
+    {
+        PlayerPrefs.SetFloat("SensitiveX", sensitivity);
+    }
+
+    public void SetSensitivityY(float sensitivity)
+    {
+        PlayerPrefs.SetFloat("SensitiveY", sensitivity);
     }
 
     public void SetResolution(int resoltionIndex)

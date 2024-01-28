@@ -98,6 +98,8 @@ public class Player : MonoBehaviour
 
     public void RecieveInputMouse(Vector2 input)
     {
+        _mouseInput.x = input.x * PlayerPrefs.GetFloat("SensitiveX");
+        _mouseInput.y = input.y * PlayerPrefs.GetFloat("SensitiveY");
         _mouseInput.x = input.x * _sensetivity.x;
         _mouseInput.y = input.y * _sensetivity.y;
     }
