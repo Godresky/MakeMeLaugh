@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using System.Collections;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -15,7 +16,17 @@ public class DialogueSystem : MonoBehaviour
     private TMP_Text _tmpName;
 
     [SerializeField]
+    private float _typingSpeed = 0.05f;
+
+    [SerializeField]
+    private AudioSource _audio;
+    [SerializeField]
+    private List<AudioClip> _speechClips;
+
+    [SerializeField]
     private GameObject _dialoguePanel;
+
+    private Coroutine _displayPhraseCoroutine;
 
     public static Action OnEndDialogue;
 
@@ -52,7 +63,11 @@ public class DialogueSystem : MonoBehaviour
 
         Phrase phrase = _activeDialogue.Dequeue();
 
-        _tmpText.text = phrase.Sentence;
+        if (_displayPhraseCoroutine != null)
+        {
+            StopCoroutine(_displayPhraseCoroutine);
+        }
+        _displayPhraseCoroutine = StartCoroutine(DisplayPhrase(phrase.Sentence));
         _tmpName.text = phrase.Name;
     }
 
@@ -61,6 +76,24 @@ public class DialogueSystem : MonoBehaviour
         GameState.Singleton.SetGameState();
         _dialoguePanel.SetActive(false);
         OnEndDialogue?.Invoke();
+    }
+
+    private IEnumerator DisplayPhrase(string phrase) 
+    {
+        _tmpText.text = "";
+
+        foreach (char letter in phrase.ToCharArray())
+        {
+            if (!_audio.isPlaying)
+            {
+                int numberRandomClip = UnityEngine.Random.Range(0, _speechClips.Count);
+                _audio.clip = _speechClips[numberRandomClip];
+                _audio.Play();
+            }
+
+            _tmpText.text += letter;
+            yield return new WaitForSeconds(_typingSpeed);
+        }
     }
 }
 

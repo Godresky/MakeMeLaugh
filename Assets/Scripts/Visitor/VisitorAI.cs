@@ -19,6 +19,12 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
 
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private SkinnedMeshRenderer _skinnedMeshRenderer;
+    [SerializeField]
+    private Material _happyVisitor;
+    [SerializeField]
+    private Material _sadVisitor;
 
     private OrderPaperUI _orderPanel;
 
@@ -110,21 +116,15 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
     {
         if (mood == Mood.Funny)
         {
-            _faceFuny.SetActive(true);
-            _faceSad.SetActive(false);
-            _faceNone.SetActive(false);
+            _skinnedMeshRenderer.material = _happyVisitor;
         }
         else if (mood == Mood.Sad)
         {
-            _faceFuny.SetActive(false);
-            _faceSad.SetActive(true);
-            _faceNone.SetActive(false);
+            _skinnedMeshRenderer.material = _sadVisitor;
         }
         else if (mood == Mood.None)
         {
-            _faceFuny.SetActive(false);
-            _faceSad.SetActive(false);
-            _faceNone.SetActive(true);
+            _skinnedMeshRenderer.material = _sadVisitor;
         }
     }
 
@@ -132,17 +132,10 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
     {
         if (_state == State.ReadyToDoOrder)
         {
-            if (_orderPanel.Text != "")
-            {
-                _orderPanel.Busy();
-            }
-            else
-            {
-                _orderTrigger.OrderBaking(this);
-                _state = State.DidOrder;
-                _orderPanel.SetText((Baking.Type)_orderTrigger.ChoosenBaking);
-                _orderPanel.NewOrder();
-            }
+            _orderTrigger.OrderBaking(this);
+            _state = State.DidOrder;
+            _orderPanel.SetText((Baking.Type)_orderTrigger.ChoosenBaking);
+            _orderPanel.NewOrder();
         }
         else if (_state == State.DidOrder)
         {
@@ -152,7 +145,8 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
             }
             else
             {
-
+                _orderPanel.SetText((Baking.Type)_orderTrigger.ChoosenBaking);
+                _orderPanel.Show();
             }
         }
     }

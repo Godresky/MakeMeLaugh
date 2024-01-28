@@ -27,6 +27,8 @@ public class TimeManager : MonoBehaviour
     private float _minuteToRealTime = 0.5f; // second Real time to minute Game time
     private float timer;
 
+    public static TimeManager Singleton;
+
     public Vector2 GetStartTime()
     {
         return new(_startHour, _startMinute);
@@ -35,6 +37,16 @@ public class TimeManager : MonoBehaviour
     public Vector2 GetEndTime()
     {
         return new(_endHour, _endMinute);
+    }
+
+    public bool IsEndWorkDay()
+    {
+        return Hour >= _endHour && Minute >= _endMinute;
+    }
+
+    private void Awake()
+    {
+        Singleton = this;
     }
 
     private void Start()

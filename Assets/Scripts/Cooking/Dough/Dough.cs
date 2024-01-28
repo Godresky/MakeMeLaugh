@@ -38,7 +38,7 @@ public class Dough : PickableItem
     public void Bake(){
         switch (_state){
             case State.Circle:
-                _futureBakingType = Baking.Type.CircleBread;
+                _futureBakingType = Baking.Type.RoundBread;
                 break;
 
             case State.Triangle:
@@ -50,7 +50,7 @@ public class Dough : PickableItem
                 break;
 
             case State.TriangleWithFilling:
-                _futureBakingType = Baking.Type.Rollet;
+                _futureBakingType = Baking.Type.Roll;
                 break;
 
             default:

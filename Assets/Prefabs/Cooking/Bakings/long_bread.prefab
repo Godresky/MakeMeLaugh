@@ -149,6 +149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lerpSpeed: 200
   _dragModifier: 2
-  _type: 0
+  _type: 2
   _isPoisoned: 0
   _isIncorect: 0

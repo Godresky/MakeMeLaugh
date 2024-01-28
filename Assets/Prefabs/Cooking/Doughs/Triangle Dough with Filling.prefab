@@ -124,7 +124,7 @@ MonoBehaviour:
   _lerpSpeed: 200
   _dragModifier: 2
   _state: 5
-  _futureBakingType: 0
+  _futureBakingType: 3
   _isReadyForBaking: 1
   _isPoisoned: 0
   _isIncorect: 0
