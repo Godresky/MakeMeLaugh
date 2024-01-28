@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.UIElements.Experimental;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(OrderTrigger))]
@@ -17,6 +19,8 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
 
     [SerializeField]
     private Animator _animator;
+
+    private OrderPaperUI _orderPanel;
 
     private OrderTrigger _orderTrigger;
     private NavMeshAgent _agent;
@@ -35,6 +39,7 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
 
     private void Start()
     {
+        _orderPanel = FindObjectOfType<OrderPaperUI>();
         _startPosition = GetComponent<Transform>().position;
         _agent = GetComponent<NavMeshAgent>();
         _orderTrigger = GetComponent<OrderTrigger>();
@@ -127,8 +132,17 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
     {
         if (_state == State.ReadyToDoOrder)
         {
-            _orderTrigger.OrderBaking(this);
-            _state = State.DidOrder;
+            if (_orderPanel.Text != "")
+            {
+                _orderPanel.Busy();
+            }
+            else
+            {
+                _orderTrigger.OrderBaking(this);
+                _state = State.DidOrder;
+                _orderPanel.SetText((Baking.Type)_orderTrigger.ChoosenBaking);
+                _orderPanel.NewOrder();
+            }
         }
         else if (_state == State.DidOrder)
         {

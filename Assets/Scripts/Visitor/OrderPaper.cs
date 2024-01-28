@@ -36,7 +36,7 @@ public class OrderPaper : MonoBehaviour, IInteractableWithPlayerObject
     private void OrderTextUpdate()
     {
         string text = "* " + _dishesMenu[_dishID];
-        _paperUI.ChangeText(text);
+        //_paperUI.ChangeText(text);
     }
 
     private void SwitchAtionUI()
