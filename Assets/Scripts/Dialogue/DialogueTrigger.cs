@@ -9,8 +9,8 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField]
     private Dialogue[] _dialoguesCollection;
 
-    public static UnityAction OnStartDialogue;
-    public static UnityAction OnEndDialogue;
+    public UnityAction OnStartDialogue;
+    public UnityAction OnEndDialogue;
 
     public void TriggerDialogue()
     {

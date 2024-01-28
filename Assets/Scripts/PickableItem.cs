@@ -20,6 +20,10 @@ public class PickableItem : MonoBehaviour
     private float _distanceForDrop = 1.4f;
     private float _oldDrag;
 
+    private bool _isEquiped = false;
+
+    public bool IsEquiped { get => _isEquiped; }
+
     protected void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -27,6 +31,7 @@ public class PickableItem : MonoBehaviour
 
     public void Drop()
     {
+        _isEquiped = false;
         _objectGrabPoint = null;
 
         _rigidbody.drag = _oldDrag;
@@ -38,6 +43,7 @@ public class PickableItem : MonoBehaviour
 
     public void Grab(Transform transform)
     {
+        _isEquiped = true;
         _objectGrabPoint = transform;
 
         _oldDrag = _rigidbody.drag;

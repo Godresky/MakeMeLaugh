@@ -14,6 +14,9 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField]
     private TMP_Text _tmpName;
 
+    [SerializeField]
+    private GameObject _dialoguePanel;
+
     public static Action OnEndDialogue;
 
     public static DialogueSystem Singleton;
@@ -27,6 +30,7 @@ public class DialogueSystem : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        _dialoguePanel.SetActive(true);
         _activeDialogue.Clear();
 
         foreach (Phrase phrase in dialogue.Phrases)
@@ -35,6 +39,7 @@ public class DialogueSystem : MonoBehaviour
         }
 
         DisplayNextPhrase();
+        GameState.Singleton.SetUIState();
     }
 
     public void DisplayNextPhrase()
@@ -53,6 +58,8 @@ public class DialogueSystem : MonoBehaviour
 
     public void EndDialog()
     {
+        GameState.Singleton.SetGameState();
+        _dialoguePanel.SetActive(false);
         OnEndDialogue?.Invoke();
     }
 }

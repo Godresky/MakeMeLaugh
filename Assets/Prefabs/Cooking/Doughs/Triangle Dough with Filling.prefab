@@ -124,10 +124,11 @@ MonoBehaviour:
   _lerpSpeed: 200
   _dragModifier: 2
   _state: 5
-  _futureBakingType: 3
+  _futureBakingType: 0
   _isReadyForBaking: 1
   _isPoisoned: 0
   _isIncorect: 0
+  _growTime: 0
   _endScale: 2
 --- !u!54 &5413685291352942374
 Rigidbody:

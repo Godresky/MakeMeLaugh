@@ -5,14 +5,28 @@ using UnityEngine;
 
 public class OrderPaperUI : MonoBehaviour
 {
-    private Animator _animator;
+    private Animation _animation;
     private bool _isShow = false;
     private TextMeshProUGUI _text;
+
+    private List<string> _orderTexts;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _text = GetComponentInChildren<TextMeshProUGUI>();
+    }
+
+    public void Show()
+    {
+        _isShow = !_isShow;
+        _animator.SetBool("isShow", _isShow);
+    }
+
+    public void Hide()
+    {
+        _isShow = !_isShow;
+        _animator.SetBool("isShow", _isShow);
     }
 
     public void SwitchActive()
@@ -21,8 +35,8 @@ public class OrderPaperUI : MonoBehaviour
         _animator.SetBool("isShow", _isShow);
     }
 
-    public void ChangeText(string text)
+    public void ChangeText(int id)
     {
-        _text.SetText(text);
+        _text.SetText(_orderTexts[id]);
     }
 }

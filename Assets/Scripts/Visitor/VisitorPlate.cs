@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem.EnhancedTouch;
 
-public class VisitorPlate : MonoBehaviour, IInteractableWithPlayerObject
+public class VisitorPlate : MonoBehaviour
 {
     [SerializeField]
     private float _hightHideY = 5;
@@ -12,53 +14,31 @@ public class VisitorPlate : MonoBehaviour, IInteractableWithPlayerObject
     [SerializeField]
     private bool _isHide = false;
     [SerializeField]
-    private string _whishDish;
-    [SerializeField]
     private GameObject _playerDish;
-    [SerializeField]
-    private int _dishMark = 0;  // Can be: -1 (bad) , 0 (none) , 1 (good)
 
-    public int DishMark { get => _dishMark; }
+    public List<Baking> BakingsInPlate { get => _bakingsInPlate; }
+
+    [SerializeField]
+    private List<Baking> _bakingsInPlate;
 
     private void Start()
     {
         Invoke(nameof(LiftDown), 0.1f);
     }
 
-    public void SetWishDish(string wishDish)
-    {
-        _whishDish = wishDish;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (_playerDish == null) 
+        if (other.gameObject.TryGetComponent(out Baking baking))
         {
-            _playerDish = other.gameObject;
+            _bakingsInPlate.Add(baking);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (GameObject.ReferenceEquals(other.gameObject, _playerDish))
+        if (other.gameObject.TryGetComponent(out Baking baking))
         {
-            _playerDish = null;
-        }
-    }
-
-    public void Interact()
-    {
-        if (_playerDish != null)
-        {
-            if (_playerDish.GetComponent<PickableItem>().GetItemName() == _whishDish)
-            {
-                _dishMark = 1;
-            }
-            else
-            {
-                _dishMark = -1;
-            }
-            Destroy(_playerDish);
+            _bakingsInPlate.Remove(baking);
         }
     }
 

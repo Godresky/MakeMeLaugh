@@ -74,10 +74,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool _canPlayAudio = true;
 
+    private bool _inUI = false;
+
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         _audio = GetComponent<AudioSource>();
         _controller = GetComponent<CharacterController>();
@@ -163,6 +165,18 @@ public class Player : MonoBehaviour
         var newCameraPosition = _initialCameraPosition - halfHeightDifference;
 
         _cameraTransform.localPosition = newCameraPosition;
+    }
+
+    public void GameInUIState()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void GameInGameState()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void CheckAudio(float speed)
@@ -279,11 +293,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        MouseLook();
-        Movement();
-        Crouching();
+        if (GameState.Singleton.CurrentState == GameState.State.InGame)
+        {
+            MouseLook();
+            Movement();
+            Crouching();
 
-        CheckRaycast();
-        
+            CheckRaycast();
+        }
     }
 }

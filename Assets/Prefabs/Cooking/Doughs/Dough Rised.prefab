@@ -127,6 +127,7 @@ MonoBehaviour:
   _isReadyForBaking: 0
   _isPoisoned: 0
   _isIncorect: 0
+  _growTime: 0
   _endScale: 2
 --- !u!54 &6353766492762739631
 Rigidbody:

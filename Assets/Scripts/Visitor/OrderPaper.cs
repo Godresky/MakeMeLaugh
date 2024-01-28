@@ -27,10 +27,10 @@ public class OrderPaper : MonoBehaviour, IInteractableWithPlayerObject
 
     public void Interact()
     {
-        gameObject.SetActive(false);
-        OrderTextUpdate();
-        Invoke(nameof(SwitchAtionUI), 0.1f);
-        Invoke(nameof(SwitchAtionUI), _delayTime);
+        //gameObject.SetActive(false);
+        //OrderTextUpdate();
+        //Invoke(nameof(SwitchAtionUI), 0.1f);
+        //Invoke(nameof(SwitchAtionUI), _delayTime);
     }
 
     private void OrderTextUpdate()

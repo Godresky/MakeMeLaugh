@@ -8,146 +8,83 @@ public class VisitorsController : MonoBehaviour
 {
     [Header("Visitors Setting")]
     [SerializeField]
-    private VisitorAI[] _visitorsList;
+    private VisitorAI[] _visitorsPool;
     [SerializeField]
-    private GameObject[] _tableSpotsList;
-    [SerializeField, Range(1, 3)]
-    private int _visitLimit = 2;
-    [SerializeField, Min(1)]
-    private int _todayVisitorCount;
-    public int TodayVisitorCount { get => _todayVisitorCount; }
-    [SerializeField]
-    private GameObject _textEndOfShift;
+    private PlaceForVisitor[] _tablePlaces;
 
-    [Header("Wait Setting")]
-    [SerializeField]
-    private float _comeWaitTime;
-    [SerializeField]
-    private float _LeaveWaitTime;
-    [SerializeField]
-    private float _endTextWaitTime;
+    //[Header("Wait Setting")]
+    //[SerializeField]
+    // private float _comeWaitTime;
+    //[SerializeField]
+    // private float _LeaveWaitTime;
+    //[SerializeField]
+    // private float _endTextWaitTime;
 
-    [Header("TEST SerializeFields")]
-    [SerializeField]
-    private int _visitorCount = 0;
-    [SerializeField]
-    private int _servedVisitors = 0;
-    [SerializeField]
-    private VisitorPlate _plate;
-    [SerializeField]
-    private int _calledVisitorID = 0;
-    [SerializeField]
-    private int _leavedVisitorID = 0;
-    [SerializeField]
-    private bool _isEndOfQueue = false;
-    public bool IsEndOfQueue { get => _isEndOfQueue; }
-    [SerializeField]
-    private bool _isShiftStarted = false;   // Value of Shift begining
+    private int _currentNumVisitors = 0;
 
-    private void Start()
+    public static VisitorsController Singleton;
+
+    private void Awake()
     {
-        for (int vi = 0, si = 0, vl = _visitorsList.Length, tsl = _tableSpotsList.Length; vi < vl; vi++, si++)
-        {
-            if (si == tsl)
-            {
-                si = 0;
-            }
-            _visitorsList[vi].SetTablePoint(_tableSpotsList[si]);
-        }
-        _isShiftStarted = true;
+        Singleton = this;
     }
 
-    private void Update()
+    public bool IsFreePlaces()
     {
-        if (_isEndOfQueue || !_isShiftStarted) return;
-
-        if (_calledVisitorID == _visitorsList.Length)
-        {
-            _calledVisitorID = 0;
-        }
-        if (_leavedVisitorID == _visitorsList.Length)
-        {
-            _leavedVisitorID = 0;
-        }
-
-        for (int vi = 0, vl = _visitorsList.Length; vi < vl; vi++)
-        {
-            CheckPlate(vi);
-            if (_plate != null && _plate.DishMark != 0)
-            {
-                _plate.LiftDown();
-                switch (_plate.DishMark)
-                {
-                    case 1:
-                        UncallVisitor(VisitorAI.Mood.Funny);
-                        break;
-                    case -1:
-                        UncallVisitor(VisitorAI.Mood.Sad);
-                        break;
-                }
-            }
-        }
-    }
-
-    private void CheckPlate(int visitorID)
-    {
-        _plate = _visitorsList[visitorID].TablePoint.GetComponentInChildren<VisitorPlate>();
-        if (_plate != null)
-        {
-            _plate.SetWishDish(_visitorsList[visitorID].WishDish);
-        }
-    }
-
-    public bool IsFreeSpots()
-    {
-        return _visitorCount < _visitLimit; 
+        return _currentNumVisitors < _tablePlaces.Length; 
     }
 
     public void CallVisitor()
     {
         // ******* NEED wait _visitorWaitTime *******
-        _visitorsList[_calledVisitorID].Come();
-        CheckPlate(_calledVisitorID);
-        _visitorCount++;
-        _calledVisitorID++;
+
+        if (!IsFreePlaces())
+            return;
+
+        VisitorAI visitor = GetVisitor();
+        PlaceForVisitor place = GetPlaceForVisitor();
+
+        visitor.Come(place);
+        place.IsUsed = true;
+        _currentNumVisitors++;
     }
 
-    public void UncallVisitor(VisitorAI.Mood mood)
+    public void UncallVisitor(VisitorAI visitor)
     {
-        _visitorsList[_leavedVisitorID].SetMood(mood);
-        // ******* NEED wait _visitorWaitTime *******
-        _visitorsList[_leavedVisitorID].Leave();
-        _visitorCount--;
-        _leavedVisitorID++;
-        _servedVisitors++;
-        if (_servedVisitors == _todayVisitorCount)
+        visitor.Leave();
+
+        _currentNumVisitors--;
+    }
+
+    private VisitorAI GetVisitor()
+    {
+        int id = Random.Range(0, _visitorsPool.Length);
+
+        if (_visitorsPool[id].CurrentState == VisitorAI.State.NonVisitor)
         {
-            _isEndOfQueue = true;
+            return _visitorsPool[id];
         }
+
+        return GetVisitor();
     }
 
-    public void EndQueue()
+    private PlaceForVisitor GetPlaceForVisitor()
     {
-        _isEndOfQueue = true;
-        // ******* NEED wait _EndTextWaitTime *******
-        _textEndOfShift.SetActive(true);
-    }
+        int placeId = Random.Range(0, _tablePlaces.Length);
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        collision.GetComponent<VisitorAI>()?.SetPaperStatus(true);
-        if (_plate != null)
+        if (!_tablePlaces[placeId].IsUsed)
         {
-            _plate.LiftUp();
+            return _tablePlaces[placeId];
         }
-        //else
-        //{
-        //    _plate = _visitorsList[_visitorID].TablePoint.GetComponentInChildren<VisitorPlate>(true);
-        //    if (_plate != null)
-        //    {
-        //        _plate.LiftUp();
-        //        _plate.SetWishDish(_visitorsList[_visitorID].WishDish);
-        //    }
-        //}
+
+        return GetPlaceForVisitor();
     }
+}
+
+[System.Serializable]
+public class PlaceForVisitor
+{
+    public Transform Transform;
+    public VisitorPlate Plate;
+    public bool IsUsed = false;
 }

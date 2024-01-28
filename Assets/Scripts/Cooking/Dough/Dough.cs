@@ -64,7 +64,10 @@ public class Dough : PickableItem
 
     public void Rolling()
     {
-        ChangeState(State.Triangle);
+        if (_state == State.Circle)
+        {
+            ChangeState(State.Triangle);
+        }
     }
 
     public void Filling()
@@ -83,7 +86,7 @@ public class Dough : PickableItem
     private void ChangeState(State state)
     {
         _state = state;
-        if (state != State.Unrised  && state != State.Rising)
+        if (state != State.Unrised && state != State.Rising && state != State.Circle)
             BakeryController.Singleton.LoadDough(this, _state);
     }
 

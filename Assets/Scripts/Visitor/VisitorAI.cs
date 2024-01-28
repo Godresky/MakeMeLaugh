@@ -3,29 +3,41 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
-public class VisitorAI : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(OrderTrigger))]
+public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
 {
     [Header("Move Setting")]
-    private GameObject _tablePoint;   // setted
-    public GameObject TablePoint { get => _tablePoint; }
+    private PlaceForVisitor _visitorPlace;   // setted
+    public Transform TablePoint { get => _visitorPlace.Transform; }
+
     private Vector3 _startPosition;
-    private NavMeshAgent _agent;
+
+    [SerializeField]
     private Animator _animator;
+
+    private OrderTrigger _orderTrigger;
+    private NavMeshAgent _agent;
 
     // Texture Settings
     private GameObject _faceFuny;
     private GameObject _faceSad;
     private GameObject _faceNone;
 
-    // Orders Setting
-    private OrderPaper _order;
+    private State _state;
+
+    [SerializeField]
+    private UnityEvent OnGettingOrderEvent;
+
+    public State CurrentState { get => _state; }
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
         _startPosition = GetComponent<Transform>().position;
         _agent = GetComponent<NavMeshAgent>();
+        _orderTrigger = GetComponent<OrderTrigger>();
         for (int i = 0, children = transform.childCount; i < children; i++)
         {
             if (transform.GetChild(i).name == "_FunyHead")
@@ -42,34 +54,52 @@ public class VisitorAI : MonoBehaviour
             }
             else if (transform.GetChild(i).name == "_Order")
             {
-                _order = transform.GetChild(i).gameObject.GetComponent<OrderPaper>();
+                //_order = transform.GetChild(i).gameObject.GetComponent<OrderPaper>();
             }
         }
         SetMood(Mood.None);
-        _order.gameObject.SetActive(false);
+        //_order.gameObject.SetActive(false);
     }
 
-    public void SetTablePoint(GameObject tablePoint)
+    private void Update()
     {
-        _tablePoint = tablePoint;
+        if (_state == State.Visitor && Vector3.Distance(transform.position, _visitorPlace.Transform.position) <= 0.1f)
+        {
+            _animator.SetInteger("State", 0);
+            _state = State.ReadyToDoOrder;
+        }
+        else if (_state == State.GotOrder && Vector3.Distance(transform.position, _startPosition) <= 0.1f)
+        {
+            _animator.SetInteger("State", 0);
+            _state = State.NonVisitor;
+        }
+        
+        if (_state == State.GotOrder || _state == State.Visitor)
+        {
+            _animator.SetInteger("State", 1);
+        }
     }
 
-    public void Come()
+    public void Come(PlaceForVisitor place)
     {
-        _agent.SetDestination(new Vector3(_tablePoint.transform.position.x, _startPosition.y, _tablePoint.transform.position.z));
+        _state = State.Visitor;
+
+        _visitorPlace = place;
+
+        _animator.SetInteger("State", 1);
+        _agent.SetDestination(new Vector3(place.Transform.position.x, place.Transform.position.y, place.Transform.position.z));
     }
 
     public void Leave()
     {
         _agent.SetDestination(_startPosition);
+        _animator.SetInteger("State", 1);
     }
 
     public void SetPaperStatus(bool status)
     {
-        _order.gameObject.SetActive(status);
+        //_order.gameObject.SetActive(status);
     }
-
-    public string WishDish { get => _order.WishDish; }
 
     public void SetMood(Mood mood)
     {
@@ -93,10 +123,69 @@ public class VisitorAI : MonoBehaviour
         }
     }
 
+    public void Interact()
+    {
+        if (_state == State.ReadyToDoOrder)
+        {
+            _orderTrigger.OrderBaking(this);
+            _state = State.DidOrder;
+        }
+        else if (_state == State.DidOrder)
+        {
+            if (_visitorPlace.Plate.BakingsInPlate.Count != 0)
+            {
+                GetBaking(_visitorPlace.Plate.BakingsInPlate[0]);
+            }
+            else
+            {
+
+            }
+        }
+    }
+
+    public void OrderedBaking()
+    {
+        if (_state == State.DidOrder)
+        {
+            _visitorPlace.Plate.LiftUp();
+        }
+    }
+
+    public void GetBaking(Baking baking)
+    {
+        if (baking == null)
+            return;
+
+        _state = State.GotOrder;
+        if (baking.CurrentType == (Baking.Type)_orderTrigger.ChoosenBaking)
+        {
+            SetMood(Mood.Funny);
+        }
+        else
+        {
+            SetMood(Mood.Sad);
+        }
+
+        Destroy(baking.gameObject);
+        _visitorPlace.Plate.LiftDown();
+        _visitorPlace.IsUsed = false;
+
+        VisitorsController.Singleton.UncallVisitor(this);
+    }
+
     public enum Mood
     {
         Funny,
         Sad,
         None
+    }
+
+    public enum State
+    {
+        NonVisitor,
+        Visitor,
+        ReadyToDoOrder,
+        DidOrder,
+        GotOrder,
     }
 }
