@@ -31,7 +31,7 @@ public class EndDayMenuUI : MonoBehaviour
     }
 
     private void EndWorkDay(){
-        GameState.Singleton.SetUIState();
+        GameState.Singleton.SetEndGameState();
         _menuPlane.SetActive(true);
     }
 

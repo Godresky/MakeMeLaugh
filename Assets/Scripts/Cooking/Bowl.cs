@@ -30,9 +30,6 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
     {
         if (other.TryGetComponent(out DoughIngridient ingridient))
         {
-            if (other.TryGetComponent(out Egg egg) && egg.IsBroken == true)
-                return;
-
             if (ingridient.TryGetComponent(out FridgeItem item))
                 item.IsUsing = true;
 
