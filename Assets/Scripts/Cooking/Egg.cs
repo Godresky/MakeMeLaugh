@@ -2,10 +2,8 @@ using UnityEngine;
 
 [RequireComponent (typeof(FridgeItem))]
 [RequireComponent (typeof(AudioSource))]
-public class Egg : DoughIngridient
+public class Egg : MonoBehaviour
 {
-    public bool IsBroken { get ; set; }
-
     [SerializeField]
     private float _magnitudeBroken = 1.2f;
 

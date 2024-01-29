@@ -8,9 +8,11 @@ public class GameState : MonoBehaviour
     private State _state;
 
     [SerializeField]
-    private AudioSource _ostGame, _ostUI;
+    private AudioSource _ostGame, _ostUI, _ostEndGame;
 
     public static GameState Singleton;
+
+    private bool _endGame = false;
 
     private Player _player;
 
@@ -29,6 +31,20 @@ public class GameState : MonoBehaviour
         _player.GameInUIState();
         _ostUI.volume = 1f;
         _ostGame.volume = 0f;
+    }
+
+    public void SetEndGameState()
+    {
+        if (!_endGame)
+        {
+            _endGame = true;
+            _state = State.InUI;
+
+            _player.GameInUIState();
+            _ostUI.Stop();
+            _ostGame.Stop();
+            _ostEndGame.Play();
+        }
     }
 
     public void SetGameState()
