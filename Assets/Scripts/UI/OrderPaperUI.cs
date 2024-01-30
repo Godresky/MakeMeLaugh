@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class OrderPaperUI : MonoBehaviour
 {
     [SerializeField]
@@ -14,10 +15,16 @@ public class OrderPaperUI : MonoBehaviour
     public string Text {get => _text.text; }
     private bool _isShown = false;
 
+    [SerializeField]
+    private AudioSource _audioSource;
+    [SerializeField]
+    private List<AudioClip> _audioClips;
+
     //private List<string> _orderTexts;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
         _text = GetComponentInChildren<TextMeshProUGUI>();
         ClearText();
@@ -68,6 +75,13 @@ public class OrderPaperUI : MonoBehaviour
     public void SetText(Baking.Type bakingType)
     {
         _text.SetText(bakingType.ToString());
+
+        if (!_audioSource.isPlaying)
+        {
+            int numberRandomClip = UnityEngine.Random.Range(0, _audioClips.Count);
+            _audioSource.clip = _audioClips[numberRandomClip];
+            _audioSource.Play();
+        }
     }
 
     public void ClearText()

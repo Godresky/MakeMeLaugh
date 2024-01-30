@@ -6,6 +6,7 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class NewspaperUI : MonoBehaviour, IInteractableWithPlayerObject
 {
     [Header("Newspaper Settings")]
@@ -17,6 +18,15 @@ public class NewspaperUI : MonoBehaviour, IInteractableWithPlayerObject
     private List<Article> _articleSet = new List<Article>();
     private int _currentArticalID = 0;
 
+    [Header("Audio Settings")]
+    [SerializeField]
+    private AudioSource _audioSource;
+
+    [SerializeField]
+    private Vector2 _rangeNewspaperVolume = new(0.65f, 0.75f);
+    [SerializeField]
+    private Vector2 _rangeNewspaperPitch = new(0.8f, 1.1f);
+
     [Header("UI Elements")]
     [SerializeField]
     private GameObject _newspaperMenu;
@@ -27,6 +37,7 @@ public class NewspaperUI : MonoBehaviour, IInteractableWithPlayerObject
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _newspaperList = _newspaperSetObj.GetComponents<Newspaper>();
 
         System.Random random = new System.Random();
@@ -42,8 +53,6 @@ public class NewspaperUI : MonoBehaviour, IInteractableWithPlayerObject
             randNum = random.Next(0, _articleSet.Count - 1);
             _articleSet.Remove(_articleSet[randNum]);
         }
-
-        UpdateUI();
     }
 
     public void SwitchLeft()
@@ -68,12 +77,20 @@ public class NewspaperUI : MonoBehaviour, IInteractableWithPlayerObject
     {
         _title.text = _articleSet[_currentArticalID].title;
         _content.text = _articleSet[_currentArticalID].content;
+
+        if (!_audioSource.isPlaying)
+        {
+            _audioSource.volume = UnityEngine.Random.Range(_rangeNewspaperVolume.x, _rangeNewspaperVolume.y);
+            _audioSource.pitch = UnityEngine.Random.Range(_rangeNewspaperPitch.x, _rangeNewspaperPitch.y);
+            _audioSource.Play();
+        }
     }
 
     public void Interact()
     {
         GameState.Singleton.SetUIState();
         _newspaperMenu.SetActive(true);
+        UpdateUI();
     }
 
     public void CloseMenu()

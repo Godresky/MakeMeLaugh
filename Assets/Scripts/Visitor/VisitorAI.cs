@@ -88,6 +88,8 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
 
     public void Leave()
     {
+        _state = State.GotOrder;
+
         _agent.SetDestination(_startPosition);
         _animator.SetInteger("State", 1);
     }
@@ -150,7 +152,6 @@ public class VisitorAI : MonoBehaviour, IInteractableWithPlayerObject
         if (baking == null)
             return;
 
-        _state = State.GotOrder;
         _orderPanel.ClearText();
         if (baking.CurrentType == (Baking.Type)_orderTrigger.ChoosenBaking)
         {

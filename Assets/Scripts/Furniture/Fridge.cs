@@ -45,12 +45,11 @@ public class Fridge : MonoBehaviour
     private void UpdateItem(FridgeItem fridgeItem, Transform position)
     {
         fridgeItem.IsUsing = false;
+        fridgeItem.PickableItem.Drop();
         fridgeItem.Rigidbody.Sleep();
         fridgeItem.Rigidbody.velocity = Vector3.zero;
-        fridgeItem.gameObject.transform.SetPositionAndRotation(position.position, position.rotation);
-        Debug.Log(position.position);
-        Debug.Log(position.rotation);
-        Debug.Log(fridgeItem.gameObject);
+        fridgeItem.gameObject.transform.position = position.position;
+        fridgeItem.gameObject.transform.rotation = position.rotation;
         fridgeItem.Rigidbody.WakeUp();
     }
 }
