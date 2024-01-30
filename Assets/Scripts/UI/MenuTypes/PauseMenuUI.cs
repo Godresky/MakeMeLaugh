@@ -30,11 +30,11 @@ public class PauseMenuUI : MonoBehaviour
 
             if (_menuPlane.activeSelf)
             {
-                GameState.Singleton.SetUIState();
+                GameState.Singleton.SetPauseState();
             }
             else
             {
-                GameState.Singleton.SetGameState();
+                GameState.Singleton.SetGameStateWithCheck();
             }
         }
     }
@@ -48,13 +48,13 @@ public class PauseMenuUI : MonoBehaviour
         if (!TimeManager.Singleton.IsEndWorkDay())
         {
             _menuPlane.SetActive(false);
-            GameState.Singleton.SetGameState();
+            GameState.Singleton.SetGameStateWithCheck();
         }
     }
 
     private void OnMainMenuButtonClicked()
     {
-        Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
 
 }

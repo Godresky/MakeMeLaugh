@@ -6,6 +6,8 @@ public class GameState : MonoBehaviour
 {
     [SerializeField]
     private State _state;
+    [SerializeField]
+    private State _previousState;
 
     [SerializeField]
     private AudioSource _ostGame, _ostUI, _ostEndGame;
@@ -26,11 +28,18 @@ public class GameState : MonoBehaviour
 
     public void SetUIState()
     {
+        _previousState = _state;
         _state = State.InUI;
 
         _player.GameInUIState();
         _ostUI.volume = 1f;
         _ostGame.volume = 0f;
+    }
+
+    public void SetPauseState()
+    {
+        SetUIState();
+        _state = State.InPause;
     }
 
     public void SetEndGameState()
@@ -56,9 +65,23 @@ public class GameState : MonoBehaviour
         _ostGame.volume = 1f;
     }
 
+    public void SetGameStateWithCheck()
+    {
+        if (_previousState == State.InGame) 
+        {
+            SetGameState();
+        }
+        else if (_previousState == State.InUI)
+        {
+            SetUIState();
+        }
+    }
+
+
     public enum State
     {
         InGame,
-        InUI
+        InUI,
+        InPause
     }
 }

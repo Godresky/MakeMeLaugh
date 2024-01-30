@@ -63,9 +63,10 @@ public class Bowl : MonoBehaviour, IInteractableWithPlayerObject
         if (!_ingridientsInBowl.Contains(DoughIngridient.Type.Egg) || !_ingridientsInBowl.Contains(DoughIngridient.Type.Flour) || !_hasWater || !_ingridientsInBowl.Contains(DoughIngridient.Type.Yeast))
             return;
 
+        Fridge.Singleton.UpdateFridge();
+
         _ingridientsInBowl.Clear();
 
-        Fridge.Singleton.UpdateFridge();
         Instantiate(_dough.gameObject, _doughSpawnpoint.position, _doughSpawnpoint.rotation);
         HasWater = false;
     }
